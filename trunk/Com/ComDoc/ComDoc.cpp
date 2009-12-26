@@ -17,12 +17,12 @@ using namespace std;
 
  int	SectorSize = 0;
  int	miniSectorSize = 0;
-
+ ULONG  MaxMiniStreamSize =0; /** short stream 的最大长度。用来判断使用的sat表式那种类型，小于在ssat中 */
 /* declare function */
 bool DumpDocHeader(PDocHeader pHeader);
 bool IfReadFile(ifstream &inStream,unsigned char * buf,unsigned int iReadOffest,size_t size);
 int GetOffestFremSid(SECT sid);
-
+bool ProcessDirEntry(PDirectoryEntry pDirEntry,vector<int> & slist,vector<int> & sslist,vector<vector<int> >& FatOfDirEntry,int );
 
 int main(int argc,char *argv[])
 {
@@ -42,12 +42,12 @@ int main(int argc,char *argv[])
 	
 	cout<<"open the "<<inputFileName<<" file is successful\n "<<endl;
 	DumpDocHeader(pHeaderSec);
-
-	/************************************************************************/
+	MaxMiniStreamSize = pHeaderSec->_ulMiniSectorCutoff;
+	/**********************************************************************/
 	/* 处理msat                                                                      */
 	/************************************************************************/
 	unsigned long  iMastSize = 0;
-	vector<int> vMastList;
+	vector<int> vMastList;  /** 用于存储sat链表*/
 	if ((pHeaderSec->_sectDifStart == ENDOFCHAIN)&&(pHeaderSec->_csectDif == 0))
 	{
 		for(iMastSize = 1;iMastSize <= 109 ;iMastSize ++)
@@ -174,24 +174,33 @@ int main(int argc,char *argv[])
 	/*
 	 *分析并处理directory目录
 	 */
-	list<DirectoryEntry> lDirList;
+	vector<DirectoryEntry> lDirList;
 	for (i=0; i<(vDirFat.size()-1) ;i++)
 	{
 		BYTE  *SecBuf = new BYTE[SectorSize];
 		IfReadFile(inStream,SecBuf,GetOffestFremSid(vDirFat[i]),SectorSize);
 		PDirectoryEntry pDirEntry = PDirectoryEntry(SecBuf);
-		lDirList.push_back(pDirEntry[0]);
-		lDirList.push_back(pDirEntry[1]);
-		lDirList.push_back(pDirEntry[2]);
-		lDirList.push_back(pDirEntry[3]);
+		for (int j = 0;j<4;j++)
+		{
+				DirectoryEntry  tempDirEntry = pDirEntry[j];
+				lDirList.push_back(tempDirEntry);
+
+		}
+	
+	
+		
 		delete []SecBuf;
 	}
 
+	vector< vector<int> > vFatOfDirEntry;
 	/*
 	 *processing  DirectoryEntry list
 	 */
-
-
+	for(i = 0;i<lDirList.size();i++)
+	{
+		ProcessDirEntry(&lDirList[i],vMastList,vSsatList,vFatOfDirEntry,i)	;
+	}
+	
 
 
 	delete []lpHeaderBuf;
@@ -200,7 +209,60 @@ int main(int argc,char *argv[])
 	return 0;
 }
 
+bool ProcessDirEntry(PDirectoryEntry pDirEntry,vector<int> & slist,vector<int> & sslist,vector<vector<int> >& vFatOfDirEntry,int i)
+{
+	string DirName;
+	unsigned int index;
+	vector<int> FatOfDirEntry;
+	if (pDirEntry->_cb == 0)
+	{
+		return false;
+	}else
+	{
+		char buf[256] ={0,0};
+		wcstombs(buf,(wchar_t *)pDirEntry->_ab,(size_t)pDirEntry->_cb);
+		DirName = buf;
+		
+		/************************************************************************/
+		/* 是否是短流                                                                     */
+		/************************************************************************/
+		if((pDirEntry->_ulSize < MaxMiniStreamSize)&&(pDirEntry->_mse != STGTY_ROOT)) 
+		{
+			FatOfDirEntry.push_back(pDirEntry->_sectStart);
+			index = pDirEntry->_sectStart;
+			while(sslist[index] != ENDOFCHAIN)
+			{
+				index=sslist[index];
+				FatOfDirEntry.push_back(index);
+			}
+			FatOfDirEntry.push_back(sslist[index]);
 
+		}else
+		{
+			FatOfDirEntry.push_back(pDirEntry->_sectStart);
+			index = pDirEntry->_sectStart;
+			while(slist[index] != ENDOFCHAIN)
+			{
+				index=slist[index];
+				FatOfDirEntry.push_back(index);
+			}
+			FatOfDirEntry.push_back(slist[index]);
+		}
+		cout<<DirName<<'\t';
+		for (int j =0; j < FatOfDirEntry.size();j++)
+		{
+			cout<<" \" \" <<DirName<<-FAT["<<j<<"] == ";
+			cout<<hex<<FatOfDirEntry[j]<<'\t';
+		}
+		cout<<endl;
+		vFatOfDirEntry.push_back(FatOfDirEntry);
+		FatOfDirEntry.clear();
+		
+	}
+	
+	return true;
+
+}
 
 
 
@@ -267,3 +329,4 @@ bool DumpDocHeader(PDocHeader pHeader)
 	cout<<'}'<<endl;
 	return true;
 }
+
