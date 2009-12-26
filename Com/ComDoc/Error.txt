@@ -1,0 +1,18 @@
+1:Vector 二维数组的使用
+2:复合文档中如何判断一个流存储在短流中
+3:STL中 list的使用，如何遍历list以及其它功能接口的使用
+
+解决：
+1：Vector 二维数组的使用，Vector< vector<int> > array;
+array.pushback(vector<int>);
+array[][];
+
+2:复合文档中如何一个流的大小小于4096，就存储在短流中，错误由于判断短流大小等于4096的等于条件引起，导致在sslist中读不到。相应流的大小；
+
+4:Stl 中list的使用，参照C++ STL和C++ Prm 
+
+
+总结：
+STL中各类使用的不熟练,加强这两方面的使用
+
+
