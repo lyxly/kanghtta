@@ -13,6 +13,12 @@
 
 using namespace std;
 
+struct DirectEntry 
+{
+	string strDirName;
+	vector<int> vSidList;
+}stDirectEntry;
+
 /* declare const */
 
  int	SectorSize = 0;
@@ -22,7 +28,7 @@ using namespace std;
 bool DumpDocHeader(PDocHeader pHeader);
 bool IfReadFile(ifstream &inStream,unsigned char * buf,unsigned int iReadOffest,size_t size);
 int GetOffestFremSid(SECT sid);
-bool ProcessDirEntry(PDirectoryEntry pDirEntry,vector<int> & slist,vector<int> & sslist,vector<vector<int> >& FatOfDirEntry,int );
+bool ProcessDirEntry(PDirectoryEntry pDirEntry,vector<int> & slist,vector<int> & sslist,vector<DirectEntry >& FatOfDirEntry,int );
 
 int main(int argc,char *argv[])
 {
@@ -192,13 +198,15 @@ int main(int argc,char *argv[])
 		delete []SecBuf;
 	}
 
-	vector< vector<int> > vFatOfDirEntry;
+	vector< DirectEntry> vFatOfDirEntry;
+	
 	/*
 	 *processing  DirectoryEntry list
 	 */
 	for(i = 0;i<lDirList.size();i++)
 	{
 		ProcessDirEntry(&lDirList[i],vMastList,vSsatList,vFatOfDirEntry,i)	;
+		memset(&stDirectEntry,0,sizeof(stDirectEntry));
 	}
 	
 
@@ -207,13 +215,14 @@ int main(int argc,char *argv[])
 
 	inStream.close();
 	return 0;
+
 }
 
-bool ProcessDirEntry(PDirectoryEntry pDirEntry,vector<int> & slist,vector<int> & sslist,vector<vector<int> >& vFatOfDirEntry,int i)
+bool ProcessDirEntry(PDirectoryEntry pDirEntry,vector<int> & slist,vector<int> & sslist,vector<DirectEntry >& vFatOfDirEntry,int i)
 {
 	string DirName;
 	unsigned int index;
-	vector<int> FatOfDirEntry;
+	
 	if (pDirEntry->_cb == 0)
 	{
 		return false;
@@ -222,41 +231,41 @@ bool ProcessDirEntry(PDirectoryEntry pDirEntry,vector<int> & slist,vector<int> &
 		char buf[256] ={0,0};
 		wcstombs(buf,(wchar_t *)pDirEntry->_ab,(size_t)pDirEntry->_cb);
 		DirName = buf;
-		
+		stDirectEntry.strDirName = DirName;
 		/************************************************************************/
 		/* ÊÇ·ñÊÇ¶ÌÁ÷                                                                     */
 		/************************************************************************/
 		if((pDirEntry->_ulSize < MaxMiniStreamSize)&&(pDirEntry->_mse != STGTY_ROOT)) 
 		{
-			FatOfDirEntry.push_back(pDirEntry->_sectStart);
+			stDirectEntry.vSidList.push_back(pDirEntry->_sectStart);
 			index = pDirEntry->_sectStart;
 			while(sslist[index] != ENDOFCHAIN)
 			{
 				index=sslist[index];
-				FatOfDirEntry.push_back(index);
+				stDirectEntry.vSidList.push_back(index);
 			}
-			FatOfDirEntry.push_back(sslist[index]);
+			stDirectEntry.vSidList.push_back(sslist[index]);
 
 		}else
 		{
-			FatOfDirEntry.push_back(pDirEntry->_sectStart);
+			stDirectEntry.vSidList.push_back(pDirEntry->_sectStart);
 			index = pDirEntry->_sectStart;
 			while(slist[index] != ENDOFCHAIN)
 			{
 				index=slist[index];
-				FatOfDirEntry.push_back(index);
+				stDirectEntry.vSidList.push_back(index);
 			}
-			FatOfDirEntry.push_back(slist[index]);
+			stDirectEntry.vSidList.push_back(slist[index]);
 		}
 		cout<<DirName<<'\t';
-		for (int j =0; j < FatOfDirEntry.size();j++)
+		for (int j =0; j < stDirectEntry.vSidList.size();j++)
 		{
 			cout<<" \" \" <<DirName<<-FAT["<<j<<"] == ";
-			cout<<hex<<FatOfDirEntry[j]<<'\t';
+			cout<<hex<<stDirectEntry.vSidList[j]<<'\t';
 		}
 		cout<<endl;
-		vFatOfDirEntry.push_back(FatOfDirEntry);
-		FatOfDirEntry.clear();
+		vFatOfDirEntry.push_back(stDirectEntry);
+	
 		
 	}
 	

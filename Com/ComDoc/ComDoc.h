@@ -24,6 +24,7 @@ typedef struct _GUID
 } GUID;
 
 
+
 typedef		GUID			CLSID;
 typedef		CLSID			 GUID;
 
@@ -99,3 +100,6 @@ typedef enum tagSTGTY
 		 ULONG _ulSize;								// [078H,04] size of stream in bytes (if _mse=STGTY_STREAM)
 		 DFPROPTYPE _dptPropType;					// [07CH,02] Reserved for future use. Must be zero. 
  }DirectoryEntry,*PDirectoryEntry;
+
+
+
