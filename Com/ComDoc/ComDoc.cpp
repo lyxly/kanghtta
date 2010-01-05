@@ -8,6 +8,7 @@
 #include <iomanip>
 #include <vector>
 #include <list>
+#include <algorithm>
 
 #include "ComDoc.h"
 
@@ -29,6 +30,7 @@ bool DumpDocHeader(PDocHeader pHeader);
 bool IfReadFile(ifstream &inStream,unsigned char * buf,unsigned int iReadOffest,size_t size);
 int GetOffestFremSid(SECT sid);
 bool ProcessDirEntry(PDirectoryEntry pDirEntry,vector<int> & slist,vector<int> & sslist,vector<DirectEntry >& FatOfDirEntry,int );
+SECT ReadMastList(ifstream &inStream,list<SECT>&vMsat,SECT sid,size_t size);
 
 int main(int argc,char *argv[])
 {
@@ -53,7 +55,8 @@ int main(int argc,char *argv[])
 	/* 处理msat                                                                      */
 	/************************************************************************/
 	unsigned long  iMastSize = 0;
-	vector<int> vMastList;  /** 用于存储sat链表*/
+	list<SECT> vMsatList; /** 用于存储Msat链 */
+	vector<int> vSatList;  /** 用于存储sat链表*/
 	if ((pHeaderSec->_sectDifStart == ENDOFCHAIN)&&(pHeaderSec->_csectDif == 0))
 	{
 		for(iMastSize = 1;iMastSize <= 109 ;iMastSize ++)
@@ -71,12 +74,12 @@ int main(int argc,char *argv[])
 				int i = 0;
 				while( pListOfMast[i]!= FREESECT )
 				{
-					vMastList.push_back(pListOfMast[i]);
-					//cout<<vMastList.front()<<" \t"<<vMastList.back()<<'\t';
+					vSatList.push_back(pListOfMast[i]);
+					//cout<<vSatList.front()<<" \t"<<vSatList.back()<<'\t';
 					
 					cout<<"MAST["<<i<<"] == ";
-					cout<<vMastList[i]<<'\t';
-					if (vMastList[vMastList.size()-1] == ENDOFCHAIN)
+					cout<<vSatList[i]<<'\t';
+					if (vSatList[vSatList.size()-1] == ENDOFCHAIN)
 					{
 						cout<<endl;
 					}
@@ -91,7 +94,64 @@ int main(int argc,char *argv[])
 	else
 	{
 		/** Mast 大于 109个扇区的情况 */
+		SECT *begin = pHeaderSec->_sectFat;
+		SECT *end = begin + 109;
+		list<SECT> vTempMsat(begin,end);
+		vMsatList = vTempMsat;
+		SECT NextMsatSid;
+		SECT  sid = pHeaderSec->_sectDifStart;
+		for (int i = 0; i < pHeaderSec->_csectDif;i++)
+		{
+			
+			NextMsatSid = ReadMastList(inStream,vMsatList,sid,SectorSize);
+			sid = NextMsatSid;
+		}
+
+		vMsatList.push_back(sid);
+		/*
+		 * 打印输出MastList
+		 */
+		cout<<"MastLiat: ";
+		cout<<hex<<showbase;
+		copy(vMsatList.begin(),vMsatList.end(),ostream_iterator<SECT>(cout," "));
+// 		list<SECT>::iterator pos;
+// 		int size =0;
+// 		for (pos = vMsatList.begin();size<vMsatList.size();++pos,size++)
+// 		{
+// 			if ((*pos) == ENDOFCHAIN)
+// 			{
+// 				break;
+// 			}
+// 			cout<<"the courrt pos is :"<<*pos<<endl;
+// 			cout<<"the begin is :"<<*vMsatList.begin()<<"the end is :"<<*vMsatList.end()<<endl;
+// 			if ((*pos ) ==  0xFFFFFFFF)
+// 			{
+// 				continue;
+// 			}
+// 			else
+// 			{
+// 				
+// 				BYTE  *SecBuf = new BYTE[SectorSize];
+// 				IfReadFile(inStream,SecBuf,GetOffestFremSid((*pos )),SectorSize);
+// 				int * pListOfMast = (int *)SecBuf;
+// 				int i = 0;
+// 				while(( pListOfMast[i]!= FREESECT )&&((128-i)!=0))
+// 				{
+// 					vSatList.push_back(pListOfMast[i]);
+// 					//cout<<vSatList.front()<<" \t"<<vSatList.back()<<'\t';
+// 					
+// 					if (vSatList[vSatList.size()-1] == ENDOFCHAIN)
+// 					{
+// 					}
+// 					i++;
+// 				}
+// 				
+// 				delete []SecBuf;
+// 			}
+// 		}
+		
 	}
+
 
 	/************************************************************************/
 	/* 处理ssat                                                                     */
@@ -103,14 +163,14 @@ int main(int argc,char *argv[])
 	vector<int>	vSsatFat;
 	vSsatFat.push_back(pHeaderSec->_sectMiniFatStart);
 	int index = vSsatFat[0];
-	while(vMastList[index] != ENDOFCHAIN )
+	while(vSatList[index] != ENDOFCHAIN )
 	{
-		index = vMastList[index];
+		index = vSatList[index];
 		vSsatFat.push_back(index);
 
 	}
 	
-	vSsatFat.push_back(vMastList[index]);
+	vSsatFat.push_back(vSatList[index]);
 	int i = 0; /** 循环计数器*/
 	for (i; i < vSsatFat.size();i++)
 	{
@@ -135,7 +195,7 @@ int main(int argc,char *argv[])
 			while( pListOfMast[i]!= FREESECT )
 			{
 				vSsatList.push_back(pListOfMast[i]);
-				//cout<<vMastList.front()<<" \t"<<vMastList.back()<<'\t';
+				//cout<<vSatList.front()<<" \t"<<vSatList.back()<<'\t';
 				
 				cout<<"SSAT["<<i<<"] == ";
 				cout<<vSsatList[i]<<'\t';
@@ -160,14 +220,14 @@ int main(int argc,char *argv[])
 	vector<int>	vDirFat;
 	vDirFat.push_back(pHeaderSec->_sectDirStart);
 	index = vDirFat[0];
-	while(vMastList[index] != ENDOFCHAIN )
+	while(vSatList[index] != ENDOFCHAIN )
 	{
-		index = vMastList[index];
+		index = vSatList[index];
 		vDirFat.push_back(index);
 		
 	}
 	
-	vDirFat.push_back(vMastList[index]);
+	vDirFat.push_back(vSatList[index]);
 
 	for (i =0; i < vDirFat.size();i++)
 	{
@@ -205,7 +265,7 @@ int main(int argc,char *argv[])
 	 */
 	for(i = 0;i<lDirList.size();i++)
 	{
-		ProcessDirEntry(&lDirList[i],vMastList,vSsatList,vFatOfDirEntry,i)	;
+		ProcessDirEntry(&lDirList[i],vSatList,vSsatList,vFatOfDirEntry,i)	;
 		memset(&stDirectEntry,0,sizeof(stDirectEntry));
 	}
 	
@@ -273,7 +333,24 @@ bool ProcessDirEntry(PDirectoryEntry pDirEntry,vector<int> & slist,vector<int> &
 
 }
 
-
+SECT ReadMastList(ifstream &inStream,list<SECT> &vMsat,SECT sid,size_t size)
+{
+	SECT tempSid = 0;
+	BYTE  * MsatBuf = new BYTE [512];
+	IfReadFile(inStream,MsatBuf,GetOffestFremSid(sid),size);
+	SECT * temSidList = (SECT *)MsatBuf;
+	if (temSidList[127] != ENDOFCHAIN)
+	{
+		vMsat.insert(vMsat.end(),temSidList,(temSidList+126));
+		tempSid = temSidList[127];
+	}else{
+		vMsat.insert(vMsat.end(),temSidList,(temSidList+127));
+		tempSid = temSidList[127];
+	}
+	
+	delete []MsatBuf;
+	return tempSid;
+}
 
 bool IfReadFile(ifstream &inStream,unsigned char * buf,unsigned int iReadOffest,size_t size)
 {
