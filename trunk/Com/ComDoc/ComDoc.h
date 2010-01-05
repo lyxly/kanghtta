@@ -62,8 +62,8 @@ typedef struct StructuredStorageHeader {			// [offset from start in bytes, lengt
 		ULONG _ulMiniSectorCutoff;	// [038H,04] maximum size for mini-streams: typically 4096 bytes
 		SECT _sectMiniFatStart;		// [03CH,04] first SECT in the mini-FAT chain
 		FSINDEX _csectMiniFat;	 // [040H,04] number of SECTs in the mini-FAT chain
-		SECT _sectDifStart;		// [044H,04] first SECT in the DIF chain
-		FSINDEX _csectDif;		// [048H,04] number of SECTs in the DIF chain 
+		SECT _sectDifStart;		// [044H,04] first SECT in the DIF chain  msat的第一个SID
+		FSINDEX _csectDif;		// [048H,04] number of SECTs in the DIF chain  个数
 		SECT _sectFat[109];		// [04CH,436] the SECTs of the first 109 FAT sectors
 } DocHeader,*PDocHeader;
 
@@ -101,5 +101,22 @@ typedef enum tagSTGTY
 		 DFPROPTYPE _dptPropType;					// [07CH,02] Reserved for future use. Must be zero. 
  }DirectoryEntry,*PDirectoryEntry;
 
+/************************************************************************/
+/* MSAT 主扇区分配表概要说明                                                                     */
+/************************************************************************/
+/*
+what is ? 
+ MSAT是被SAT(扇区分配表）使用的扇区号数组，开始109个扇区包含在header中，msat的大小(sid的个数)和SAT使用的扇区数相等；
+ msat的第一个扇区在头中被标记..在msat扇区中的最后一个sid被用来标示下一个msat使用的扇区号，如果没有占用其他的扇区，最后一个
+ 被指定为-2；
 
+how is?
+
+  1：首先，判断header中开始扇区号是不是-2，大小是不是0，如果是-2，表示头中的msat的前109个sid并没有用完，只处理前109个扇区；
+  2：如果，开始扇区号不是-2，表示msat占用了其它扇区，处理开始的109个扇区后，读header0x44处sid代表的扇区，判断该扇区最后一个
+  sid是不是-2，如果不是，将出最后一个sid的其它sid保持在msat链中，读入该扇区的最后一个sid代表的扇区数据，重复2，直到
+  读入的扇区id为free，末尾的sid为-2为止；
+
+
+*/
 
