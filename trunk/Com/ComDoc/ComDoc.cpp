@@ -29,11 +29,15 @@ struct DirectEntry
 bool DumpDocHeader(PDocHeader pHeader);
 bool IfReadFile(ifstream &inStream,unsigned char * buf,unsigned int iReadOffest,size_t size);
 int GetOffestFremSid(SECT sid);
-bool ProcessDirEntry(PDirectoryEntry pDirEntry,vector<int> & slist,vector<int> & sslist,vector<DirectEntry >& FatOfDirEntry,int );
+bool ProcessDirEntry(PDirectoryEntry pDirEntry,vector<SECT> & slist,vector<int> & sslist,vector<DirectEntry >& FatOfDirEntry,int );
 SECT ReadMastList(ifstream &inStream,list<SECT>&vMsat,SECT sid,size_t size);
 
 int main(int argc,char *argv[])
 {
+	int a = 0xFFFFFFFF;
+	long b = 0xFFFFFFFF;
+	cout<<a<<endl;
+	cout<<b<<endl;
 	cout<<"Enter the name of the input file :\n";
 	string	 inputFileName;
 	getline(cin,inputFileName);
@@ -56,7 +60,7 @@ int main(int argc,char *argv[])
 	/************************************************************************/
 	unsigned long  iMastSize = 0;
 
-	vector<int> vSatList;  /** 用于存储sat链表*/
+	vector<SECT> vSatList;  /** 用于存储sat链表*/
 	if ((pHeaderSec->_sectDifStart == ENDOFCHAIN)&&(pHeaderSec->_csectDif == 0))
 	{
 		for(iMastSize = 1;iMastSize <= 109 ;iMastSize ++)
@@ -70,20 +74,15 @@ int main(int argc,char *argv[])
 				
 				BYTE  *SecBuf = new BYTE[SectorSize];
 				IfReadFile(inStream,SecBuf,GetOffestFremSid((pHeaderSec->_sectFat[iMastSize - 1] )),SectorSize);
-				int * pListOfMast = (int *)SecBuf;
+				SECT * pListOfMast = (SECT *)SecBuf;
 				int i = 0;
-				while( pListOfMast[i]!= FREESECT )
+				for (i;i<128;i++)
 				{
-					vSatList.push_back(pListOfMast[i]);
-					//cout<<vSatList.front()<<" \t"<<vSatList.back()<<'\t';
-					
-					cout<<"MAST["<<i<<"] == ";
-					cout<<vSatList[i]<<'\t';
-					if (vSatList[vSatList.size()-1] == ENDOFCHAIN)
+					if (pListOfMast[i] != 0xFFFFFFFF )
 					{
-						cout<<endl;
+						vSatList.push_back(pListOfMast[i]);
 					}
-					i++;
+
 				}
 				
 				delete []SecBuf;
@@ -133,11 +132,15 @@ int main(int argc,char *argv[])
 	
  				BYTE  *SecBuf = new BYTE[SectorSize];
  				IfReadFile(inStream,SecBuf,GetOffestFremSid((vMsatList[pos] )),SectorSize);
- 				int * pListOfMast = (int *)SecBuf;
+ 				SECT * pListOfMast = (SECT *)SecBuf;
  				int i = 0;
  				for (i;i<128;i++)
  				{
-					vSatList.push_back(pListOfMast[i]);
+					if (pListOfMast[i] != 0xFFFFFFFF )
+					{
+						vSatList.push_back(pListOfMast[i]);
+					}
+					
  				}
  				
  				delete []SecBuf;
@@ -147,7 +150,7 @@ int main(int argc,char *argv[])
 	}
 
 	cout<<"the sat size "<<vSatList.size()<<endl;
-	return 0;
+
 	/************************************************************************/
 	/* 处理ssat                                                                     */
 	/************************************************************************/
@@ -273,7 +276,7 @@ int main(int argc,char *argv[])
 
 }
 
-bool ProcessDirEntry(PDirectoryEntry pDirEntry,vector<int> & slist,vector<int> & sslist,vector<DirectEntry >& vFatOfDirEntry,int i)
+bool ProcessDirEntry(PDirectoryEntry pDirEntry,vector<SECT> & slist,vector<int> & sslist,vector<DirectEntry >& vFatOfDirEntry,int i)
 {
 	string DirName;
 	unsigned int index;
