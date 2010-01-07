@@ -55,7 +55,7 @@ int main(int argc,char *argv[])
 	/* 处理msat                                                                      */
 	/************************************************************************/
 	unsigned long  iMastSize = 0;
-	list<SECT> vMsatList; /** 用于存储Msat链 */
+
 	vector<int> vSatList;  /** 用于存储sat链表*/
 	if ((pHeaderSec->_sectDifStart == ENDOFCHAIN)&&(pHeaderSec->_csectDif == 0))
 	{
@@ -97,62 +97,57 @@ int main(int argc,char *argv[])
 		SECT *begin = pHeaderSec->_sectFat;
 		SECT *end = begin + 109;
 		list<SECT> vTempMsat(begin,end);
-		vMsatList = vTempMsat;
+	
 		SECT NextMsatSid;
 		SECT  sid = pHeaderSec->_sectDifStart;
 		for (int i = 0; i < pHeaderSec->_csectDif;i++)
 		{
 			
-			NextMsatSid = ReadMastList(inStream,vMsatList,sid,SectorSize);
+			NextMsatSid = ReadMastList(inStream,vTempMsat,sid,SectorSize);
 			sid = NextMsatSid;
 		}
 
-		vMsatList.push_back(sid);
+		vTempMsat.push_back(sid);
 		/*
 		 * 打印输出MastList
 		 */
+		vector<SECT> vMsatList(vTempMsat.begin(),vTempMsat.end());
 		cout<<"MastLiat: ";
 		cout<<hex<<showbase;
 		copy(vMsatList.begin(),vMsatList.end(),ostream_iterator<SECT>(cout," "));
-// 		list<SECT>::iterator pos;
-// 		int size =0;
-// 		for (pos = vMsatList.begin();size<vMsatList.size();++pos,size++)
-// 		{
-// 			if ((*pos) == ENDOFCHAIN)
-// 			{
-// 				break;
-// 			}
-// 			cout<<"the courrt pos is :"<<*pos<<endl;
-// 			cout<<"the begin is :"<<*vMsatList.begin()<<"the end is :"<<*vMsatList.end()<<endl;
-// 			if ((*pos ) ==  0xFFFFFFFF)
-// 			{
-// 				continue;
-// 			}
-// 			else
-// 			{
-// 				
-// 				BYTE  *SecBuf = new BYTE[SectorSize];
-// 				IfReadFile(inStream,SecBuf,GetOffestFremSid((*pos )),SectorSize);
-// 				int * pListOfMast = (int *)SecBuf;
-// 				int i = 0;
-// 				while(( pListOfMast[i]!= FREESECT )&&((128-i)!=0))
-// 				{
-// 					vSatList.push_back(pListOfMast[i]);
-// 					//cout<<vSatList.front()<<" \t"<<vSatList.back()<<'\t';
-// 					
-// 					if (vSatList[vSatList.size()-1] == ENDOFCHAIN)
-// 					{
-// 					}
-// 					i++;
-// 				}
-// 				
-// 				delete []SecBuf;
-// 			}
-// 		}
+		int pos = 0,
+			length = vMsatList.size() ;
+		for (pos ; pos < length ;++pos)
+		{
+			if ((vMsatList[pos]) == ENDOFCHAIN)
+			{
+				break;
+			}
+			
+ 			if ((vMsatList[pos] ) ==  0xFFFFFFFF)
+ 			{
+ 				continue;
+ 			}
+ 			else
+			{
+	
+ 				BYTE  *SecBuf = new BYTE[SectorSize];
+ 				IfReadFile(inStream,SecBuf,GetOffestFremSid((vMsatList[pos] )),SectorSize);
+ 				int * pListOfMast = (int *)SecBuf;
+ 				int i = 0;
+ 				for (i;i<128;i++)
+ 				{
+					vSatList.push_back(pListOfMast[i]);
+ 				}
+ 				
+ 				delete []SecBuf;
+ 			}
+ 		}
 		
 	}
 
-
+	cout<<"the sat size "<<vSatList.size()<<endl;
+	return 0;
 	/************************************************************************/
 	/* 处理ssat                                                                     */
 	/************************************************************************/
@@ -397,7 +392,7 @@ bool DumpDocHeader(PDocHeader pHeader)
 	cout<<"\t Total number of sectors used for the master sector allocation table is "<<(ULONG)pHeader->_csectDif<<endl;
 	cout<<"\t First part of the master sector allocation table containing 109 SecIDs  is "<<endl;
 	cout<<"\t {\t";
-	for (i = 0;i<109;i++)
+	for (int i = 0;i<109;i++)
 	{
 		if ( pHeader->_sectFat[i] != -1 )
 		{
