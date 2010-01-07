@@ -30,14 +30,10 @@ bool DumpDocHeader(PDocHeader pHeader);
 bool IfReadFile(ifstream &inStream,unsigned char * buf,unsigned int iReadOffest,size_t size);
 int GetOffestFremSid(SECT sid);
 bool ProcessDirEntry(PDirectoryEntry pDirEntry,vector<SECT> & slist,vector<int> & sslist,vector<DirectEntry >& FatOfDirEntry,int );
-SECT ReadMastList(ifstream &inStream,list<SECT>&vMsat,SECT sid,size_t size);
+SECT ReadMastList(ifstream &inStream,vector<SECT>&vMsat,SECT sid,size_t size);
 
 int main(int argc,char *argv[])
 {
-	int a = 0xFFFFFFFF;
-	long b = 0xFFFFFFFF;
-	cout<<a<<endl;
-	cout<<b<<endl;
 	cout<<"Enter the name of the input file :\n";
 	string	 inputFileName;
 	getline(cin,inputFileName);
@@ -95,7 +91,7 @@ int main(int argc,char *argv[])
 		/** Mast 大于 109个扇区的情况 */
 		SECT *begin = pHeaderSec->_sectFat;
 		SECT *end = begin + 109;
-		list<SECT> vTempMsat(begin,end);
+		vector<SECT> vTempMsat(begin,end);
 	
 		SECT NextMsatSid;
 		SECT  sid = pHeaderSec->_sectDifStart;
@@ -149,7 +145,10 @@ int main(int argc,char *argv[])
 		
 	}
 
-	cout<<"the sat size "<<vSatList.size()<<endl;
+	cout<<"the sat size "<<(vSatList.size()*512+512)<<endl;
+	inStream.seekg(0,ios::end);
+	long filesize = inStream.tellg();
+	cout<<"the file size :"<<filesize<<endl;
 
 	/************************************************************************/
 	/* 处理ssat                                                                     */
@@ -331,7 +330,7 @@ bool ProcessDirEntry(PDirectoryEntry pDirEntry,vector<SECT> & slist,vector<int> 
 
 }
 
-SECT ReadMastList(ifstream &inStream,list<SECT> &vMsat,SECT sid,size_t size)
+SECT ReadMastList(ifstream &inStream,vector<SECT> &vMsat,SECT sid,size_t size)
 {
 	SECT tempSid = 0;
 	BYTE  * MsatBuf = new BYTE [512];
@@ -339,7 +338,7 @@ SECT ReadMastList(ifstream &inStream,list<SECT> &vMsat,SECT sid,size_t size)
 	SECT * temSidList = (SECT *)MsatBuf;
 	if (temSidList[127] != ENDOFCHAIN)
 	{
-		vMsat.insert(vMsat.end(),temSidList,(temSidList+126));
+		vMsat.insert(vMsat.end(),temSidList,(temSidList+127));
 		tempSid = temSidList[127];
 	}else{
 		vMsat.insert(vMsat.end(),temSidList,(temSidList+127));
