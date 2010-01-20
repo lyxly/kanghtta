@@ -1,0 +1,89 @@
+Internet Resources
+The Internet is a huge source of information regarding the topic of this book. Here is a list of my recommendations of sites where you could find additional, relevant information.
+
+Where You Can Get the Standard
+The American National Standards Institute (ANSI) sells the C++ standard in the United States. At the time this book was written, you could get the C++ standard at the Electronics Standard Store of ANSI for $18 (US) at the following site:
+
+http://www.ansi.org/
+
+Newsgroups
+The following newsgroups discuss C++, the standard, and the C++ standard library:
+
+General aspects of C++ (unmoderated)
+
+   comp.lang.c++
+General aspects of C++ (moderated)
+
+   comp.lang.c++.moderated
+Aspects of the C++ standard (moderated)
+
+   comp.std.c++
+For more information about this newsgroup see
+
+http://reality.sgi.com/austern/std-c++/faq.html 
+
+Internet Addresses/URLs
+This section lists links that provide additional related informations regarding the C++ standard library and the STL. However, books might have a longer life than Internet sites, and the links listed here may be not valid in the future. Therefore, I will provide the actual list of links for this book at the following site (and I expect my site to be stable):
+
+http://www.josuttis.com/1ibbook/
+
+The following links refer to issues of the whole C++ standard library:
+
+FAQs (frequently asked questions) about the standardization of C++:
+
+http://reality.sgi.com/austern/std-c++/faq.html 
+
+The official home page of ISO working group for the standardization of C++
+
+http://www.dkuug.dk/jtc1/sc22/wg21/ 
+
+The Dinkum C++ Library Reference
+
+http://www.dinkumware.com/refxcpp.html 
+
+The C++ standard library implementation for the EGCS C++ compiler
+
+http://sourceware.cygnus.com/1ibstdc++/ 
+
+The EGCS C++ compiler
+
+http://egcs.cygnus.com/ 
+
+The Boost repository for free, peer-reviewed C++ libraries
+
+http://www.boost.org/ 
+
+Blitz++, a C++ class library for scientific computing
+
+http://www.oonumerics.org/blitz/ 
+
+The following links refer to issues of the STL:
+
+The freely available STL implementation by SGI
+
+http://www.sgi.com/Technology/STL/ 
+
+STLport for several platforms
+
+http://www.stlport.org/ 
+
+Mumit's STL Newbie Guide
+
+http://www.xraylith.wisc.edu/~khan/software/stl/STL.newbie.html 
+
+David Musser's STL site
+
+http://www.cs.rpi.edu/~musser/stl.html 
+
+STL FAQs
+
+ftp://butler.hpl.hp.com/stl/stl.faq 
+
+Safe STL by Cay Horstmann
+
+http://www.horstmann.com/safestl.html 
+
+Warren Young's STL Resource List
+
+http://www.cyberport.com/~tangent/programming/stl/resources.html 
+
