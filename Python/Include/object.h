@@ -61,7 +61,7 @@ whose size is determined when the object is allocated.
 #define Py_REF_DEBUG
 #endif
 
-#ifdef Py_TRACE_REFS
+#ifdef Py_TRACE_REFS   //此宏用于调试模式
 /* Define pointers to support a doubly-linked list of all live heap objects. */
 #define _PyObject_HEAD_EXTRA		\
 	struct _object *_ob_next;	\
@@ -74,11 +74,15 @@ whose size is determined when the object is allocated.
 #define _PyObject_EXTRA_INIT
 #endif
 
-/* PyObject_HEAD defines the initial segment of every PyObject. */
+
+
+/* PyObject_HEAD defines the initial segment of every PyObject.
+ * 所有PyObject对象的初始化断定义，对象头定义
+ */
 #define PyObject_HEAD			\
 	_PyObject_HEAD_EXTRA		\
-	Py_ssize_t ob_refcnt;		\
-	struct _typeobject *ob_type;
+	Py_ssize_t ob_refcnt;		\   
+	struct _typeobject *ob_type;     
 
 #define PyObject_HEAD_INIT(type)	\
 	_PyObject_EXTRA_INIT		\
@@ -92,17 +96,23 @@ whose size is determined when the object is allocated.
  * element, but enough space is malloc'ed so that the array actually
  * has room for ob_size elements.  Note that ob_size is an element count,
  * not necessarily a byte count.
+ * 可变长对象定义，附加一字段用来表示该对象所占内存大小
  */
 #define PyObject_VAR_HEAD		\
 	PyObject_HEAD			\
-	Py_ssize_t ob_size; /* Number of items in variable part */
+	Py_ssize_t ob_size; /* Number of items in variable part可变部分的元素个数，而不是内存大小 */
 #define Py_INVALID_SIZE (Py_ssize_t)-1
 
 /* Nothing is actually declared to be a PyObject, but every pointer to
  * a Python object can be cast to a PyObject*.  This is inheritance built
  * by hand.  Similarly every pointer to a variable-size Python object can,
  * in addition, be cast to PyVarObject*.
+ * 所有的一切都是对象，所有的对象都有一些相同的内容，在此结构中定义
+ * 有两种类型的对象，一种的对象定义后，不包含可变长数据的对象，如整数，一种是包含可变长数据的定义的对象
+   如字符串，而PyObject_VAR_HEAD只是PyObject_HEAD的扩展，因此可以使用任何PyObject对象指针来引用任何
+   Python对象
  */
+
 typedef struct _object {
 	PyObject_HEAD
 } PyObject;
@@ -111,6 +121,7 @@ typedef struct {
 	PyObject_VAR_HEAD
 } PyVarObject;
 
+/** 带参数的宏定义，分别用于获取一个对象的引用计数，对象类型，和可变长对象的元素数目*/
 #define Py_REFCNT(ob)		(((PyObject*)(ob))->ob_refcnt)
 #define Py_TYPE(ob)		(((PyObject*)(ob))->ob_type)
 #define Py_SIZE(ob)		(((PyVarObject*)(ob))->ob_size)
@@ -268,7 +279,7 @@ typedef struct {
 
 	/* Added in release 2.5 */
 	unaryfunc nb_index;
-} PyNumberMethods;
+} PyNumberMethods; /** 用于数学运算的方法函数,数值对象操作*/
 
 typedef struct {
 	lenfunc sq_length;
@@ -282,13 +293,14 @@ typedef struct {
 	/* Added in release 2.0 */
 	binaryfunc sq_inplace_concat;
 	ssizeargfunc sq_inplace_repeat;
-} PySequenceMethods;
+} PySequenceMethods; /** 系列对象操作函数定义*/
 
 typedef struct {
 	lenfunc mp_length;
 	binaryfunc mp_subscript;
 	objobjargproc mp_ass_subscript;
-} PyMappingMethods;
+} PyMappingMethods; /** 关联对象操作函数定义*/
+
 
 typedef struct {
 	readbufferproc bf_getreadbuffer;
@@ -303,6 +315,7 @@ typedef struct {
 typedef void (*freefunc)(void *);
 typedef void (*destructor)(PyObject *);
 typedef int (*printfunc)(PyObject *, FILE *, int);
+/* *指向函数的指针类型定义，函数返回值类型为PyObject对象指针*/
 typedef PyObject *(*getattrfunc)(PyObject *, char *);
 typedef PyObject *(*getattrofunc)(PyObject *, PyObject *);
 typedef int (*setattrfunc)(PyObject *, char *, PyObject *);
@@ -319,10 +332,11 @@ typedef int (*initproc)(PyObject *, PyObject *, PyObject *);
 typedef PyObject *(*newfunc)(struct _typeobject *, PyObject *, PyObject *);
 typedef PyObject *(*allocfunc)(struct _typeobject *, Py_ssize_t);
 
+/**用来指定对象类型的类型对象*/
 typedef struct _typeobject {
 	PyObject_VAR_HEAD
-	const char *tp_name; /* For printing, in format "<module>.<name>" */
-	Py_ssize_t tp_basicsize, tp_itemsize; /* For allocation */
+	const char *tp_name; /* For printing, in format "<module>.<name>"用于内部调试 */
+	Py_ssize_t tp_basicsize, tp_itemsize; /* For allocation  用于创建对象的时，初始化内存空间*/
 
 	/* Methods to implement standard operations */
 
@@ -341,7 +355,7 @@ typedef struct _typeobject {
 
 	/* More standard operations (here for binary compatibility) */
 
-	hashfunc tp_hash;
+	hashfunc tp_hash;     //如何生成对应于该对象的hash值
 	ternaryfunc tp_call;
 	reprfunc tp_str;
 	getattrofunc tp_getattro;
