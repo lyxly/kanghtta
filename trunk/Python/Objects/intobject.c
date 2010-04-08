@@ -41,7 +41,7 @@ struct _intblock {
 typedef struct _intblock PyIntBlock;
 
 static PyIntBlock *block_list = NULL;
-static PyIntObject *free_list = NULL;
+static PyIntObject *free_list = NULL;//表示目前block中可用的内存对象池中的对象
 
 static PyIntObject *
 fill_free_list(void)
@@ -51,7 +51,7 @@ fill_free_list(void)
 	p = (PyIntObject *) PyMem_MALLOC(sizeof(PyIntBlock));
 	if (p == NULL)
 		return (PyIntObject *) PyErr_NoMemory();
-	((PyIntBlock *)p)->next = block_list;
+	((PyIntBlock *)p)->next = block_list; /*初始化单向链表*/
 	block_list = (PyIntBlock *)p;
 	/* Link the int objects together, from rear to front, then return
 	   the address of the last int object in the block. */
@@ -81,11 +81,14 @@ static PyIntObject *small_ints[NSMALLNEGINTS + NSMALLPOSINTS];
 int quick_int_allocs, quick_neg_int_allocs;
 #endif
 
+/************************************************************************/
+/* 含默认值的数值对象初始化                                                                    */
+/************************************************************************/
 PyObject *
 PyInt_FromLong(long ival)
 {
 	register PyIntObject *v;
-#if NSMALLNEGINTS + NSMALLPOSINTS > 0
+#if NSMALLNEGINTS + NSMALLPOSINTS > 0    //#if常量表达式，非零时参与编译
 	if (-NSMALLNEGINTS <= ival && ival < NSMALLPOSINTS) {
 		v = small_ints[ival + NSMALLNEGINTS];
 		Py_INCREF(v);
@@ -104,7 +107,7 @@ PyInt_FromLong(long ival)
 	}
 	/* Inline PyObject_New */
 	v = free_list;
-	free_list = (PyIntObject *)Py_TYPE(v);
+	free_list = (PyIntObject *)Py_TYPE(v);//取下一个free_item,为下一次的分配做准备
 	PyObject_INIT(v, &PyInt_Type);
 	v->ob_ival = ival;
 	return (PyObject *) v;
@@ -113,11 +116,15 @@ PyInt_FromLong(long ival)
 PyObject *
 PyInt_FromSize_t(size_t ival)
 {
+	/**判断该数值是否超出最大整数范围*/
 	if (ival <= LONG_MAX)
 		return PyInt_FromLong((long)ival);
 	return _PyLong_FromSize_t(ival);
 }
 
+/************************************************************************/
+/* 判读数值对象的范围并分配相应的数值对象                                                                     */
+/************************************************************************/
 PyObject *
 PyInt_FromSsize_t(Py_ssize_t ival)
 {
@@ -134,9 +141,11 @@ int_dealloc(PyIntObject *v)
 		free_list = v;
 	}
 	else
-		Py_TYPE(v)->tp_free((PyObject *)v);
+		Py_TYPE(v)->tp_free((PyObject *)v);//否则调用该对象析构函数释放对象
 }
-
+/************************************************************************/
+/* 将对象v归还对象池                                                                     */
+/************************************************************************/
 static void
 int_free(PyIntObject *v)
 {
