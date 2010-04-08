@@ -1,0 +1,782 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on March, 20 2010 by texi2html 1.78 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+
+-->
+<head>
+<title>GRUB Manual: D. Hacking GRUB</title>
+
+<meta name="description" content="GRUB Manual: D. Hacking GRUB">
+<meta name="keywords" content="GRUB Manual: D. Hacking GRUB">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.78">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Internals"></a>
+<a name="SEC128"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="grub_23.html#SEC127" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC129" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub_23.html#SEC127" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="appendix"> D. Hacking GRUB </h1>
+
+<p>This chapter documents the user-invisible aspect of GRUB.
+</p>
+<p>As a general rule of software development, it is impossible to keep the
+descriptions of the internals up-to-date, and it is quite hard to
+document everything. So refer to the source code, whenever you are not
+satisfied with this documentation.  Please assume that this gives just
+hints to you.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC129">D.1 The memory map of various components</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC130">D.2 Embedded variables in GRUB</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC131">D.3 The generic interface for filesystems</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC132">D.4 The generic interface for built-ins</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC133">D.5 The bootstrap mechanism used in GRUB</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC134">D.6 How to probe I/O ports used by INT 13H</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC135">D.7 How to detect all installed RAM</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC136">D.8 INT 13H disk I/O interrupts</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC137">D.9 The structure of Master Boot Record</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC138">D.10 The format of partition tables</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC139">D.11 Where and how you should send patches</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+</table>
+
+
+<hr size="6">
+<a name="Memory-map"></a>
+<a name="SEC129"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC128" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC130" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC128" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC128" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> D.1 The memory map of various components </h2>
+
+<p>GRUB consists of two distinct components, called <em>stages</em>, which are
+loaded at different times in the boot process. Because they run
+mutual-exclusively, sometimes a memory area overlaps with another
+memory area. And, even in one stage, a single memory area can be used
+for various purposes, because their usages are mutually exclusive.
+</p>
+<p>Here is the memory map of the various components:
+</p>
+<dl compact="compact">
+<dt> 0 to 4K-1</dt>
+<dd><p>BIOS and real mode interrupts
+</p>
+</dd>
+<dt> 0x07BE to 0x07FF</dt>
+<dd><p>Partition table passed to another boot loader
+</p>
+</dd>
+<dt> down from 8K-1</dt>
+<dd><p>Real mode stack
+</p>
+</dd>
+<dt> 0x2000 to ?</dt>
+<dd><p>The optional Stage 1.5 is loaded here
+</p>
+</dd>
+<dt> 0x2000 to 0x7FFF</dt>
+<dd><p>Command-line buffer for Multiboot kernels and modules
+</p>
+</dd>
+<dt> 0x7C00 to 0x7DFF</dt>
+<dd><p>Stage 1 is loaded here by BIOS or another boot loader
+</p>
+</dd>
+<dt> 0x7F00 to 0x7F42</dt>
+<dd><p>LBA drive parameters
+</p>
+</dd>
+<dt> 0x8000 to ?</dt>
+<dd><p>Stage2 is loaded here
+</p>
+</dd>
+<dt> The end of Stage 2 to 416K-1</dt>
+<dd><p>Heap, in particular used for the menu
+</p>
+</dd>
+<dt> down from 416K-1</dt>
+<dd><p>Protected mode stack
+</p>
+</dd>
+<dt> 416K to 448K-1</dt>
+<dd><p>Filesystem buffer
+</p>
+</dd>
+<dt> 448K to 479.5K-1</dt>
+<dd><p>Raw device buffer
+</p>
+</dd>
+<dt> 479.5K to 480K-1</dt>
+<dd><p>512-byte scratch area
+</p>
+</dd>
+<dt> 480K to 512K-1</dt>
+<dd><p>Buffers for various functions, such as password, command-line, cut and
+paste, and completion.
+</p>
+</dd>
+<dt> The last 1K of lower memory</dt>
+<dd><p>Disk swapping code and data
+</p></dd>
+</dl>
+
+<p>See the file &lsquo;<tt>stage2/shared.h</tt>&rsquo;, for more information.
+</p>
+
+<hr size="6">
+<a name="Embedded-data"></a>
+<a name="SEC130"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC129" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC131" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC128" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC128" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> D.2 Embedded variables in GRUB </h2>
+
+<p>Stage 1 and Stage 2 have embedded variables whose locations are
+well-defined, so that the installation can patch the binary file
+directly without recompilation of the stages.
+</p>
+<p>In Stage 1, these are defined:
+</p>
+<dl compact="compact">
+<dt> <code>0x3E</code></dt>
+<dd><p>The version number (not GRUB's, but the installation mechanism's).
+</p>
+</dd>
+<dt> <code>0x40</code></dt>
+<dd><p>The boot drive. If it is 0xFF, use a drive passed by BIOS.
+</p>
+</dd>
+<dt> <code>0x41</code></dt>
+<dd><p>The flag for if forcing LBA.
+</p>
+</dd>
+<dt> <code>0x42</code></dt>
+<dd><p>The starting address of Stage 2.
+</p>
+</dd>
+<dt> <code>0x44</code></dt>
+<dd><p>The first sector of Stage 2.
+</p>
+</dd>
+<dt> <code>0x48</code></dt>
+<dd><p>The starting segment of Stage 2.
+</p>
+</dd>
+<dt> <code>0x1FE</code></dt>
+<dd><p>The signature (<code>0xAA55</code>).
+</p></dd>
+</dl>
+
+<p>See the file &lsquo;<tt>stage1/stage1.S</tt>&rsquo;, for more information.
+</p>
+<p>In the first sector of Stage 1.5 and Stage 2, the block lists are
+recorded between <code>firstlist</code> and <code>lastlist</code>. The address of
+<code>lastlist</code> is determined when assembling the file
+&lsquo;<tt>stage2/start.S</tt>&rsquo;.
+</p>
+<p>The trick here is that it is actually read backward, and the first
+8-byte block list is not read here, but after the pointer is decremented
+8 bytes, then after reading it, it decrements again, reads, and so on,
+until it is finished. The terminating condition is when the number of
+sectors to be read in the next block list is zero.
+</p>
+<p>The format of a block list can be seen from the example in the code just
+before the <code>firstlist</code> label. Note that it is always from the
+beginning of the disk, but <em>not</em> relative to the partition 
+boundaries.
+</p>
+<p>In the second sector of Stage 1.5 and Stage 2, these are defined:
+</p>
+<dl compact="compact">
+<dt> <code>0x6</code></dt>
+<dd><p>The version number (likewise, the installation mechanism's).
+</p>
+</dd>
+<dt> <code>0x8</code></dt>
+<dd><p>The installed partition.
+</p>
+</dd>
+<dt> <code>0xC</code></dt>
+<dd><p>The saved entry number.
+</p>
+</dd>
+<dt> <code>0x10</code></dt>
+<dd><p>The identifier.
+</p>
+</dd>
+<dt> <code>0x11</code></dt>
+<dd><p>The flag for if forcing LBA.
+</p>
+</dd>
+<dt> <code>0x12</code></dt>
+<dd><p>The version string (GRUB's).
+</p>
+</dd>
+<dt> <code>0x12</code> + <em>the length of the version string</em></dt>
+<dd><p>The name of a configuration file.
+</p></dd>
+</dl>
+
+<p>See the file &lsquo;<tt>stage2/asm.S</tt>&rsquo;, for more information.
+</p>
+
+<hr size="6">
+<a name="Filesystem-interface"></a>
+<a name="SEC131"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC130" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC132" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC128" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC128" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> D.3 The generic interface for filesystems </h2>
+
+<p>For any particular partition, it is presumed that only one of the
+<em>normal</em> filesystems such as FAT, FFS, or ext2fs can be used, so
+there is a switch table managed by the functions in
+&lsquo;<tt>disk_io.c</tt>&rsquo;. The notation is that you can only <em>mount</em> one at a
+time.
+</p>
+<p>The block list filesystem has a special place in the system. In addition
+to the <em>normal</em> filesystem (or even without one mounted), you can
+access disk blocks directly (in the indicated partition) via the block
+list notation. Using the block list filesystem doesn't effect any other
+filesystem mounts.
+</p>
+<p>The variables which can be read by the filesystem backend are:
+</p>
+<dl compact="compact">
+<dt> <code>current_drive</code>
+<a name="IDX64"></a>
+</dt>
+<dd><p>The current BIOS drive number (numbered from 0, if a floppy, and
+numbered from 0x80, if a hard disk).
+</p>
+</dd>
+<dt> <code>current_partition</code>
+<a name="IDX65"></a>
+</dt>
+<dd><p>The current partition number.
+</p>
+</dd>
+<dt> <code>current_slice</code>
+<a name="IDX66"></a>
+</dt>
+<dd><p>The current partition type.
+</p>
+</dd>
+<dt> <code>saved_drive</code>
+<a name="IDX67"></a>
+</dt>
+<dd><p>The <em>drive</em> part of the root device.
+</p>
+</dd>
+<dt> <code>saved_partition</code>
+<a name="IDX68"></a>
+</dt>
+<dd><p>The <em>partition</em> part of the root device.
+</p>
+</dd>
+<dt> <code>part_start</code>
+<a name="IDX69"></a>
+</dt>
+<dd><p>The current partition starting address, in sectors.
+</p>
+</dd>
+<dt> <code>part_length</code>
+<a name="IDX70"></a>
+</dt>
+<dd><p>The current partition length, in sectors.
+</p>
+</dd>
+<dt> <code>print_possibilities</code>
+<a name="IDX71"></a>
+</dt>
+<dd><p>True when the <code>dir</code> function should print the possible completions
+of a file, and false when it should try to actually open a file of that
+name.
+</p>
+</dd>
+<dt> <code>FSYS_BUF</code>
+<a name="IDX72"></a>
+</dt>
+<dd><p>Filesystem buffer which is 32K in size, to use in any way which the
+filesystem backend desires.
+</p></dd>
+</dl>
+
+<p>The variables which need to be written by a filesystem backend are:
+</p>
+<dl compact="compact">
+<dt> <code>filepos</code>
+<a name="IDX73"></a>
+</dt>
+<dd><p>The current position in the file, in sectors.
+</p>
+<p><strong>Caution:</strong> the value of <var>filepos</var> can be changed out from
+under the filesystem code in the current implementation. Don't depend on
+it being the same for later calls into the backend code!
+</p>
+</dd>
+<dt> <code>filemax</code>
+<a name="IDX74"></a>
+</dt>
+<dd><p>The length of the file.
+</p>
+</dd>
+<dt> <code>disk_read_func</code>
+<a name="IDX75"></a>
+</dt>
+<dd><p>The value of <var>disk_read_hook</var> <em>only</em> during reading of data
+for the file, not any other fs data, inodes, FAT tables, whatever, then
+set to <code>NULL</code> at all other times (it will be <code>NULL</code> by
+default). If this isn't done correctly, then the <code>testload</code> and
+<code>install</code> commands won't work correctly.
+</p></dd>
+</dl>
+
+<p>The functions expected to be used by the filesystem backend are:
+</p>
+<dl compact="compact">
+<dt> <code>devread</code>
+<a name="IDX76"></a>
+</dt>
+<dd><p>Only read sectors from within a partition. Sector 0 is the first sector
+in the partition.
+</p>
+</dd>
+<dt> <code>grub_read</code>
+<a name="IDX77"></a>
+</dt>
+<dd><p>If the backend uses the block list code, then <code>grub_read</code> can be
+used, after setting <var>block_file</var> to 1.
+</p>
+</dd>
+<dt> <code>print_a_completion</code>
+<a name="IDX78"></a>
+</dt>
+<dd><p>If <var>print_possibilities</var> is true, call <code>print_a_completion</code> for
+each possible file name. Otherwise, the file name completion won't work.
+</p></dd>
+</dl>
+
+<p>The functions expected to be defined by the filesystem backend are
+described at least moderately in the file &lsquo;<tt>filesys.h</tt>&rsquo;. Their usage
+is fairly evident from their use in the functions in &lsquo;<tt>disk_io.c</tt>&rsquo;,
+look for the use of the <var>fsys_table</var> array.
+</p>
+<p><strong>Caution:</strong> The semantics are such that then &lsquo;<samp>mount</samp>&rsquo;ing the
+filesystem, presume the filesystem buffer <code>FSYS_BUF</code> is corrupted,
+and (re-)load all important contents. When opening and reading a file,
+presume that the data from the &lsquo;<samp>mount</samp>&rsquo; is available, and doesn't
+get corrupted by the open/read (i.e. multiple opens and/or reads will be
+done with only one mount if in the same filesystem).
+</p>
+
+<hr size="6">
+<a name="Command-interface"></a>
+<a name="SEC132"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC131" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC133" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC128" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC128" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> D.4 The generic interface for built-ins </h2>
+
+<p>GRUB built-in commands are defined in a uniformal interface, whether
+they are menu-specific or can be used anywhere. The definition of a
+builtin command consists of two parts: the code itself and the table of
+the information.
+</p>
+<p>The code must be a function which takes two arguments, a command-line
+string and flags, and returns an &lsquo;<samp>int</samp>&rsquo; value. The <em>flags</em>
+argument specifies how the function is called, using a bit mask. The
+return value must be zero if successful, otherwise non-zero. So it is
+normally enough to return <var>errnum</var>.
+</p>
+<p>The table of the information is represented by the structure
+<code>struct builtin</code>, which contains the name of the command, a pointer
+to the function, flags, a short description of the command and a long
+description of the command. Since the descriptions are used only for
+help messages interactively, you don't have to define them, if the
+command may not be called interactively (such as <code>title</code>).
+</p>
+<p>The table is finally registered in the table <var>builtin_table</var>, so
+that <code>run_script</code> and <code>enter_cmdline</code> can find the
+command. See the files &lsquo;<tt>cmdline.c</tt>&rsquo; and &lsquo;<tt>builtins.c</tt>&rsquo;, for more
+details.
+</p>
+
+<hr size="6">
+<a name="Bootstrap-tricks"></a>
+<a name="SEC133"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC132" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC134" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC128" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC128" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> D.5 The bootstrap mechanism used in GRUB </h2>
+
+<p>The disk space can be used in a boot loader is very restricted because
+a MBR (see section <a href="#SEC137">The structure of Master Boot Record</a>) is only 512 bytes but it also contains a partition
+table (see section <a href="#SEC138">The format of partition tables</a>) and a BPB. So the question is how to
+make a boot loader code enough small to be fit in a MBR.
+</p>
+<p>However, GRUB is a very large program, so we break GRUB into 2 (or 3)
+distinct components, <em>Stage 1</em> and <em>Stage 2</em> (and optionally
+<em>Stage 1.5</em>). See section <a href="#SEC129">The memory map of various components</a>, for more information.
+</p>
+<p>We embed Stage 1 in a MBR or in the boot sector of a partition, and
+place Stage 2 in a filesystem. The optional Stage 1.5 can be installed
+in a filesystem, in the <em>boot loader</em> area in a FFS or a ReiserFS,
+and in the sectors right after a MBR, because Stage 1.5 is enough small
+and the sectors right after a MBR is normally an unused region. The size
+of this region is the number of sectors per head minus 1.
+</p>
+<p>Thus, all Stage1 must do is just load Stage2 or Stage1.5. But even if
+Stage 1 needs not to support the user interface or the filesystem
+interface, it is impossible to make Stage 1 less than 400 bytes, because
+GRUB should support both the CHS mode and the LBA mode (see section <a href="#SEC136">INT 13H disk I/O interrupts</a>).
+</p>
+<p>The solution used by GRUB is that Stage 1 loads only the first sector of
+Stage 2 (or Stage 1.5) and Stage 2 itself loads the rest. The flow of
+Stage 1 is:
+</p>
+<ol>
+<li>
+Initialize the system briefly.
+
+</li><li>
+Detect the geometry and the accessing mode of the <em>loading drive</em>.
+
+</li><li>
+Load the first sector of Stage 2.
+
+</li><li>
+Jump to the starting address of the Stage 2.
+</li></ol>
+
+<p>The flow of Stage 2 (and Stage 1.5) is:
+</p>
+<ol>
+<li>
+Load the rest of itself to the real starting address, that is, the
+starting address plus 512 bytes. The block lists are stored in the last
+part of the first sector.
+
+</li><li>
+Long jump to the real starting address.
+</li></ol>
+
+<p>Note that Stage 2 (or Stage 1.5) does not probe the geometry
+or the accessing mode of the <em>loading drive</em>, since Stage 1 has
+already probed them.
+</p>
+
+<hr size="6">
+<a name="I_002fO-ports-detection"></a>
+<a name="SEC134"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC133" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC135" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC128" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC128" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> D.6 How to probe I/O ports used by INT 13H </h2>
+
+<p>FIXME: I will write this chapter after implementing the new technique.
+</p>
+
+
+<hr size="6">
+<a name="Memory-detection"></a>
+<a name="SEC135"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC134" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC136" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC128" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC128" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> D.7 How to detect all installed RAM </h2>
+
+<p>FIXME: I doubt if Erich didn't write this chapter only himself wholly,
+so I will rewrite this chapter.
+</p>
+
+<hr size="6">
+<a name="Low_002dlevel-disk-I_002fO"></a>
+<a name="SEC136"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC135" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC137" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC128" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC128" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> D.8 INT 13H disk I/O interrupts </h2>
+
+<p>FIXME: I'm not sure where some part of the original chapter is derived,
+so I will rewrite this chapter.
+</p>
+
+<hr size="6">
+<a name="MBR"></a>
+<a name="SEC137"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC136" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC138" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC128" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC128" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> D.9 The structure of Master Boot Record </h2>
+
+<p>FIXME: Likewise.
+</p>
+
+<hr size="6">
+<a name="Partition-table"></a>
+<a name="SEC138"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC137" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC139" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC128" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC128" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> D.10 The format of partition tables </h2>
+
+<p>FIXME: Probably the original chapter is derived from &quot;How It Works&quot;, so
+I will rewrite this chapter.
+</p>
+
+<hr size="6">
+<a name="Submitting-patches"></a>
+<a name="SEC139"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC138" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC128" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC128" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> D.11 Where and how you should send patches </h2>
+
+<p>When you write patches for GRUB, please send them to the mailing list
+<a href="mailto:bug-grub@gnu.org">bug-grub@gnu.org</a>. Here is the list of items of which you
+should take care:
+</p>
+<ul>
+<li>
+Please make your patch as small as possible. Generally, it is not a good
+thing to make one big patch which changes many things. Instead,
+segregate features and produce many patches.
+
+</li><li>
+Use as late code as possible, for the original code. The CVS repository
+always has the current version (see section <a href="grub_21.html#SEC125">How to obtain and build GRUB</a>).
+
+</li><li>
+Write ChangeLog entries. See <a href="../standards/Change-Logs.html#Change-Logs">(standards)Change Logs</a> section `Change Logs' in <cite>GNU Coding Standards</cite>, if you don't know how to write ChangeLog.
+
+</li><li>
+Make patches in unified diff format. &lsquo;<samp>diff -urN</samp>&rsquo; is appropriate in
+most cases.
+
+</li><li>
+Don't make patches reversely. Reverse patches are difficult to read and
+use.
+
+</li><li>
+Be careful enough of the license term and the copyright. Because GRUB
+is under GNU General Public License, you may not steal code from
+software whose license is incompatible against GPL. And, if you copy
+code written by others, you must not ignore their copyrights. Feel free
+to ask GRUB maintainers, whenever you are not sure what you should do.
+
+</li><li>
+If your patch is too large to send in e-mail, put it at somewhere we can
+see. Usually, you shouldn't send e-mail over 20K.
+</li></ul>
+
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC128" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>root</em> on <em>March, 20 2010</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.78</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

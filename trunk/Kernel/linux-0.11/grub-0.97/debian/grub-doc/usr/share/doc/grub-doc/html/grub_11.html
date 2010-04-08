@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on March, 20 2010 by texi2html 1.78 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+
+-->
+<head>
+<title>GRUB Manual: 11. Filesystem syntax and semantics</title>
+
+<meta name="description" content="GRUB Manual: 11. Filesystem syntax and semantics">
+<meta name="keywords" content="GRUB Manual: 11. Filesystem syntax and semantics">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.78">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Filesystem"></a>
+<a name="SEC36"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="grub_10.html#SEC35" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC37" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub_10.html#SEC35" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_12.html#SEC40" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 11. Filesystem syntax and semantics </h1>
+
+<p>GRUB uses a special syntax for specifying disk drives which can be
+accessed by BIOS. Because of BIOS limitations, GRUB cannot distinguish
+between IDE, ESDI, SCSI, or others. You must know yourself which BIOS
+device is equivalent to which OS device. Normally, that will be clear if
+you see the files in a device or use the command <code>find</code>
+(see section <a href="grub_13.html#SEC82">find</a>).
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC37">11.1 How to specify devices</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC38">11.2 How to specify files</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC39">11.3 How to specify block lists</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+</table>
+
+
+<hr size="6">
+<a name="Device-syntax"></a>
+<a name="SEC37"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC36" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC38" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC36" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC36" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_12.html#SEC40" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 11.1 How to specify devices </h2>
+
+<p>The device syntax is like this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"><code>(<var>device</var>[,<var>part-num</var>][,<var>bsd-subpart-letter</var>])</code>
+</pre></td></tr></table>
+
+<p>&lsquo;<samp>[]</samp>&rsquo; means the parameter is optional. <var>device</var> should be
+either &lsquo;<samp>fd</samp>&rsquo; or &lsquo;<samp>hd</samp>&rsquo; followed by a digit, like &lsquo;<samp>fd0</samp>&rsquo;.
+But you can also set <var>device</var> to a hexadecimal or a decimal number
+which is a BIOS drive number, so the following are equivalent:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">(hd0)
+(0x80)
+(128)
+</pre></td></tr></table>
+
+<p><var>part-num</var> represents the partition number of <var>device</var>, starting
+from zero for primary partitions and from four for extended partitions,
+and <var>bsd-subpart-letter</var> represents the BSD disklabel subpartition,
+such as &lsquo;<samp>a</samp>&rsquo; or &lsquo;<samp>e</samp>&rsquo;.
+</p>
+<p>A shortcut for specifying BSD subpartitions is
+<code>(<var>device</var>,<var>bsd-subpart-letter</var>)</code>, in this case, GRUB
+searches for the first PC partition containing a BSD disklabel, then
+finds the subpartition <var>bsd-subpart-letter</var>. Here is an example:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">(hd0,a)
+</pre></td></tr></table>
+
+<p>The syntax &lsquo;<samp>(hd0)</samp>&rsquo; represents using the entire disk (or the
+MBR when installing GRUB), while the syntax &lsquo;<samp>(hd0,0)</samp>&rsquo;
+represents using the first partition of the disk (or the boot sector
+of the partition when installing GRUB).
+</p>
+<p>If you enabled the network support, the special drive, &lsquo;<samp>(nd)</samp>&rsquo;, is
+also available. Before using the network drive, you must initialize the
+network. See section <a href="grub_6.html#SEC29">Downloading OS images from a network</a>, for more information.
+</p>
+<p>If you boot GRUB from a CD-ROM, &lsquo;<samp>(cd)</samp>&rsquo; is available. See section <a href="grub_3.html#SEC11">Making a GRUB bootable CD-ROM</a>, for details.
+</p>
+
+<hr size="6">
+<a name="File-name-syntax"></a>
+<a name="SEC38"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC37" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC39" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC36" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC36" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_12.html#SEC40" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 11.2 How to specify files </h2>
+
+<p>There are two ways to specify files, by <em>absolute file name</em> and by
+<em>block list</em>.
+</p>
+<p>An absolute file name resembles a Unix absolute file name, using
+&lsquo;<samp>/</samp>&rsquo; for the directory separator (not &lsquo;<samp>\</samp>&rsquo; as in DOS). One
+example is &lsquo;<samp>(hd0,0)/boot/grub/menu.lst</samp>&rsquo;. This means the file
+&lsquo;<tt>/boot/grub/menu.lst</tt>&rsquo; in the first partition of the first hard
+disk. If you omit the device name in an absolute file name, GRUB uses
+GRUB's <em>root device</em> implicitly. So if you set the root device to,
+say, &lsquo;<samp>(hd1,0)</samp>&rsquo; by the command <code>root</code> (see section <a href="grub_13.html#SEC103">root</a>), then
+<code>/boot/kernel</code> is the same as <code>(hd1,0)/boot/kernel</code>.
+</p>
+
+<hr size="6">
+<a name="Block-list-syntax"></a>
+<a name="SEC39"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC38" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_12.html#SEC40" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC36" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC36" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_12.html#SEC40" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 11.3 How to specify block lists </h2>
+
+<p>A block list is used for specifying a file that doesn't appear in the
+filesystem, like a chainloader. The syntax is
+<code>[<var>offset</var>]+<var>length</var>[,[<var>offset</var>]+<var>length</var>]&hellip;</code>.
+Here is an example:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"><code>0+100,200+1,300+300</code>
+</pre></td></tr></table>
+
+<p>This represents that GRUB should read blocks 0 through 99, block 200,
+and blocks 300 through 599. If you omit an offset, then GRUB assumes
+the offset is zero.
+</p>
+<p>Like the file name syntax (see section <a href="#SEC38">How to specify files</a>), if a blocklist
+does not contain a device name, then GRUB uses GRUB's <em>root
+device</em>. So <code>(hd0,1)+1</code> is the same as <code>+1</code> when the root
+device is &lsquo;<samp>(hd0,1)</samp>&rsquo;.
+</p>
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC36" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_12.html#SEC40" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>root</em> on <em>March, 20 2010</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.78</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

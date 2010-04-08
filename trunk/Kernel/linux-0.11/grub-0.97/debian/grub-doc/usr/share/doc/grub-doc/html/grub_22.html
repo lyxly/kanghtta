@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on March, 20 2010 by texi2html 1.78 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+
+-->
+<head>
+<title>GRUB Manual: B. Reporting bugs</title>
+
+<meta name="description" content="GRUB Manual: B. Reporting bugs">
+<meta name="keywords" content="GRUB Manual: B. Reporting bugs">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.78">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Reporting-bugs"></a>
+<a name="SEC126"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="grub_21.html#SEC125" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_23.html#SEC127" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub_21.html#SEC125" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_23.html#SEC127" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="appendix"> B. Reporting bugs </h1>
+
+<p>These are the guideline for how to report bugs. Take a look at this
+list below before you submit bugs:
+</p>
+<ol>
+<li>
+Before getting unsettled, read this manual through and through. Also,
+see the <a href="http://www.gnu.org/software/grub/grub-faq.html">GNU GRUB FAQ</a>.
+
+</li><li>
+Always mention the information on your GRUB. The version number and the
+configuration are quite important. If you build it yourself, write the
+options specified to the configure script and your operating system,
+including the versions of gcc and binutils.
+
+</li><li>
+If you have trouble with the installation, inform us of how you
+installed GRUB. Don't omit error messages, if any. Just &lsquo;<samp>GRUB hangs
+up when it boots</samp>&rsquo; is not enough.
+
+<p>The information on your hardware is also essential. These are especially
+important: the geometries and the partition tables of your hard disk
+drives and your BIOS.
+</p>
+</li><li>
+If GRUB cannot boot your operating system, write down
+<em>everything</em> you see on the screen. Don't paraphrase them, like
+&lsquo;<samp>The foo OS crashes with GRUB, even though it can boot with the
+bar boot loader just fine</samp>&rsquo;. Mention the commands you executed, the
+messages printed by them, and information on your operating system
+including the version number.
+
+</li><li>
+Explain what you wanted to do. It is very useful to know your purpose
+and your wish, and how GRUB didn't satisfy you.
+
+</li><li>
+If you can investigate the problem yourself, please do. That will give
+you and us much more information on the problem. Attaching a patch is
+even better.
+
+<p>When you attach a patch, make the patch in unified diff format, and
+write ChangeLog entries. But, even when you make a patch, don't forget
+to explain the problem, so that we can understand what your patch is
+for.
+</p>
+</li><li>
+Write down anything that you think might be related. Please understand
+that we often need to reproduce the same problem you encounterred in our
+environment. So your information should be sufficient for us to do the
+same thing&mdash;Don't forget that we cannot see your computer directly. If
+you are not sure whether to state a fact or leave it out, state it!
+Reporting too many things is much better than omitting something
+important.
+</li></ol>
+
+<p>If you follow the guideline above, submit a report to the
+<a href="http://savannah.gnu.org/bugs/?group=grub">Bug Tracking System</a>.
+Alternatively, you can submit a report via electronic mail to
+<a href="mailto:bug-grub@gnu.org">bug-grub@gnu.org</a>, but we strongly recommend that you use the
+Bug Tracking System, because e-mail can be passed over easily.
+</p>
+<p>Once we get your report, we will try to fix the bugs.
+</p>
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="grub_21.html#SEC125" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_23.html#SEC127" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>root</em> on <em>March, 20 2010</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.78</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

@@ -1,0 +1,406 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on March, 20 2010 by texi2html 1.78 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+
+-->
+<head>
+<title>GRUB Manual: 14. Error messages reported by GRUB</title>
+
+<meta name="description" content="GRUB Manual: 14. Error messages reported by GRUB">
+<meta name="keywords" content="GRUB Manual: 14. Error messages reported by GRUB">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.78">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Troubleshooting"></a>
+<a name="SEC112"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="grub_13.html#SEC111" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC113" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub_13.html#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_15.html#SEC116" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 14. Error messages reported by GRUB </h1>
+
+<p>This chapter describes error messages reported by GRUB when you
+encounter trouble. See section <a href="grub_15.html#SEC116">Invoking the grub shell</a>, if your problem is
+specific to the grub shell.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC113">14.1 Errors reported by the Stage 1</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC114">14.2 Errors reported by the Stage 1.5</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC115">14.3 Errors reported by the Stage 2</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+</table>
+
+
+<hr size="6">
+<a name="Stage1-errors"></a>
+<a name="SEC113"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC112" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC114" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_15.html#SEC116" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 14.1 Errors reported by the Stage 1 </h2>
+
+<p>The general way that the Stage 1 handles errors is to print an error
+string and then halt. Pressing <kbd>&lt;CTRL&gt;-&lt;ALT&gt;-&lt;DEL&gt;</kbd> will
+reboot.
+</p>
+<p>The following is a comprehensive list of error messages for the Stage 1:
+</p>
+<dl compact="compact">
+<dt> Hard Disk Error</dt>
+<dd><p>The stage2 or stage1.5 is being read from a hard disk, and the attempt
+to determine the size and geometry of the hard disk failed.
+</p>
+</dd>
+<dt> Floppy Error</dt>
+<dd><p>The stage2 or stage1.5 is being read from a floppy disk, and the attempt
+to determine the size and geometry of the floppy disk failed. It's listed
+as a separate error since the probe sequence is different than for hard
+disks.
+</p>
+</dd>
+<dt> Read Error</dt>
+<dd><p>A disk read error happened while trying to read the stage2 or stage1.5.
+</p>
+</dd>
+<dt> Geom Error</dt>
+<dd><p>The location of the stage2 or stage1.5 is not in the portion of the disk
+supported directly by the BIOS read calls.  This could occur because the
+BIOS translated geometry has been changed by the user or the disk is
+moved to another machine or controller after installation, or GRUB was
+not installed using itself (if it was, the Stage 2 version of this error
+would have been seen during that process and it would not have completed
+the install).
+</p></dd>
+</dl>
+
+
+<hr size="6">
+<a name="Stage1_002e5-errors"></a>
+<a name="SEC114"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC113" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC115" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_15.html#SEC116" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 14.2 Errors reported by the Stage 1.5 </h2>
+
+<p>The general way that the Stage 1.5 handles errors is to print an error
+number in the form <code>Error <var>num</var></code> and then halt. Pressing
+<kbd>&lt;CTRL&gt;-&lt;ALT&gt;-&lt;DEL&gt;</kbd> will reboot.
+</p>
+<p>The error numbers correspond to the errors reported by Stage
+2. See section <a href="#SEC115">Errors reported by the Stage 2</a>.
+</p>
+
+<hr size="6">
+<a name="Stage2-errors"></a>
+<a name="SEC115"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC114" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_15.html#SEC116" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_15.html#SEC116" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 14.3 Errors reported by the Stage 2 </h2>
+
+<p>The general way that the Stage 2 handles errors is to abort the
+operation in question, print an error string, then (if possible) either
+continue based on the fact that an error occurred or wait for the user to
+deal with the error.
+</p>
+<p>The following is a comprehensive list of error messages for the Stage 2
+(error numbers for the Stage 1.5 are listed before the colon in each
+description):
+</p>
+<dl compact="compact">
+<dt> 1 : Filename must be either an absolute filename or blocklist</dt>
+<dd><p>This error is returned if a file name is requested which doesn't fit the
+syntax/rules listed in the <a href="grub_11.html#SEC36">Filesystem syntax and semantics</a>.
+</p>
+</dd>
+<dt> 2 : Bad file or directory type</dt>
+<dd><p>This error is returned if a file requested is not a regular file, but
+something like a symbolic link, directory, or FIFO.
+</p>
+</dd>
+<dt> 3 : Bad or corrupt data while decompressing file</dt>
+<dd><p>This error is returned if the run-length decompression code gets an
+internal error. This is usually from a corrupt file.
+</p>
+</dd>
+<dt> 4 : Bad or incompatible header in compressed file</dt>
+<dd><p>This error is returned if the file header for a supposedly compressed
+file is bad.
+</p>
+</dd>
+<dt> 5 : Partition table invalid or corrupt</dt>
+<dd><p>This error is returned if the sanity checks on the integrity of the
+partition table fail. This is a bad sign.
+</p>
+</dd>
+<dt> 6 : Mismatched or corrupt version of stage1/stage2</dt>
+<dd><p>This error is returned if the install command points to incompatible
+or corrupt versions of the stage1 or stage2. It can't detect corruption
+in general, but this is a sanity check on the version numbers, which
+should be correct.
+</p>
+</dd>
+<dt> 7 : Loading below 1MB is not supported</dt>
+<dd><p>This error is returned if the lowest address in a kernel is below the
+1MB boundary. The Linux zImage format is a special case and can be
+handled since it has a fixed loading address and maximum size.
+</p>
+</dd>
+<dt> 8 : Kernel must be loaded before booting</dt>
+<dd><p>This error is returned if GRUB is told to execute the boot sequence
+without having a kernel to start.
+</p>
+</dd>
+<dt> 9 : Unknown boot failure</dt>
+<dd><p>This error is returned if the boot attempt did not succeed for reasons
+which are unknown.
+</p>
+</dd>
+<dt> 10 : Unsupported Multiboot features requested</dt>
+<dd><p>This error is returned when the Multiboot features word in the Multiboot
+header requires a feature that is not recognized. The point of this is
+that the kernel requires special handling which GRUB is probably
+unable to provide.
+</p>
+</dd>
+<dt> 11 : Unrecognized device string</dt>
+<dd><p>This error is returned if a device string was expected, and the string
+encountered didn't fit the syntax/rules listed in the <a href="grub_11.html#SEC36">Filesystem syntax and semantics</a>.
+</p>
+</dd>
+<dt> 12 : Invalid device requested</dt>
+<dd><p>This error is returned if a device string is recognizable but does not
+fall under the other device errors.
+</p>
+</dd>
+<dt> 13 : Invalid or unsupported executable format</dt>
+<dd><p>This error is returned if the kernel image being loaded is not
+recognized as Multiboot or one of the supported native formats (Linux
+zImage or bzImage, FreeBSD, or NetBSD).
+</p>
+</dd>
+<dt> 14 : Filesystem compatibility error, cannot read whole file</dt>
+<dd><p>Some of the filesystem reading code in GRUB has limits on the length of
+the files it can read. This error is returned when the user runs into
+such a limit.
+</p>
+</dd>
+<dt> 15 : File not found</dt>
+<dd><p>This error is returned if the specified file name cannot be found, but
+everything else (like the disk/partition info) is OK.
+</p>
+</dd>
+<dt> 16 : Inconsistent filesystem structure</dt>
+<dd><p>This error is returned by the filesystem code to denote an internal
+error caused by the sanity checks of the filesystem structure on disk
+not matching what it expects. This is usually caused by a corrupt
+filesystem or bugs in the code handling it in GRUB.
+</p>
+</dd>
+<dt> 17 : Cannot mount selected partition</dt>
+<dd><p>This error is returned if the partition requested exists, but the
+filesystem type cannot be recognized by GRUB.
+</p>
+</dd>
+<dt> 18 : Selected cylinder exceeds maximum supported by BIOS</dt>
+<dd><p>This error is returned when a read is attempted at a linear block
+address beyond the end of the BIOS translated area. This generally
+happens if your disk is larger than the BIOS can handle (512MB for
+(E)IDE disks on older machines or larger than 8GB in general).
+</p>
+</dd>
+<dt> 19 : Linux kernel must be loaded before initrd</dt>
+<dd><p>This error is returned if the initrd command is used before loading a
+Linux kernel.
+</p>
+</dd>
+<dt> 20 : Multiboot kernel must be loaded before modules</dt>
+<dd><p>This error is returned if the module load command is used before loading
+a Multiboot kernel. It only makes sense in this case anyway, as GRUB has
+no idea how to communicate the presence of such modules to a
+non-Multiboot-aware kernel.
+</p>
+</dd>
+<dt> 21 : Selected disk does not exist</dt>
+<dd><p>This error is returned if the device part of a device- or full file name
+refers to a disk or BIOS device that is not present or not recognized by
+the BIOS in the system.
+</p>
+</dd>
+<dt> 22 : No such partition</dt>
+<dd><p>This error is returned if a partition is requested in the device part of
+a device- or full file name which isn't on the selected disk.
+</p>
+</dd>
+<dt> 23 : Error while parsing number</dt>
+<dd><p>This error is returned if GRUB was expecting to read a number and
+encountered bad data.
+</p>
+</dd>
+<dt> 24 : Attempt to access block outside partition</dt>
+<dd><p>This error is returned if a linear block address is outside of the disk
+partition. This generally happens because of a corrupt filesystem on the
+disk or a bug in the code handling it in GRUB (it's a great debugging
+tool).
+</p>
+</dd>
+<dt> 25 : Disk read error</dt>
+<dd><p>This error is returned if there is a disk read error when trying to
+probe or read data from a particular disk.
+</p>
+</dd>
+<dt> 26 : Too many symbolic links</dt>
+<dd><p>This error is returned if the link count is beyond the maximum
+(currently 5), possibly the symbolic links are looped.
+</p>
+</dd>
+<dt> 27 : Unrecognized command</dt>
+<dd><p>This error is returned if an unrecognized command is entered on the
+command-line or in a boot sequence section of a configuration file and
+that entry is selected.
+</p>
+</dd>
+<dt> 28 : Selected item cannot fit into memory</dt>
+<dd><p>This error is returned if a kernel, module, or raw file load command is
+either trying to load its data such that it won't fit into memory or it
+is simply too big.
+</p>
+</dd>
+<dt> 29 : Disk write error</dt>
+<dd><p>This error is returned if there is a disk write error when trying to
+write to a particular disk. This would generally only occur during an
+install of set active partition command.
+</p>
+</dd>
+<dt> 30 : Invalid argument</dt>
+<dd><p>This error is returned if an argument specified to a command is invalid.
+</p>
+</dd>
+<dt> 31 : File is not sector aligned</dt>
+<dd><p>This error may occur only when you access a ReiserFS partition by
+block-lists (e.g. the command <code>install</code>). In this case, you
+should mount the partition with the &lsquo;<samp>-o notail</samp>&rsquo; option.
+</p>
+</dd>
+<dt> 32 : Must be authenticated</dt>
+<dd><p>This error is returned if you try to run a locked entry. You should
+enter a correct password before running such an entry.
+</p>
+</dd>
+<dt> 33 : Serial device not configured</dt>
+<dd><p>This error is returned if you try to change your terminal to a serial
+one before initializing any serial device.
+</p>
+</dd>
+<dt> 34 : No spare sectors on the disk</dt>
+<dd><p>This error is returned if a disk doesn't have enough spare space. This
+happens when you try to embed Stage 1.5 into the unused sectors after
+the MBR, but the first partition starts right after the MBR or they are
+used by EZ-BIOS.
+</p></dd>
+</dl>
+
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_15.html#SEC116" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>root</em> on <em>March, 20 2010</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.78</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

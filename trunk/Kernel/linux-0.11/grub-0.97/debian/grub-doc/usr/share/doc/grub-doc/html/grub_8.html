@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on March, 20 2010 by texi2html 1.78 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+
+-->
+<head>
+<title>GRUB Manual: 8. Embedding a configuration file into GRUB</title>
+
+<meta name="description" content="GRUB Manual: 8. Embedding a configuration file into GRUB">
+<meta name="keywords" content="GRUB Manual: 8. Embedding a configuration file into GRUB">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.78">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Preset-Menu"></a>
+<a name="SEC33"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="grub_7.html#SEC32" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_9.html#SEC34" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub_7.html#SEC32" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_9.html#SEC34" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 8. Embedding a configuration file into GRUB </h1>
+
+<p>GRUB supports a <em>preset menu</em> which is to be always loaded before
+starting. The preset menu feature is useful, for example, when your
+computer has no console but a serial cable. In this case, it is
+critical to set up the serial terminal as soon as possible, since you
+cannot see any message until the serial terminal begins to work. So it
+is good to run the commands <code>serial</code> (see section <a href="grub_13.html#SEC64">serial</a>) and
+<code>terminal</code> (see section <a href="grub_13.html#SEC67">terminal</a>) before anything else at the
+start-up time.
+</p>
+<p>How the preset menu works is slightly complicated:
+</p>
+<ol>
+<li>
+GRUB checks if the preset menu feature is used, and loads the preset
+menu, if available. This includes running commands and reading boot
+entries, like an ordinary configuration file.
+
+</li><li>
+GRUB checks if the configuration file is available. Note that this check
+is performed <strong>regardless of the existence of the preset
+menu</strong>. The configuration file is loaded even if the preset menu was
+loaded.
+
+</li><li>
+If the preset menu includes any boot entries, they are cleared when
+the configuration file is loaded. It doesn't matter whether the
+configuration file has any entries or no entry. The boot entries in the
+preset menu are used only when GRUB fails in loading the configuration
+file.
+</li></ol>
+
+<p>To enable the preset menu feature, you must rebuild GRUB specifying a
+file to the configure script with the option
+&lsquo;<samp>--enable-preset-menu</samp>&rsquo;. The file has the same semantics as
+normal configuration files (see section <a href="grub_5.html#SEC28">Configuration</a>).
+</p>
+<p>Another point you should take care is that the diskless support
+(see section <a href="grub_6.html#SEC31">Booting from a network</a>) diverts the preset menu. Diskless images embed a
+preset menu to execute the command <code>bootp</code> (see section <a href="grub_13.html#SEC53">bootp</a>)
+automatically, unless you specify your own preset menu to the configure
+script. This means that you must put commands to initialize a network in
+the preset menu yourself, because diskless images don't set it up
+implicitly, when you use the preset menu explicitly.
+</p>
+<p>Therefore, a typical preset menu used with diskless support would be
+like this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"># Set up the serial terminal, first of all.
+serial --unit=0 --speed=19200
+terminal --timeout=0 serial
+
+# Initialize the network.
+dhcp
+</pre></td></tr></table>
+
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="grub_7.html#SEC32" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_9.html#SEC34" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>root</em> on <em>March, 20 2010</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.78</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

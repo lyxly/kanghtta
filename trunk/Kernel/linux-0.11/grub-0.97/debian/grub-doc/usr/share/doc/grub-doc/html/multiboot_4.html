@@ -1,0 +1,965 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on March, 20 2010 by texi2html 1.78 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+
+-->
+<head>
+<title>Multiboot Specification: 4. Examples</title>
+
+<meta name="description" content="Multiboot Specification: 4. Examples">
+<meta name="keywords" content="Multiboot Specification: 4. Examples">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.78">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Examples"></a>
+<a name="SEC18"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="multiboot_3.html#SEC17" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC19" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="multiboot_3.html#SEC10" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="multiboot.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_5.html#SEC29" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="multiboot.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_6.html#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 4. Examples </h1>
+
+<p><strong>Caution:</strong> The following items are not part of the specification
+document, but are included for prospective operating system and boot
+loader writers.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC19">4.1 Notes on PC</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC20">4.2 BIOS device mapping techniques</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">  
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC23">4.3 Example OS code</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">             
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC28">4.4 Example boot loader code</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">    
+</td></tr>
+</table>
+
+
+<hr size="6">
+<a name="Notes-on-PC"></a>
+<a name="SEC19"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC18" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC20" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC18" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC18" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_5.html#SEC29" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="multiboot.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_6.html#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 4.1 Notes on PC </h2>
+
+<p>In reference to bit 0 of the &lsquo;<samp>flags</samp>&rsquo; parameter in the Multiboot
+information structure, if the bootloader in question uses older
+<small>BIOS</small> interfaces, or the newest ones are not available (see
+description about bit 6), then a maximum of either 15 or 63 megabytes of
+memory may be reported. It is <em>highly</em> recommended that boot
+loaders perform a thorough memory probe.
+</p>
+<p>In reference to bit 1 of the &lsquo;<samp>flags</samp>&rsquo; parameter in the Multiboot
+information structure, it is recognized that determination of which
+<small>BIOS</small> drive maps to which device driver in an operating system is
+non-trivial, at best. Many kludges have been made to various operating
+systems instead of solving this problem, most of them breaking under
+many conditions. To encourage the use of general-purpose solutions to
+this problem, there are 2 <small>BIOS</small> device mapping techniques
+(see section <a href="#SEC20">BIOS device mapping techniques</a>). 
+</p>
+<p>In reference to bit 6 of the &lsquo;<samp>flags</samp>&rsquo; parameter in the Multiboot
+information structure, it is important to note that the data structure
+used there (starting with &lsquo;<samp>BaseAddrLow</samp>&rsquo;) is the data returned by
+the INT 15h, AX=E820h &mdash; Query System Address Map call. See See <a href="../grub/Query-System-Address-Map.html#Query-System-Address-Map">(grub.info)Query System Address Map</a> section `Query System Address Map' in <cite>The GRUB Manual</cite>, for more information. The interface here is meant to allow a
+boot loader to work unmodified with any reasonable extensions of the
+<small>BIOS</small> interface, passing along any extra data to be interpreted by
+the operating system as desired.
+</p>
+
+<hr size="6">
+<a name="BIOS-device-mapping-techniques"></a>
+<a name="SEC20"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC19" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC18" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC18" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_5.html#SEC29" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="multiboot.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_6.html#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 4.2 BIOS device mapping techniques </h2>
+
+<p>Both of these techniques should be usable from any PC operating system,
+and neither require any special support in the drivers themselves. This
+section will be flushed out into detailed explanations, particularly for
+the I/O restriction technique.
+</p>
+<p>The general rule is that the data comparison technique is the quick and
+dirty solution. It works most of the time, but doesn't cover all the
+bases, and is relatively simple.
+</p>
+<p>The I/O restriction technique is much more complex, but it has potential
+to solve the problem under all conditions, plus allow access of the
+remaining <small>BIOS</small> devices when not all of them have operating system
+drivers.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC21">4.2.1 Data comparison technique</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">   
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC22">4.2.2 I/O restriction technique</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">   
+</td></tr>
+</table>
+
+
+<hr size="6">
+<a name="Data-comparison-technique"></a>
+<a name="SEC21"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC20" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC22" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC18" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC20" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_5.html#SEC29" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="multiboot.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_6.html#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 4.2.1 Data comparison technique </h3>
+
+<p>Before activating <em>any</em> of the device drivers, gather enough data
+from similar sectors on each of the disks such that each one can be
+uniquely identified.
+</p>
+<p>After activating the device drivers, compare data from the drives using
+the operating system drivers. This should hopefully be sufficient to
+provide such a mapping.
+</p>
+<p>Problems:
+</p>
+<ol>
+<li>
+The data on some <small>BIOS</small> devices might be identical (so the part
+reading the drives from the <small>BIOS</small> should have some mechanism to give
+up).
+
+</li><li>
+There might be extra drives not accessible from the <small>BIOS</small> which are
+identical to some drive used by the <small>BIOS</small> (so it should be capable
+of giving up there as well).
+</li></ol>
+
+
+<hr size="6">
+<a name="I_002fO-restriction-technique"></a>
+<a name="SEC22"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC21" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC23" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC18" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC20" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_5.html#SEC29" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="multiboot.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_6.html#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 4.2.2 I/O restriction technique </h3>
+
+<p>This first step may be unnecessary, but first create copy-on-write
+mappings for the device drivers writing into <small>PC</small> <small>RAM</small>. Keep the
+original copies for the <em>clean <small>BIOS</small> virtual machine</em> to be
+created later.
+</p>
+<p>For each device driver brought online, determine which <small>BIOS</small> devices
+become inaccessible by:
+</p>
+<ol>
+<li>
+Create a <em>clean <small>BIOS</small> virtual machine</em>.
+
+</li><li>
+Set the I/O permission map for the I/O area claimed by the device driver
+to no permissions (neither read nor write).
+
+</li><li>
+Access each device.
+
+</li><li>
+Record which devices succeed, and those which try to access the
+<em>restricted</em> I/O areas (hopefully, this will be an <em>xor</em>
+situation).
+</li></ol>
+
+<p>For each device driver, given how many of the <small>BIOS</small> devices were
+subsumed by it (there should be no gaps in this list), it should be easy
+to determine which devices on the controller these are.
+</p>
+<p>In general, you have at most 2 disks from each controller given
+<small>BIOS</small> numbers, but they pretty much always count from the lowest
+logically numbered devices on the controller.
+</p>
+
+<hr size="6">
+<a name="Example-OS-code"></a>
+<a name="SEC23"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC22" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC24" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC18" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC18" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_5.html#SEC29" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="multiboot.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_6.html#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 4.3 Example OS code </h2>
+
+<p>In this distribution, the example Multiboot kernel &lsquo;<tt>kernel</tt>&rsquo; is
+included. The kernel just prints out the Multiboot information structure
+on the screen, so you can make use of the kernel to test a
+Multiboot-compliant boot loader and for reference to how to implement a
+Multiboot kernel. The source files can be found under the directory
+&lsquo;<tt>docs</tt>&rsquo; in the GRUB distribution.
+</p>
+<p>The kernel &lsquo;<tt>kernel</tt>&rsquo; consists of only three files: &lsquo;<tt>boot.S</tt>&rsquo;,
+&lsquo;<tt>kernel.c</tt>&rsquo; and &lsquo;<tt>multiboot.h</tt>&rsquo;. The assembly source
+&lsquo;<tt>boot.S</tt>&rsquo; is written in GAS (see <a href="../as/index.html#Top">(as.info)Top</a> section `GNU assembler' in <cite>The GNU assembler</cite>), and contains the Multiboot information structure to
+comply with the specification. When a Multiboot-compliant boot loader
+loads and execute it, it initialize the stack pointer and <code>EFLAGS</code>,
+and then call the function <code>cmain</code> defined in &lsquo;<tt>kernel.c</tt>&rsquo;. If
+<code>cmain</code> returns to the callee, then it shows a message to inform
+the user of the halt state and stops forever until you push the reset
+key. The file &lsquo;<tt>kernel.c</tt>&rsquo; contains the function <code>cmain</code>,
+which checks if the magic number passed by the boot loader is valid and
+so on, and some functions to print messages on the screen. The file
+&lsquo;<tt>multiboot.h</tt>&rsquo; defines some macros, such as the magic number for the
+Multiboot header, the Multiboot header structure and the Multiboot
+information structure.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC24">4.3.1 multiboot.h</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC25">4.3.2 boot.S</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                      
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC26">4.3.3 kernel.c</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                    
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC27">4.3.4 Other Multiboot kernels</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">     
+</td></tr>
+</table>
+
+
+<hr size="6">
+<a name="multiboot_002eh"></a>
+<a name="SEC24"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC23" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC25" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC18" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC23" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_5.html#SEC29" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="multiboot.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_6.html#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 4.3.1 multiboot.h </h3>
+
+<p>This is the source code in the file &lsquo;<tt>multiboot.h</tt>&rsquo;:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">/* <span class="roman">multiboot.h - the header for Multiboot</span> */
+/* <span class="roman">Copyright (C) 1999, 2001  Free Software Foundation, Inc.
+   
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+   
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.</span> */
+
+/* <span class="roman">Macros.</span> */
+
+/* <span class="roman">The magic number for the Multiboot header.</span> */
+#define MULTIBOOT_HEADER_MAGIC          0x1BADB002
+
+/* <span class="roman">The flags for the Multiboot header.</span> */
+#ifdef __ELF__
+# define MULTIBOOT_HEADER_FLAGS         0x00000003
+#else
+# define MULTIBOOT_HEADER_FLAGS         0x00010003
+#endif
+
+/* <span class="roman">The magic number passed by a Multiboot-compliant boot loader.</span> */
+#define MULTIBOOT_BOOTLOADER_MAGIC      0x2BADB002
+
+/* <span class="roman">The size of our stack (16KB).</span> */
+#define STACK_SIZE                      0x4000
+
+/* <span class="roman">C symbol format. HAVE_ASM_USCORE is defined by configure.</span> */
+#ifdef HAVE_ASM_USCORE
+# define EXT_C(sym)                     _ ## sym
+#else
+# define EXT_C(sym)                     sym
+#endif
+
+#ifndef ASM
+/* <span class="roman">Do not include here in boot.S.</span> */
+
+/* <span class="roman">Types.</span> */
+
+/* <span class="roman">The Multiboot header.</span> */
+typedef struct multiboot_header
+{
+  unsigned long magic;
+  unsigned long flags;
+  unsigned long checksum;
+  unsigned long header_addr;
+  unsigned long load_addr;
+  unsigned long load_end_addr;
+  unsigned long bss_end_addr;
+  unsigned long entry_addr;
+} multiboot_header_t;
+
+/* <span class="roman">The symbol table for a.out.</span> */
+typedef struct aout_symbol_table
+{
+  unsigned long tabsize;
+  unsigned long strsize;
+  unsigned long addr;
+  unsigned long reserved;
+} aout_symbol_table_t;
+
+/* <span class="roman">The section header table for ELF.</span> */
+typedef struct elf_section_header_table
+{
+  unsigned long num;
+  unsigned long size;
+  unsigned long addr;
+  unsigned long shndx;
+} elf_section_header_table_t;
+
+/* <span class="roman">The Multiboot information.</span> */
+typedef struct multiboot_info
+{
+  unsigned long flags;
+  unsigned long mem_lower;
+  unsigned long mem_upper;
+  unsigned long boot_device;
+  unsigned long cmdline;
+  unsigned long mods_count;
+  unsigned long mods_addr;
+  union
+  {
+    aout_symbol_table_t aout_sym;
+    elf_section_header_table_t elf_sec;
+  } u;
+  unsigned long mmap_length;
+  unsigned long mmap_addr;
+} multiboot_info_t;
+
+/* <span class="roman">The module structure.</span> */
+typedef struct module
+{
+  unsigned long mod_start;
+  unsigned long mod_end;
+  unsigned long string;
+  unsigned long reserved;
+} module_t;
+
+/* <span class="roman">The memory map. Be careful that the offset 0 is base_addr_low
+   but no size.</span> */
+typedef struct memory_map
+{
+  unsigned long size;
+  unsigned long base_addr_low;
+  unsigned long base_addr_high;
+  unsigned long length_low;
+  unsigned long length_high;
+  unsigned long type;
+} memory_map_t;
+
+#endif /* <span class="roman">! ASM</span> */
+</pre></td></tr></table>
+
+
+<hr size="6">
+<a name="boot_002eS"></a>
+<a name="SEC25"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC24" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC26" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC18" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC23" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_5.html#SEC29" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="multiboot.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_6.html#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 4.3.2 boot.S </h3>
+
+<p>In the file &lsquo;<tt>boot.S</tt>&rsquo;:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">/* <span class="roman">boot.S - bootstrap the kernel</span> */
+/* <span class="roman">Copyright (C) 1999, 2001  Free Software Foundation, Inc.
+
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+ 
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+ 
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.</span> */
+
+#define ASM     1
+#include &lt;multiboot.h&gt;
+        
+        .text
+
+        .globl  start, _start
+start:
+_start:
+        jmp     multiboot_entry
+
+        /* <span class="roman">Align 32 bits boundary.</span> */
+        .align  4
+        
+        /* <span class="roman">Multiboot header.</span> */
+multiboot_header:
+        /* <span class="roman">magic</span> */
+        .long   MULTIBOOT_HEADER_MAGIC
+        /* <span class="roman">flags</span> */
+        .long   MULTIBOOT_HEADER_FLAGS
+        /* <span class="roman">checksum</span> */
+        .long   -(MULTIBOOT_HEADER_MAGIC + MULTIBOOT_HEADER_FLAGS)
+#ifndef __ELF__
+        /* <span class="roman">header_addr</span> */
+        .long   multiboot_header
+        /* <span class="roman">load_addr</span> */
+        .long   _start
+        /* <span class="roman">load_end_addr</span> */
+        .long   _edata
+        /* <span class="roman">bss_end_addr</span> */
+        .long   _end
+        /* <span class="roman">entry_addr</span> */
+        .long   multiboot_entry
+#endif /* <span class="roman">! __ELF__</span> */
+
+multiboot_entry:
+        /* <span class="roman">Initialize the stack pointer.</span> */
+        movl    $(stack + STACK_SIZE), %esp
+
+        /* <span class="roman">Reset EFLAGS.</span> */
+        pushl   $0
+        popf
+
+        /* <span class="roman">Push the pointer to the Multiboot information structure.</span> */
+        pushl   %ebx
+        /* <span class="roman">Push the magic value.</span> */
+        pushl   %eax
+
+        /* <span class="roman">Now enter the C main function...</span> */
+        call    EXT_C(cmain)
+
+        /* <span class="roman">Halt.</span> */
+        pushl   $halt_message
+        call    EXT_C(printf)
+        
+loop:   hlt
+        jmp     loop
+
+halt_message:
+        .asciz  &quot;Halted.&quot;
+
+        /* <span class="roman">Our stack area.</span> */
+        .comm   stack, STACK_SIZE
+        </pre></td></tr></table>
+
+
+<hr size="6">
+<a name="kernel_002ec"></a>
+<a name="SEC26"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC25" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC27" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC18" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC23" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_5.html#SEC29" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="multiboot.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_6.html#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 4.3.3 kernel.c </h3>
+
+<p>And, in the file &lsquo;<tt>kernel.c</tt>&rsquo;:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">/* <span class="roman">kernel.c - the C part of the kernel</span> */
+/* <span class="roman">Copyright (C) 1999  Free Software Foundation, Inc.
+   
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+   
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.</span> */
+
+#include &lt;multiboot.h&gt;
+
+/* <span class="roman">Macros.</span> */
+
+/* <span class="roman">Check if the bit BIT in FLAGS is set.</span> */
+#define CHECK_FLAG(flags,bit)   ((flags) &amp; (1 &lt;&lt; (bit)))
+
+/* <span class="roman">Some screen stuff.</span> */
+/* <span class="roman">The number of columns.</span> */
+#define COLUMNS                 80
+/* <span class="roman">The number of lines.</span> */
+#define LINES                   24
+/* <span class="roman">The attribute of an character.</span> */
+#define ATTRIBUTE               7
+/* <span class="roman">The video memory address.</span> */
+#define VIDEO                   0xB8000
+
+/* <span class="roman">Variables.</span> */
+/* <span class="roman">Save the X position.</span> */
+static int xpos;
+/* <span class="roman">Save the Y position.</span> */
+static int ypos;
+/* <span class="roman">Point to the video memory.</span> */
+static volatile unsigned char *video;
+
+/* <span class="roman">Forward declarations.</span> */
+void cmain (unsigned long magic, unsigned long addr);
+static void cls (void);
+static void itoa (char *buf, int base, int d);
+static void putchar (int c);
+void printf (const char *format, ...);
+
+/* <span class="roman">Check if MAGIC is valid and print the Multiboot information structure
+   pointed by ADDR.</span> */
+void
+cmain (unsigned long magic, unsigned long addr)
+{
+  multiboot_info_t *mbi;
+  
+  /* <span class="roman">Clear the screen.</span> */
+  cls ();
+
+  /* <span class="roman">Am I booted by a Multiboot-compliant boot loader?</span> */
+  if (magic != MULTIBOOT_BOOTLOADER_MAGIC)
+    {
+      printf (&quot;Invalid magic number: 0x%x\n&quot;, (unsigned) magic);
+      return;
+    }
+
+  /* <span class="roman">Set MBI to the address of the Multiboot information structure.</span> */
+  mbi = (multiboot_info_t *) addr;
+
+  /* <span class="roman">Print out the flags.</span> */
+  printf (&quot;flags = 0x%x\n&quot;, (unsigned) mbi-&gt;flags);
+
+  /* <span class="roman">Are mem_* valid?</span> */
+  if (CHECK_FLAG (mbi-&gt;flags, 0))
+    printf (&quot;mem_lower = %uKB, mem_upper = %uKB\n&quot;,
+            (unsigned) mbi-&gt;mem_lower, (unsigned) mbi-&gt;mem_upper);
+
+  /* <span class="roman">Is boot_device valid?</span> */
+  if (CHECK_FLAG (mbi-&gt;flags, 1))
+    printf (&quot;boot_device = 0x%x\n&quot;, (unsigned) mbi-&gt;boot_device);
+  
+  /* <span class="roman">Is the command line passed?</span> */
+  if (CHECK_FLAG (mbi-&gt;flags, 2))
+    printf (&quot;cmdline = %s\n&quot;, (char *) mbi-&gt;cmdline);
+
+  /* <span class="roman">Are mods_* valid?</span> */
+  if (CHECK_FLAG (mbi-&gt;flags, 3))
+    {
+      module_t *mod;
+      int i;
+      
+      printf (&quot;mods_count = %d, mods_addr = 0x%x\n&quot;,
+              (int) mbi-&gt;mods_count, (int) mbi-&gt;mods_addr);
+      for (i = 0, mod = (module_t *) mbi-&gt;mods_addr;
+           i &lt; mbi-&gt;mods_count;
+           i++, mod++)
+        printf (&quot; mod_start = 0x%x, mod_end = 0x%x, string = %s\n&quot;,
+                (unsigned) mod-&gt;mod_start,
+                (unsigned) mod-&gt;mod_end,
+                (char *) mod-&gt;string);
+    }
+
+  /* <span class="roman">Bits 4 and 5 are mutually exclusive!</span> */
+  if (CHECK_FLAG (mbi-&gt;flags, 4) &amp;&amp; CHECK_FLAG (mbi-&gt;flags, 5))
+    {
+      printf (&quot;Both bits 4 and 5 are set.\n&quot;);
+      return;
+    }
+
+  /* <span class="roman">Is the symbol table of a.out valid?</span> */
+  if (CHECK_FLAG (mbi-&gt;flags, 4))
+    {
+      aout_symbol_table_t *aout_sym = &amp;(mbi-&gt;u.aout_sym);
+      
+      printf (&quot;aout_symbol_table: tabsize = 0x%0x, &quot;
+              &quot;strsize = 0x%x, addr = 0x%x\n&quot;,
+              (unsigned) aout_sym-&gt;tabsize,
+              (unsigned) aout_sym-&gt;strsize,
+              (unsigned) aout_sym-&gt;addr);
+    }
+
+  /* <span class="roman">Is the section header table of ELF valid?</span> */
+  if (CHECK_FLAG (mbi-&gt;flags, 5))
+    {
+      elf_section_header_table_t *elf_sec = &amp;(mbi-&gt;u.elf_sec);
+
+      printf (&quot;elf_sec: num = %u, size = 0x%x,&quot;
+              &quot; addr = 0x%x, shndx = 0x%x\n&quot;,
+              (unsigned) elf_sec-&gt;num, (unsigned) elf_sec-&gt;size,
+              (unsigned) elf_sec-&gt;addr, (unsigned) elf_sec-&gt;shndx);
+    }
+
+  /* <span class="roman">Are mmap_* valid?</span> */
+  if (CHECK_FLAG (mbi-&gt;flags, 6))
+    {
+      memory_map_t *mmap;
+      
+      printf (&quot;mmap_addr = 0x%x, mmap_length = 0x%x\n&quot;,
+              (unsigned) mbi-&gt;mmap_addr, (unsigned) mbi-&gt;mmap_length);
+      for (mmap = (memory_map_t *) mbi-&gt;mmap_addr;
+           (unsigned long) mmap &lt; mbi-&gt;mmap_addr + mbi-&gt;mmap_length;
+           mmap = (memory_map_t *) ((unsigned long) mmap
+                                    + mmap-&gt;size + sizeof (mmap-&gt;size)))
+        printf (&quot; size = 0x%x, base_addr = 0x%x%x,&quot;
+                &quot; length = 0x%x%x, type = 0x%x\n&quot;,
+                (unsigned) mmap-&gt;size,
+                (unsigned) mmap-&gt;base_addr_high,
+                (unsigned) mmap-&gt;base_addr_low,
+                (unsigned) mmap-&gt;length_high,
+                (unsigned) mmap-&gt;length_low,
+                (unsigned) mmap-&gt;type);
+    }
+}    
+
+/* <span class="roman">Clear the screen and initialize VIDEO, XPOS and YPOS.</span> */
+static void
+cls (void)
+{
+  int i;
+
+  video = (unsigned char *) VIDEO;
+  
+  for (i = 0; i &lt; COLUMNS * LINES * 2; i++)
+    *(video + i) = 0;
+
+  xpos = 0;
+  ypos = 0;
+}
+
+/* <span class="roman">Convert the integer D to a string and save the string in BUF. If
+   BASE is equal to 'd', interpret that D is decimal, and if BASE is
+   equal to 'x', interpret that D is hexadecimal.</span> */
+static void
+itoa (char *buf, int base, int d)
+{
+  char *p = buf;
+  char *p1, *p2;
+  unsigned long ud = d;
+  int divisor = 10;
+  
+  /* <span class="roman">If %d is specified and D is minus, put `-' in the head.</span> */
+  if (base == 'd' &amp;&amp; d &lt; 0)
+    {
+      *p++ = '-';
+      buf++;
+      ud = -d;
+    }
+  else if (base == 'x')
+    divisor = 16;
+
+  /* <span class="roman">Divide UD by DIVISOR until UD == 0.</span> */
+  do
+    {
+      int remainder = ud % divisor;
+      
+      *p++ = (remainder &lt; 10) ? remainder + '0' : remainder + 'a' - 10;
+    }
+  while (ud /= divisor);
+
+  /* <span class="roman">Terminate BUF.</span> */
+  *p = 0;
+  
+  /* <span class="roman">Reverse BUF.</span> */
+  p1 = buf;
+  p2 = p - 1;
+  while (p1 &lt; p2)
+    {
+      char tmp = *p1;
+      *p1 = *p2;
+      *p2 = tmp;
+      p1++;
+      p2--;
+    }
+}
+
+/* <span class="roman">Put the character C on the screen.</span> */
+static void
+putchar (int c)
+{
+  if (c == '\n' || c == '\r')
+    {
+    newline:
+      xpos = 0;
+      ypos++;
+      if (ypos &gt;= LINES)
+        ypos = 0;
+      return;
+    }
+
+  *(video + (xpos + ypos * COLUMNS) * 2) = c &amp; 0xFF;
+  *(video + (xpos + ypos * COLUMNS) * 2 + 1) = ATTRIBUTE;
+
+  xpos++;
+  if (xpos &gt;= COLUMNS)
+    goto newline;
+}
+
+/* <span class="roman">Format a string and print it on the screen, just like the libc
+   function printf.</span> */
+void
+printf (const char *format, ...)
+{
+  char **arg = (char **) &amp;format;
+  int c;
+  char buf[20];
+
+  arg++;
+  
+  while ((c = *format++) != 0)
+    {
+      if (c != '%')
+        putchar (c);
+      else
+        {
+          char *p;
+          
+          c = *format++;
+          switch (c)
+            {
+            case 'd':
+            case 'u':
+            case 'x':
+              itoa (buf, c, *((int *) arg++));
+              p = buf;
+              goto string;
+              break;
+
+            case 's':
+              p = *arg++;
+              if (! p)
+                p = &quot;(null)&quot;;
+
+            string:
+              while (*p)
+                putchar (*p++);
+              break;
+
+            default:
+              putchar (*((int *) arg++));
+              break;
+            }
+        }
+    }
+}
+</pre></td></tr></table>
+
+
+<hr size="6">
+<a name="Other-Multiboot-kernels"></a>
+<a name="SEC27"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC26" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC28" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC18" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC23" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_5.html#SEC29" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="multiboot.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_6.html#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 4.3.4 Other Multiboot kernels </h3>
+
+<p>Other useful information should be available in Multiboot kernels, such
+as GNU Mach and Fiasco <a href="http://os.inf.tu-dresden.de/fiasco/">http://os.inf.tu-dresden.de/fiasco/</a>. And,
+it is worth mentioning the OSKit
+<a href="http://www.cs.utah.edu/projects/flux/oskit/">http://www.cs.utah.edu/projects/flux/oskit/</a>, which provides a
+library supporting the specification.
+</p>
+
+<hr size="6">
+<a name="Example-boot-loader-code"></a>
+<a name="SEC28"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC27" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_5.html#SEC29" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC18" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC18" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_5.html#SEC29" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="multiboot.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_6.html#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 4.4 Example boot loader code </h2>
+
+<p>The GNU GRUB (see <a href="../grub/index.html#Top">(grub.info)Top</a> section `GRUB' in <cite>The GRUB manual</cite>) project
+is a full Multiboot-compliant boot loader, supporting all required and
+optional features present in this specification. A public release has
+not been made, but the test release is available from:
+</p>
+<p><a href="ftp://alpha.gnu.org/gnu/grub">ftp://alpha.gnu.org/gnu/grub</a>
+</p>
+<p>See the webpage <a href="http://www.gnu.org/software/grub/grub.html">http://www.gnu.org/software/grub/grub.html</a>, for
+more information.
+</p>
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC18" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_5.html#SEC29" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="multiboot.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_6.html#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="multiboot_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>root</em> on <em>March, 20 2010</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.78</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

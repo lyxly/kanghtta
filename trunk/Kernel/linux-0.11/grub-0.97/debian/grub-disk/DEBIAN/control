@@ -1,0 +1,14 @@
+Package: grub-disk
+Source: grub
+Version: 0.97-29ubuntu59
+Architecture: all
+Maintainer: Ubuntu Kernel Team <kernel-team@lists.ubuntu.com>
+Installed-Size: 160
+Depends: grub-rescue-pc
+Suggests: grub-doc
+Section: admin
+Priority: optional
+Description: GRUB bootable disk image (dummy package)
+ This is a dummy transitional package to handle upgrades.  It can be
+ safely removed.
+Original-Maintainer: Grub Maintainers <pkg-grub-devel@lists.alioth.debian.org>
