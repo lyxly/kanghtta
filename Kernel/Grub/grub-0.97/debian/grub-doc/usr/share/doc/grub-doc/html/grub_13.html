@@ -1,0 +1,2773 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on March, 20 2010 by texi2html 1.78 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+
+-->
+<head>
+<title>GRUB Manual: 13. The list of available commands</title>
+
+<meta name="description" content="GRUB Manual: 13. The list of available commands">
+<meta name="keywords" content="GRUB Manual: 13. The list of available commands">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.78">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Commands"></a>
+<a name="SEC45"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="grub_12.html#SEC44" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC46" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub_12.html#SEC40" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 13. The list of available commands </h1>
+
+<p>In this chapter, we list all commands that are available in GRUB.
+</p>
+<p>Commands belong to different groups. A few can only be used in
+the global section of the configuration file (or &ldquo;menu&rdquo;); most
+of them can be entered on the command-line and can be used either
+anywhere in the menu or specifically in the menu entries.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC46">13.1 The list of commands for the menu only</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC52">13.2 The list of general commands</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC71">13.3 The list of command-line and menu entry commands</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+</table>
+
+
+<hr size="6">
+<a name="Menu_002dspecific-commands"></a>
+<a name="SEC46"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC45" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC47" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 13.1 The list of commands for the menu only </h2>
+
+<p>The semantics used in parsing the configuration file are the following:
+</p>
+<ul>
+<li>
+The menu-specific commands have to be used before any others.
+
+</li><li>
+The files <em>must</em> be in plain-text format.
+
+</li><li>
+&lsquo;<samp>#</samp>&rsquo; at the beginning of a line in a configuration file means it is
+only a comment.
+
+</li><li>
+Options are separated by spaces.
+
+</li><li>
+All numbers can be either decimal or hexadecimal. A hexadecimal number
+must be preceded by &lsquo;<samp>0x</samp>&rsquo;, and is case-insensitive.
+
+</li><li>
+Extra options or text at the end of the line are ignored unless otherwise
+specified.
+
+</li><li>
+Unrecognized commands are added to the current entry, except before entries
+start, where they are ignored.
+</li></ul>
+
+<p>These commands can only be used in the menu:
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC47">13.1.1 default</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                     Set the default entry
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC48">13.1.2 fallback</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                    Set the fallback entry
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC49">13.1.3 hiddenmenu</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                  Hide the menu interface
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC50">13.1.4 timeout</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                     Set the timeout
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC51">13.1.5 title</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                       Start a menu entry
+</td></tr>
+</table>
+
+
+<hr size="6">
+<a name="default"></a>
+<a name="SEC47"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC46" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC48" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC46" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.1.1 default </h3>
+
+<dl>
+<dt><u>Command:</u> <b>default</b><i> num</i>
+<a name="IDX1"></a>
+</dt>
+<dd><p>Set the default entry to the entry number <var>num</var>. Numbering starts
+from 0, and the entry number 0 is the default if the command is not
+used.
+</p>
+<p>You can specify &lsquo;<samp>saved</samp>&rsquo; instead of a number. In this case, the
+default entry is the entry saved with the command
+<code>savedefault</code>. See section <a href="#SEC105">savedefault</a>, for more information.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="fallback"></a>
+<a name="SEC48"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC47" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC49" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC46" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.1.2 fallback </h3>
+
+<dl>
+<dt><u>Command:</u> <b>fallback</b><i> num...</i>
+<a name="IDX2"></a>
+</dt>
+<dd><p>Go into unattended boot mode: if the default boot entry has any errors,
+instead of waiting for the user to do something, immediately start
+over using the <var>num</var> entry (same numbering as the <code>default</code>
+command (see section <a href="#SEC47">default</a>)). This obviously won't help if the machine was
+rebooted by a kernel that GRUB loaded. You can specify multiple
+fallback entry numbers.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="hiddenmenu"></a>
+<a name="SEC49"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC48" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC50" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC46" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.1.3 hiddenmenu </h3>
+
+<dl>
+<dt><u>Command:</u> <b>hiddenmenu</b>
+<a name="IDX3"></a>
+</dt>
+<dd><p>Don't display the menu. If the command is used, no menu will be
+displayed on the control terminal, and the default entry will be
+booted after the timeout expired. The user can still request the
+menu to be displayed by pressing &lt;ESC&gt; before the timeout
+expires. See also <a href="grub_12.html#SEC44">The hidden menu interface</a>.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="timeout"></a>
+<a name="SEC50"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC49" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC51" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC46" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.1.4 timeout </h3>
+
+<dl>
+<dt><u>Command:</u> <b>timeout</b><i> sec</i>
+<a name="IDX4"></a>
+</dt>
+<dd><p>Set a timeout, in <var>sec</var> seconds, before automatically booting the
+default entry (normally the first entry defined).
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="title"></a>
+<a name="SEC51"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC50" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC52" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC46" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.1.5 title </h3>
+
+<dl>
+<dt><u>Command:</u> <b>title</b><i> name &hellip;</i>
+<a name="IDX5"></a>
+</dt>
+<dd><p>Start a new boot entry, and set its name to the contents of the rest of
+the line, starting with the first non-space character.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="General-commands"></a>
+<a name="SEC52"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC51" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC53" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 13.2 The list of general commands </h2>
+
+<p>Commands usable anywhere in the menu and in the command-line.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC53">13.2.1 bootp</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                       Initialize a network device via BOOTP
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC54">13.2.2 color</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                       Color the menu interface
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC55">13.2.3 device</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                      Specify a file as a drive
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC56">13.2.4 dhcp</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                        Initialize a network device via DHCP
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC57">13.2.5 hide</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                        Hide a partition
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC58">13.2.6 ifconfig</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                    Configure a network device manually
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC59">13.2.7 pager</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                       Change the state of the internal pager
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC60">13.2.8 partnew</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                     Make a primary partition
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC61">13.2.9 parttype</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                    Change the type of a partition
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC62">13.2.10 password</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                    Set a password for the menu interface
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC63">13.2.11 rarp</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                        Initialize a network device via RARP
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC64">13.2.12 serial</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                      Set up a serial device
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC65">13.2.13 setkey</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                      Configure the key map
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC66">13.2.14 splashimage</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 Use a splash image
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC67">13.2.15 terminal</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                    Choose a terminal
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC68">13.2.16 terminfo</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                    Define escape sequences for a terminal
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC69">13.2.17 tftpserver</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                  Specify a TFTP server
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC70">13.2.18 unhide</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                      Unhide a partition
+</td></tr>
+</table>
+
+
+<hr size="6">
+<a name="bootp"></a>
+<a name="SEC53"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC52" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC54" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC52" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.2.1 bootp </h3>
+
+<dl>
+<dt><u>Command:</u> <b>bootp</b><i> [&lsquo;<samp>--with-configfile</samp>&rsquo;]</i>
+<a name="IDX6"></a>
+</dt>
+<dd><p>Initialize a network device via the <em>BOOTP</em> protocol. This command
+is only available if GRUB is compiled with netboot support. See also
+<a href="grub_6.html#SEC29">Downloading OS images from a network</a>.
+</p>
+<p>If you specify &lsquo;<samp>--with-configfile</samp>&rsquo; to this command, GRUB will
+fetch and load a configuration file specified by your BOOTP server
+with the vendor tag &lsquo;<samp>150</samp>&rsquo;.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="color"></a>
+<a name="SEC54"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC53" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC55" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC52" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.2.2 color </h3>
+
+<dl>
+<dt><u>Command:</u> <b>color</b><i> normal [highlight]</i>
+<a name="IDX7"></a>
+</dt>
+<dd><p>Change the menu colors. The color <var>normal</var> is used for most
+lines in the menu (see section <a href="grub_12.html#SEC42">The simple menu interface</a>), and the color
+<var>highlight</var> is used to highlight the line where the cursor
+points. If you omit <var>highlight</var>, then the inverted color of
+<var>normal</var> is used for the highlighted line. The format of a color is
+<code><var>foreground</var>/<var>background</var></code>. <var>foreground</var> and
+<var>background</var> are symbolic color names. A symbolic color name must be
+one of these:
+</p>
+<ul>
+<li>
+black
+
+</li><li>
+blue
+
+</li><li>
+green
+
+</li><li>
+cyan
+
+</li><li>
+red
+
+</li><li>
+magenta
+
+</li><li>
+brown
+
+</li><li>
+light-gray
+
+<p><strong>These below can be specified only for the foreground.</strong>
+</p>
+</li><li>
+dark-gray
+
+</li><li>
+light-blue
+
+</li><li>
+light-green
+
+</li><li>
+light-cyan
+
+</li><li>
+light-red
+
+</li><li>
+light-magenta
+
+</li><li>
+yellow
+
+</li><li>
+white
+</li></ul>
+
+<p>But only the first eight names can be used for <var>background</var>. You can
+prefix <code>blink-</code> to <var>foreground</var> if you want a blinking
+foreground color.
+</p>
+<p>This command can be used in the configuration file and on the command
+line, so you may write something like this in your configuration file:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"># Set default colors.
+color light-gray/blue black/light-gray
+
+# Change the colors.
+title OS-BS like
+color magenta/blue black/magenta
+</pre></td></tr></table>
+</dd></dl>
+
+
+<hr size="6">
+<a name="device"></a>
+<a name="SEC55"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC54" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC56" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC52" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.2.3 device </h3>
+
+<dl>
+<dt><u>Command:</u> <b>device</b><i> drive file</i>
+<a name="IDX8"></a>
+</dt>
+<dd><p>In the grub shell, specify the file <var>file</var> as the actual drive for a
+<small>BIOS</small> drive <var>drive</var>. You can use this command to create a disk
+image, and/or to fix the drives guessed by GRUB when GRUB fails to
+determine them correctly, like this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">grub&gt; <kbd>device (fd0) /floppy-image</kbd>
+grub&gt; <kbd>device (hd0) /dev/sd0</kbd>
+</pre></td></tr></table>
+
+<p>This command can be used only in the grub shell (see section <a href="grub_15.html#SEC116">Invoking the grub shell</a>).
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="dhcp"></a>
+<a name="SEC56"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC55" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC57" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC52" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.2.4 dhcp </h3>
+
+<dl>
+<dt><u>Command:</u> <b>dhcp</b><i> [&ndash;with-configfile]</i>
+<a name="IDX9"></a>
+</dt>
+<dd><p>Initialize a network device via the <em>DHCP</em> protocol. Currently,
+this command is just an alias for <code>bootp</code>, since the two
+protocols are very similar. This command is only available if GRUB is
+compiled with netboot support. See also <a href="grub_6.html#SEC29">Downloading OS images from a network</a>.
+</p>
+<p>If you specify &lsquo;<samp>--with-configfile</samp>&rsquo; to this command, GRUB will
+fetch and load a configuration file specified by your DHCP server
+with the vendor tag &lsquo;<samp>150</samp>&rsquo;.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="hide"></a>
+<a name="SEC57"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC56" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC58" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC52" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.2.5 hide </h3>
+
+<dl>
+<dt><u>Command:</u> <b>hide</b><i> partition</i>
+<a name="IDX10"></a>
+</dt>
+<dd><p>Hide the partition <var>partition</var> by setting the <em>hidden</em> bit in
+its partition type code. This is useful only when booting DOS or Windows
+and multiple primary FAT partitions exist in one disk. See also
+<a href="grub_4.html#SEC22">DOS/Windows</a>.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="ifconfig"></a>
+<a name="SEC58"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC57" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC59" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC52" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.2.6 ifconfig </h3>
+
+<dl>
+<dt><u>Command:</u> <b>ifconfig</b><i> [&lsquo;<samp>--server=server</samp>&rsquo;] [&lsquo;<samp>--gateway=gateway</samp>&rsquo;] [&lsquo;<samp>--mask=mask</samp>&rsquo;] [&lsquo;<samp>--address=address</samp>&rsquo;]</i>
+<a name="IDX11"></a>
+</dt>
+<dd><p>Configure the IP address, the netmask, the gateway, and the server
+address of a network device manually. The values must be in dotted
+decimal format, like &lsquo;<samp>192.168.11.178</samp>&rsquo;. The order of the options is
+not important. This command shows current network configuration, if no
+option is specified. See also <a href="grub_6.html#SEC29">Downloading OS images from a network</a>.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="pager"></a>
+<a name="SEC59"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC58" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC60" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC52" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.2.7 pager </h3>
+
+<dl>
+<dt><u>Command:</u> <b>pager</b><i> [flag]</i>
+<a name="IDX12"></a>
+</dt>
+<dd><p>Toggle or set the state of the internal pager. If <var>flag</var> is
+&lsquo;<samp>on</samp>&rsquo;, the internal pager is enabled. If <var>flag</var> is &lsquo;<samp>off</samp>&rsquo;,
+it is disabled. If no argument is given, the state is toggled.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="partnew"></a>
+<a name="SEC60"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC59" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC61" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC52" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.2.8 partnew </h3>
+
+<dl>
+<dt><u>Command:</u> <b>partnew</b><i> part type from len</i>
+<a name="IDX13"></a>
+</dt>
+<dd><p>Create a new primary partition. <var>part</var> is a partition specification
+in GRUB syntax (see section <a href="grub_2.html#SEC6">Naming convention</a>); <var>type</var> is the partition
+type and must be a number in the range <code>0-0xff</code>; <var>from</var> is
+the starting address and <var>len</var> is the length, both in sector units.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="parttype"></a>
+<a name="SEC61"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC60" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC62" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC52" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.2.9 parttype </h3>
+
+<dl>
+<dt><u>Command:</u> <b>parttype</b><i> part type</i>
+<a name="IDX14"></a>
+</dt>
+<dd><p>Change the type of an existing partition.  <var>part</var> is a partition
+specification in GRUB syntax (see section <a href="grub_2.html#SEC6">Naming convention</a>); <var>type</var>
+is the new partition type and must be a number in the range 0-0xff.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="password"></a>
+<a name="SEC62"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC61" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC63" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC52" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.2.10 password </h3>
+
+<dl>
+<dt><u>Command:</u> <b>password</b><i> [&lsquo;<samp>--md5</samp>&rsquo;] passwd [new-config-file]</i>
+<a name="IDX15"></a>
+</dt>
+<dd><p>If used in the first section of a menu file, disable all interactive
+editing control (menu entry editor and command-line) and entries
+protected by the command <code>lock</code>. If the password <var>passwd</var> is
+entered, it loads the <var>new-config-file</var> as a new config file and
+restarts the GRUB Stage 2, if <var>new-config-file</var> is
+specified. Otherwise, GRUB will just unlock the privileged instructions.
+You can also use this command in the script section, in which case it
+will ask for the password, before continuing.  The option
+&lsquo;<samp>--md5</samp>&rsquo; tells GRUB that <var>passwd</var> is encrypted with
+<code>md5crypt</code> (see section <a href="#SEC95">md5crypt</a>).
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="rarp"></a>
+<a name="SEC63"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC62" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC64" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC52" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.2.11 rarp </h3>
+
+<dl>
+<dt><u>Command:</u> <b>rarp</b>
+<a name="IDX16"></a>
+</dt>
+<dd><p>Initialize a network device via the <em>RARP</em> protocol.  This command
+is only available if GRUB is compiled with netboot support. See also
+<a href="grub_6.html#SEC29">Downloading OS images from a network</a>.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="serial"></a>
+<a name="SEC64"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC63" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC65" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC52" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.2.12 serial </h3>
+
+<dl>
+<dt><u>Command:</u> <b>serial</b><i> [&lsquo;<samp>--unit=unit</samp>&rsquo;] [&lsquo;<samp>--port=port</samp>&rsquo;] [&lsquo;<samp>--speed=speed</samp>&rsquo;] [&lsquo;<samp>--word=word</samp>&rsquo;] [&lsquo;<samp>--parity=parity</samp>&rsquo;] [&lsquo;<samp>--stop=stop</samp>&rsquo;] [&lsquo;<samp>--device=dev</samp>&rsquo;]</i>
+<a name="IDX17"></a>
+</dt>
+<dd><p>Initialize a serial device. <var>unit</var> is a number in the range 0-3
+specifying which serial port to use; default is 0, which corresponds to
+the port often called COM1. <var>port</var> is the I/O port where the UART
+is to be found; if specified it takes precedence over <var>unit</var>.
+<var>speed</var> is the transmission speed; default is 9600. <var>word</var> and
+<var>stop</var> are the number of data bits and stop bits. Data bits must
+be in the range 5-8 and stop bits must be 1 or 2. Default is 8 data
+bits and one stop bit. <var>parity</var> is one of &lsquo;<samp>no</samp>&rsquo;, &lsquo;<samp>odd</samp>&rsquo;,
+&lsquo;<samp>even</samp>&rsquo; and defaults to &lsquo;<samp>no</samp>&rsquo;. The option &lsquo;<samp>--device</samp>&rsquo;
+can only be used in the grub shell and is used to specify the 
+tty device to be used in the host operating system (see section <a href="grub_15.html#SEC116">Invoking the grub shell</a>).
+</p>
+<p>The serial port is not used as a communication channel unless the
+<code>terminal</code> command is used (see section <a href="#SEC67">terminal</a>).
+</p>
+<p>This command is only available if GRUB is compiled with serial
+support. See also <a href="grub_7.html#SEC32">Using GRUB via a serial line</a>.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="setkey"></a>
+<a name="SEC65"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC64" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC52" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.2.13 setkey </h3>
+
+<dl>
+<dt><u>Command:</u> <b>setkey</b><i> [to_key from_key]</i>
+<a name="IDX18"></a>
+</dt>
+<dd><p>Change the keyboard map. The key <var>from_key</var> is mapped to the key
+<var>to_key</var>. If no argument is specified, reset key mappings. Note that 
+this command <em>does not</em> exchange the keys. If you want to exchange 
+the keys, run this command again with the arguments exchanged, like this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">grub&gt; <kbd>setkey capslock control</kbd>
+grub&gt; <kbd>setkey control capslock</kbd>
+</pre></td></tr></table>
+
+<p>A key must be an alphabet letter, a digit, or one of these symbols:
+&lsquo;<samp>escape</samp>&rsquo;, &lsquo;<samp>exclam</samp>&rsquo;, &lsquo;<samp>at</samp>&rsquo;, &lsquo;<samp>numbersign</samp>&rsquo;,
+&lsquo;<samp>dollar</samp>&rsquo;, &lsquo;<samp>percent</samp>&rsquo;, &lsquo;<samp>caret</samp>&rsquo;, &lsquo;<samp>ampersand</samp>&rsquo;,
+&lsquo;<samp>asterisk</samp>&rsquo;, &lsquo;<samp>parenleft</samp>&rsquo;, &lsquo;<samp>parenright</samp>&rsquo;, &lsquo;<samp>minus</samp>&rsquo;,
+&lsquo;<samp>underscore</samp>&rsquo;, &lsquo;<samp>equal</samp>&rsquo;, &lsquo;<samp>plus</samp>&rsquo;, &lsquo;<samp>backspace</samp>&rsquo;,
+&lsquo;<samp>tab</samp>&rsquo;, &lsquo;<samp>bracketleft</samp>&rsquo;, &lsquo;<samp>braceleft</samp>&rsquo;, &lsquo;<samp>bracketright</samp>&rsquo;,
+&lsquo;<samp>braceright</samp>&rsquo;, &lsquo;<samp>enter</samp>&rsquo;, &lsquo;<samp>control</samp>&rsquo;, &lsquo;<samp>semicolon</samp>&rsquo;,
+&lsquo;<samp>colon</samp>&rsquo;, &lsquo;<samp>quote</samp>&rsquo;, &lsquo;<samp>doublequote</samp>&rsquo;, &lsquo;<samp>backquote</samp>&rsquo;,
+&lsquo;<samp>tilde</samp>&rsquo;, &lsquo;<samp>shift</samp>&rsquo;, &lsquo;<samp>backslash</samp>&rsquo;, &lsquo;<samp>bar</samp>&rsquo;, &lsquo;<samp>comma</samp>&rsquo;,
+&lsquo;<samp>less</samp>&rsquo;, &lsquo;<samp>period</samp>&rsquo;, &lsquo;<samp>greater</samp>&rsquo;, &lsquo;<samp>slash</samp>&rsquo;,
+&lsquo;<samp>question</samp>&rsquo;, &lsquo;<samp>alt</samp>&rsquo;, &lsquo;<samp>space</samp>&rsquo;, &lsquo;<samp>capslock</samp>&rsquo;, &lsquo;<samp>FX</samp>&rsquo;
+(&lsquo;<samp>X</samp>&rsquo; is a digit), and &lsquo;<samp>delete</samp>&rsquo;. This table describes to which
+character each of the symbols corresponds:
+</p>
+<dl compact="compact">
+<dt> &lsquo;<samp>exclam</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>!</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>at</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>@</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>numbersign</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>#</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>dollar</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>$</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>percent</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>%</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>caret</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>^</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>ampersand</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>&amp;</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>asterisk</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>*</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>parenleft</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>(</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>parenright</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>)</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>minus</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>-</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>underscore</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>_</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>equal</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>=</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>plus</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>+</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>bracketleft</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>[</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>braceleft</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>{</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>bracketright</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>]</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>braceright</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>}</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>semicolon</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>;</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>colon</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>:</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>quote</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>'</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>doublequote</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>&quot;</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>backquote</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>`</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>tilde</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>~</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>backslash</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>\</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>bar</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>|</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>comma</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>,</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>less</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>&lt;</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>period</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>.</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>greater</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>&gt;</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>slash</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>/</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>question</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp>?</samp>&rsquo;
+</p>
+</dd>
+<dt> &lsquo;<samp>space</samp>&rsquo;</dt>
+<dd><p>&lsquo;<samp> </samp>&rsquo;
+</p></dd>
+</dl>
+</dd></dl>
+
+
+<hr size="6">
+<a name="splashimage"></a>
+<a name="SEC66"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC65" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC67" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC52" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.2.14 splashimage </h3>
+
+<dl>
+<dt><u>Command:</u> <b>splashimage</b><i> file</i>
+<a name="IDX19"></a>
+</dt>
+<dd><p>Select an image to use as the background image.  This should be
+specified using normal GRUB device naming syntax.  The format of the
+file is a gzipped xpm which is 640x480 with a 14 color palette.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="terminal"></a>
+<a name="SEC67"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC66" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC68" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC52" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.2.15 terminal </h3>
+
+<dl>
+<dt><u>Command:</u> <b>terminal</b><i> [&lsquo;<samp>--dumb</samp>&rsquo;] [&lsquo;<samp>--no-echo</samp>&rsquo;] [&lsquo;<samp>--no-edit</samp>&rsquo;] [&lsquo;<samp>--timeout=secs</samp>&rsquo;] [&lsquo;<samp>--lines=lines</samp>&rsquo;] [&lsquo;<samp>--silent</samp>&rsquo;] [&lsquo;<samp>console</samp>&rsquo;] [&lsquo;<samp>serial</samp>&rsquo;] [&lsquo;<samp>hercules</samp>&rsquo;]</i>
+<a name="IDX20"></a>
+</dt>
+<dd><p>Select a terminal for user interaction. The terminal is assumed to be
+VT100-compatible unless &lsquo;<samp>--dumb</samp>&rsquo; is specified. If both
+&lsquo;<samp>console</samp>&rsquo; and &lsquo;<samp>serial</samp>&rsquo; are specified, then GRUB will use
+the one where a key is entered first or the first when the timeout
+expires. If neither are specified, the current setting is
+reported. This command is only available if GRUB is compiled with serial
+support. See also <a href="grub_7.html#SEC32">Using GRUB via a serial line</a>.
+</p>
+<p>This may not make sense for most users, but GRUB supports Hercules
+console as well. Hercules console is usable like the ordinary console,
+and the usage is quite similar to that for serial terminals: specify
+&lsquo;<samp>hercules</samp>&rsquo; as the argument.
+</p>
+<p>The option &lsquo;<samp>--lines</samp>&rsquo; defines the number of lines in your
+terminal, and it is used for the internal pager function. If you don't
+specify this option, the number is assumed as 24.
+</p>
+<p>The option &lsquo;<samp>--silent</samp>&rsquo; suppresses the message to prompt you to
+hit any key. This might be useful if your system has no terminal
+device.
+</p>
+<p>The option &lsquo;<samp>--no-echo</samp>&rsquo; has GRUB not to echo back input
+characters. This implies the option &lsquo;<samp>--no-edit</samp>&rsquo;.
+</p>
+<p>The option &lsquo;<samp>--no-edit</samp>&rsquo; disables the BASH-like editing feature.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="terminfo"></a>
+<a name="SEC68"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC67" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC69" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC52" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.2.16 terminfo </h3>
+
+<dl>
+<dt><u>Command:</u> <b>terminfo</b><i> &lsquo;<samp>--name=name</samp>&rsquo; &lsquo;<samp>--cursor-address=seq</samp>&rsquo; [&lsquo;<samp>--clear-screen=seq</samp>&rsquo;] [&lsquo;<samp>--enter-standout-mode=seq</samp>&rsquo;] [&lsquo;<samp>--exit-standout-mode=seq</samp>&rsquo;]</i>
+<a name="IDX21"></a>
+</dt>
+<dd><p>Define the capabilities of your terminal. Use this command to define
+escape sequences, if it is not vt100-compatible. You may use &lsquo;<samp>\e</samp>&rsquo;
+for &lt;ESC&gt; and &lsquo;<samp>^X</samp>&rsquo; for a control character.
+</p>
+<p>You can use the utility <code>grub-terminfo</code> to generate
+appropriate arguments to this command. See section <a href="grub_18.html#SEC122">Invoking grub-terminfo</a>.
+</p>
+<p>If no option is specified, the current settings are printed.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="tftpserver"></a>
+<a name="SEC69"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC68" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC70" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC52" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.2.17 tftpserver </h3>
+
+<dl>
+<dt><u>Command:</u> <b>tftpserver</b><i> ipaddr</i>
+<a name="IDX22"></a>
+</dt>
+<dd><p><strong>Caution:</strong> This command exists only for backward
+compatibility. Use <code>ifconfig</code> (see section <a href="#SEC58">ifconfig</a>) instead.
+</p>
+<p>Override a TFTP server address returned by a BOOTP/DHCP/RARP server. The
+argument <var>ipaddr</var> must be in dotted decimal format, like
+&lsquo;<samp>192.168.0.15</samp>&rsquo;.  This command is only available if GRUB is compiled
+with netboot support. See also <a href="grub_6.html#SEC29">Downloading OS images from a network</a>.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="unhide"></a>
+<a name="SEC70"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC69" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC52" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.2.18 unhide </h3>
+
+<dl>
+<dt><u>Command:</u> <b>unhide</b><i> partition</i>
+<a name="IDX23"></a>
+</dt>
+<dd><p>Unhide the partition <var>partition</var> by clearing the <em>hidden</em> bit in
+its partition type code. This is useful only when booting DOS or Windows
+and multiple primary partitions exist on one disk. See also
+<a href="grub_4.html#SEC22">DOS/Windows</a>.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="Command_002dline-and-menu-entry-commands"></a>
+<a name="SEC71"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC70" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC72" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 13.3 The list of command-line and menu entry commands </h2>
+
+<p>These commands are usable in the command-line and in menu entries.  If
+you forget a command, you can run the command <code>help</code>
+(see section <a href="#SEC86">help</a>).
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC72">13.3.1 blocklist</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                   Get the block list notation of a file
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC73">13.3.2 boot</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                        Start up your operating system
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC74">13.3.3 cat</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                         Show the contents of a file
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC75">13.3.4 chainloader</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 Chain-load another boot loader
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC76">13.3.5 cmp</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                         Compare two files
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC77">13.3.6 configfile</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                  Load a configuration file
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC78">13.3.7 debug</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                       Toggle the debug flag
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC79">13.3.8 displayapm</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                  Display APM information
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC80">13.3.9 displaymem</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                  Display memory configuration
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC81">13.3.10 embed</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                       Embed Stage 1.5
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC82">13.3.11 find</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                        Find a file
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC83">13.3.12 fstest</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                      Test a filesystem
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC84">13.3.13 geometry</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                    Manipulate the geometry of a drive
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC85">13.3.14 halt</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                        Shut down your computer
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC86">13.3.15 help</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                        Show help messages
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC87">13.3.16 impsprobe</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                   Probe SMP
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC88">13.3.17 initrd</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                      Load an initrd
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC89">13.3.18 install</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                     Install GRUB
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC90">13.3.19 ioprobe</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                     Probe I/O ports used for a drive
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC91">13.3.20 kernel</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                      Load a kernel
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC92">13.3.21 lock</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                        Lock a menu entry
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC93">13.3.22 makeactive</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                  Make a partition active
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC94">13.3.23 map</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                         Map a drive to another
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC95">13.3.24 md5crypt</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                    Encrypt a password in MD5 format
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC96">13.3.25 module</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                      Load a module
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC97">13.3.26 modulenounzip</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">               Load a module without decompression
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC98">13.3.27 pause</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                       Wait for a key press
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC99">13.3.28 print</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                       Print a message
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC100">13.3.29 quit</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                        Exit from the grub shell
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC101">13.3.30 reboot</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                      Reboot your computer
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC102">13.3.31 read</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                        Read data from memory
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC103">13.3.32 root</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                        Set GRUB's root device
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC104">13.3.33 rootnoverify</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Set GRUB's root device without mounting
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC105">13.3.34 savedefault</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 Save current entry as the default entry
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC106">13.3.35 setup</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                       Set up GRUB's installation automatically
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC107">13.3.36 testload</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                    Load a file for testing a filesystem
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC108">13.3.37 testvbe</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                     Test VESA BIOS EXTENSION
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC109">13.3.38 uppermem</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                    Set the upper memory size
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC110">13.3.39 uuid</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                        Set GRUB's root device using UUID
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC111">13.3.40 vbeprobe</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                    Probe VESA BIOS EXTENSION
+</td></tr>
+</table>
+
+
+<hr size="6">
+<a name="blocklist"></a>
+<a name="SEC72"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC71" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC73" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.1 blocklist </h3>
+
+<dl>
+<dt><u>Command:</u> <b>blocklist</b><i> file</i>
+<a name="IDX24"></a>
+</dt>
+<dd><p>Print the block list notation of the file <var>file</var>. See section <a href="grub_11.html#SEC39">How to specify block lists</a>.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="boot"></a>
+<a name="SEC73"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC72" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC74" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.2 boot </h3>
+
+<dl>
+<dt><u>Command:</u> <b>boot</b>
+<a name="IDX25"></a>
+</dt>
+<dd><p>Boot the OS or chain-loader which has been loaded. Only necessary if
+running the fully interactive command-line (it is implicit at the end of
+a menu entry).
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="cat"></a>
+<a name="SEC74"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC73" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC75" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.3 cat </h3>
+
+<dl>
+<dt><u>Command:</u> <b>cat</b><i> file</i>
+<a name="IDX26"></a>
+</dt>
+<dd><p>Display the contents of the file <var>file</var>. This command may be useful
+to remind you of your OS's root partition:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">grub&gt; <kbd>cat /etc/fstab</kbd>
+</pre></td></tr></table>
+</dd></dl>
+
+
+<hr size="6">
+<a name="chainloader"></a>
+<a name="SEC75"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC74" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC76" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.4 chainloader </h3>
+
+<dl>
+<dt><u>Command:</u> <b>chainloader</b><i> [&lsquo;<samp>--force</samp>&rsquo;] file</i>
+<a name="IDX27"></a>
+</dt>
+<dd><p>Load <var>file</var> as a chain-loader. Like any other file loaded by the
+filesystem code, it can use the blocklist notation to grab the first
+sector of the current partition with &lsquo;<samp>+1</samp>&rsquo;. If you specify the
+option &lsquo;<samp>--force</samp>&rsquo;, then load <var>file</var> forcibly, whether it has a
+correct signature or not. This is required when you want to load a
+defective boot loader, such as SCO UnixWare 7.1 (see section <a href="grub_4.html#SEC23">SCO UnixWare</a>).
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="cmp"></a>
+<a name="SEC76"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC75" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC77" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.5 cmp </h3>
+
+<dl>
+<dt><u>Command:</u> <b>cmp</b><i> file1 file2</i>
+<a name="IDX28"></a>
+</dt>
+<dd><p>Compare the file <var>file1</var> with the file <var>file2</var>. If they differ
+in size, print the sizes like this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">Differ in size: 0x1234 [foo], 0x4321 [bar]
+</pre></td></tr></table>
+
+<p>If the sizes are equal but the bytes at an offset differ, then print the
+bytes like this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">Differ at the offset 777: 0xbe [foo], 0xef [bar]
+</pre></td></tr></table>
+
+<p>If they are completely identical, nothing will be printed.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="configfile"></a>
+<a name="SEC77"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC76" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC78" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.6 configfile </h3>
+
+<dl>
+<dt><u>Command:</u> <b>configfile</b><i> file</i>
+<a name="IDX29"></a>
+</dt>
+<dd><p>Load <var>file</var> as a configuration file.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="debug"></a>
+<a name="SEC78"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC77" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC79" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.7 debug </h3>
+
+<dl>
+<dt><u>Command:</u> <b>debug</b>
+<a name="IDX30"></a>
+</dt>
+<dd><p>Toggle debug mode (by default it is off). When debug mode is on, some
+extra messages are printed to show disk activity. This global debug flag
+is mainly useful for GRUB developers when testing new code.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="displayapm"></a>
+<a name="SEC79"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC78" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC80" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.8 displayapm </h3>
+
+<dl>
+<dt><u>Command:</u> <b>displayapm</b>
+<a name="IDX31"></a>
+</dt>
+<dd><p>Display APM BIOS information.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="displaymem"></a>
+<a name="SEC80"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC79" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC81" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.9 displaymem </h3>
+
+<dl>
+<dt><u>Command:</u> <b>displaymem</b>
+<a name="IDX32"></a>
+</dt>
+<dd><p>Display what GRUB thinks the system address space map of the machine is,
+including all regions of physical <small>RAM</small> installed. GRUB's
+<em>upper/lower memory</em> display uses the standard BIOS interface for
+the available memory in the first megabyte, or <em>lower memory</em>, and a
+synthesized number from various BIOS interfaces of the memory starting
+at 1MB and going up to the first chipset hole for <em>upper memory</em>
+(the standard PC <em>upper memory</em> interface is limited to reporting a
+maximum of 64MB).
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="embed"></a>
+<a name="SEC81"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC80" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC82" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.10 embed </h3>
+
+<dl>
+<dt><u>Command:</u> <b>embed</b><i> stage1_5 device</i>
+<a name="IDX33"></a>
+</dt>
+<dd><p>Embed the Stage 1.5 <var>stage1_5</var> in the sectors after the MBR if
+<var>device</var> is a drive, or in the <em>boot loader</em> area if <var>device</var>
+is a FFS partition or a ReiserFS partition.<a name="DOCF9" href="grub_fot.html#FOOT9">(9)</a> Print the number of sectors which
+<var>stage1_5</var> occupies, if successful.
+</p>
+<p>Usually, you don't need to run this command directly. See section <a href="#SEC106">setup</a>.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="find"></a>
+<a name="SEC82"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC81" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC83" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.11 find </h3>
+
+<dl>
+<dt><u>Command:</u> <b>find</b><i> filename</i>
+<a name="IDX34"></a>
+</dt>
+<dd><p>Search for the file name <var>filename</var> in all mountable partitions
+and print the list of the devices which contain the file. The file
+name <var>filename</var> should be an absolute file name like
+<code>/boot/grub/stage1</code>.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="fstest"></a>
+<a name="SEC83"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC82" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC84" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.12 fstest </h3>
+
+<dl>
+<dt><u>Command:</u> <b>fstest</b>
+<a name="IDX35"></a>
+</dt>
+<dd><p>Toggle filesystem test mode.
+Filesystem test mode, when turned on, prints out data corresponding to
+all the device reads and what values are being sent to the low-level
+routines. The format is &lsquo;<samp>&lt;<var>partition-offset-sector</var>,
+<var>byte-offset</var>, <var>byte-length</var>&gt;</samp>&rsquo; for high-level reads inside a
+partition, and &lsquo;<samp>[<var>disk-offset-sector</var>]</samp>&rsquo; for low-level sector
+requests from the disk.
+Filesystem test mode is turned off by any use of the <code>install</code>
+(see section <a href="#SEC89">install</a>) or <code>testload</code> (see section <a href="#SEC107">testload</a>) commands.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="geometry"></a>
+<a name="SEC84"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC83" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC85" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.13 geometry </h3>
+
+<dl>
+<dt><u>Command:</u> <b>geometry</b><i> drive [cylinder head sector [total_sector]]</i>
+<a name="IDX36"></a>
+</dt>
+<dd><p>Print the information for the drive <var>drive</var>. In the grub shell, you
+can set the geometry of the drive arbitrarily. The number of
+cylinders, the number of heads, the number of sectors and the number of
+total sectors are set to CYLINDER, HEAD, SECTOR and TOTAL_SECTOR,
+respectively. If you omit TOTAL_SECTOR, then it will be calculated
+based on the C/H/S values automatically.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="halt"></a>
+<a name="SEC85"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC84" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC86" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.14 halt </h3>
+
+<dl>
+<dt><u>Command:</u> <b>halt</b><i> &lsquo;<samp>--no-apm</samp>&rsquo;</i>
+<a name="IDX37"></a>
+</dt>
+<dd><p>The command halts the computer. If the &lsquo;<samp>--no-apm</samp>&rsquo; option
+is specified, no APM BIOS call is performed. Otherwise, the computer
+is shut down using APM.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="help"></a>
+<a name="SEC86"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC85" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC87" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.15 help </h3>
+
+<dl>
+<dt><u>Command:</u> <b>help</b><i> &lsquo;<samp>--all</samp>&rsquo; [pattern &hellip;]</i>
+<a name="IDX38"></a>
+</dt>
+<dd><p>Display helpful information about builtin commands. If you do not
+specify <var>pattern</var>, this command shows short descriptions of most of
+available commands. If you specify the option &lsquo;<samp>--all</samp>&rsquo; to this
+command, short descriptions of rarely used commands (such as
+<a href="#SEC107">testload</a>) are displayed as well.
+</p>
+<p>If you specify any <var>patterns</var>, it displays longer information
+about each of the commands which match those <var>patterns</var>.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="impsprobe"></a>
+<a name="SEC87"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC86" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC88" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.16 impsprobe </h3>
+
+<dl>
+<dt><u>Command:</u> <b>impsprobe</b>
+<a name="IDX39"></a>
+</dt>
+<dd><p>Probe the Intel Multiprocessor Specification 1.1 or 1.4 configuration
+table and boot the various CPUs which are found into a tight loop. This
+command can be used only in the Stage 2, but not in the grub shell.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="initrd"></a>
+<a name="SEC88"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC87" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC89" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.17 initrd </h3>
+
+<dl>
+<dt><u>Command:</u> <b>initrd</b><i> file &hellip;</i>
+<a name="IDX40"></a>
+</dt>
+<dd><p>Load an initial ramdisk for a Linux format boot image and set the
+appropriate parameters in the Linux setup area in memory. See also
+<a href="grub_4.html#SEC18">GNU/Linux</a>.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="install"></a>
+<a name="SEC89"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC88" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC90" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.18 install </h3>
+
+<dl>
+<dt><u>Command:</u> <b>install</b><i> [&lsquo;<samp>--force-lba</samp>&rsquo;] [&lsquo;<samp>--stage2=os_stage2_file</samp>&rsquo;] stage1_file [&lsquo;<samp>d</samp>&rsquo;] dest_dev stage2_file [addr] [&lsquo;<samp>p</samp>&rsquo;] [config_file] [real_config_file]</i>
+<a name="IDX41"></a>
+</dt>
+<dd><p>This command is fairly complex, and you should not use this command
+unless you are familiar with GRUB. Use <code>setup</code> (see section <a href="#SEC106">setup</a>)
+instead.
+</p>
+<p>In short, it will perform a full install presuming the Stage 2 or Stage
+1.5<a name="DOCF10" href="grub_fot.html#FOOT10">(10)</a> is in its final install location.
+</p>
+<p>In slightly more detail, it will load <var>stage1_file</var>, validate that
+it is a GRUB Stage 1 of the right version number, install in it a
+blocklist for loading <var>stage2_file</var> as a Stage 2. If the option
+&lsquo;<samp>d</samp>&rsquo; is present, the Stage 1 will always look for the actual
+disk <var>stage2_file</var> was installed on, rather than using the booting
+drive. The Stage 2 will be loaded at address <var>addr</var>, which must be
+&lsquo;<samp>0x8000</samp>&rsquo; for a true Stage 2, and &lsquo;<samp>0x2000</samp>&rsquo; for a Stage 1.5. If
+<var>addr</var> is not present, GRUB will determine the address
+automatically. It then writes the completed Stage 1 to the first block
+of the device <var>dest_dev</var>. If the options &lsquo;<samp>p</samp>&rsquo; or
+<var>config_file</var> are present, then it reads the first block of stage2,
+modifies it with the values of the partition <var>stage2_file</var> was found
+on (for &lsquo;<samp>p</samp>&rsquo;) or places the string <var>config_file</var> into the area
+telling the stage2 where to look for a configuration file at boot
+time. Likewise, if <var>real_config_file</var> is present and
+<var>stage2_file</var> is a Stage 1.5, then the Stage 2 <var>config_file</var> is
+patched with the configuration file name <var>real_config_file</var>. This
+command preserves the DOS BPB (and for hard disks, the partition table)
+of the sector the Stage 1 is to be installed into.
+</p>
+<p><strong>Caution:</strong> Several buggy BIOSes don't pass a booting drive
+properly when booting from a hard disk drive. Therefore, you will
+unfortunately have to specify the option &lsquo;<samp>d</samp>&rsquo;, whether your
+Stage2 resides at the booting drive or not, if you have such a
+BIOS. We know these are defective in this way:
+</p>
+<dl compact="compact">
+<dt></dt>
+<dd><p>Fujitsu LifeBook 400 BIOS version 31J0103A
+</p>
+</dd>
+<dt></dt>
+<dd><p>HP Vectra XU 6/200 BIOS version GG.06.11
+</p></dd>
+</dl>
+
+<p><strong>Caution2:</strong> A number of BIOSes don't return a correct LBA support
+bitmap even if they do have the support. So GRUB provides a solution to
+ignore the wrong bitmap, that is, the option &lsquo;<samp>--force-lba</samp>&rsquo;. Don't
+use this option if you know that your BIOS doesn't have LBA support.
+</p>
+<p><strong>Caution3:</strong> You must specify the option &lsquo;<samp>--stage2</samp>&rsquo; in the
+grub shell, if you cannot unmount the filesystem where your stage2 file
+resides. The argument should be the file name in your operating system.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="ioprobe"></a>
+<a name="SEC90"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC89" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC91" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.19 ioprobe </h3>
+
+<dl>
+<dt><u>Command:</u> <b>ioprobe</b><i> drive</i>
+<a name="IDX42"></a>
+</dt>
+<dd><p>Probe I/O ports used for the drive <var>drive</var>. This command will list
+the I/O ports on the screen. For technical information,
+See section <a href="grub_24.html#SEC128">Hacking GRUB</a>.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="kernel"></a>
+<a name="SEC91"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC90" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC92" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.20 kernel </h3>
+
+<dl>
+<dt><u>Command:</u> <b>kernel</b><i> [&lsquo;<samp>--type=type</samp>&rsquo;] [&lsquo;<samp>--no-mem-option</samp>&rsquo;] file &hellip;</i>
+<a name="IDX43"></a>
+</dt>
+<dd><p>Attempt to load the primary boot image (Multiboot a.out or <small>ELF</small>,
+Linux zImage or bzImage, FreeBSD a.out, NetBSD a.out, etc.) from
+<var>file</var>. The rest of the line is passed verbatim as the <em>kernel
+command-line</em>. Any modules must be reloaded after using this command.
+</p>
+<p>This command also accepts the option &lsquo;<samp>--type</samp>&rsquo; so that you can
+specify the kernel type of <var>file</var> explicitly. The argument
+<var>type</var> must be one of these: &lsquo;<samp>netbsd</samp>&rsquo;, &lsquo;<samp>freebsd</samp>&rsquo;,
+&lsquo;<samp>openbsd</samp>&rsquo;, &lsquo;<samp>linux</samp>&rsquo;, &lsquo;<samp>biglinux</samp>&rsquo;, and
+&lsquo;<samp>multiboot</samp>&rsquo;. However, you need to specify it only if you want to
+load a NetBSD <small>ELF</small> kernel, because GRUB can automatically determine
+a kernel type in the other cases, quite safely.
+</p>
+<p>The option &lsquo;<samp>--no-mem-option</samp>&rsquo; is effective only for Linux. If the
+option is specified, GRUB doesn't pass the option &lsquo;<samp>mem=</samp>&rsquo; to the
+kernel.  This option is implied for Linux kernels 2.4.18 and newer.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="lock"></a>
+<a name="SEC92"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC91" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC93" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.21 lock </h3>
+
+<dl>
+<dt><u>Command:</u> <b>lock</b>
+<a name="IDX44"></a>
+</dt>
+<dd><p>Prevent normal users from executing arbitrary menu entries. You must use
+the command <code>password</code> if you really want this command to be
+useful (see section <a href="#SEC62">password</a>).
+</p>
+<p>This command is used in a menu, as shown in this example:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">title This entry is too dangerous to be executed by normal users
+lock
+root (hd0,a)
+kernel /no-security-os
+</pre></td></tr></table>
+
+<p>See also <a href="grub_9.html#SEC34">Protecting your computer from cracking</a>.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="makeactive"></a>
+<a name="SEC93"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC92" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC94" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.22 makeactive </h3>
+
+<dl>
+<dt><u>Command:</u> <b>makeactive</b>
+<a name="IDX45"></a>
+</dt>
+<dd><p>Set the active partition on the root disk to GRUB's root device.
+This command is limited to <em>primary</em> PC partitions on a hard disk.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="map"></a>
+<a name="SEC94"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC93" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC95" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.23 map </h3>
+
+<dl>
+<dt><u>Command:</u> <b>map</b><i> to_drive from_drive</i>
+<a name="IDX46"></a>
+</dt>
+<dd><p>Map the drive <var>from_drive</var> to the drive <var>to_drive</var>. This is
+necessary when you chain-load some operating systems, such as DOS, if
+such an OS resides at a non-first drive. Here is an example:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">grub&gt; <kbd>map (hd0) (hd1)</kbd>
+grub&gt; <kbd>map (hd1) (hd0)</kbd>
+</pre></td></tr></table>
+
+<p>The example exchanges the order between the first hard disk and the
+second hard disk. See also <a href="grub_4.html#SEC22">DOS/Windows</a>.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="md5crypt"></a>
+<a name="SEC95"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC94" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC96" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.24 md5crypt </h3>
+
+<dl>
+<dt><u>Command:</u> <b>md5crypt</b>
+<a name="IDX47"></a>
+</dt>
+<dd><p>Prompt to enter a password, and encrypt it in MD5 format. The encrypted
+password can be used with the command <code>password</code>
+(see section <a href="#SEC62">password</a>). See also <a href="grub_9.html#SEC34">Protecting your computer from cracking</a>.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="module"></a>
+<a name="SEC96"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC95" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC97" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.25 module </h3>
+
+<dl>
+<dt><u>Command:</u> <b>module</b><i> file &hellip;</i>
+<a name="IDX48"></a>
+</dt>
+<dd><p>Load a boot module <var>file</var> for a Multiboot format boot image (no
+interpretation of the file contents are made, so the user of this
+command must know what the kernel in question expects). The rest of the
+line is passed as the <em>module command-line</em>, like the
+<code>kernel</code> command. You must load a Multiboot kernel image before
+loading any module. See also <a href="#SEC97">modulenounzip</a>.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="modulenounzip"></a>
+<a name="SEC97"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC96" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC98" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.26 modulenounzip </h3>
+
+<dl>
+<dt><u>Command:</u> <b>modulenounzip</b><i> file &hellip;</i>
+<a name="IDX49"></a>
+</dt>
+<dd><p>The same as <code>module</code> (see section <a href="#SEC96">module</a>), except that automatic
+decompression is disabled.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="pause"></a>
+<a name="SEC98"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC97" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC99" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.27 pause </h3>
+
+<dl>
+<dt><u>Command:</u> <b>pause</b><i> message &hellip;</i>
+<a name="IDX50"></a>
+</dt>
+<dd><p>Print the <var>message</var>, then wait until a key is pressed. Note that
+placing &lt;^G&gt; (ASCII code 7) in the message will cause the speaker to
+emit the standard beep sound, which is useful when prompting the user to
+change floppies.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="print"></a>
+<a name="SEC99"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC98" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC100" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.28 print </h3>
+
+<dl>
+<dt><u>Command:</u> <b>print</b><i> message &hellip;</i>
+<a name="IDX51"></a>
+</dt>
+<dd><p>Print the <var>message</var>. Note that placing &lt;^G&gt; (ASCII code 7) in the
+message will cause the speaker to emit the standard beep sound, which is
+useful for visually impaired people.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="quit"></a>
+<a name="SEC100"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC99" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC101" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.29 quit </h3>
+
+<dl>
+<dt><u>Command:</u> <b>quit</b>
+<a name="IDX52"></a>
+</dt>
+<dd><p>Exit from the grub shell <code>grub</code> (see section <a href="grub_15.html#SEC116">Invoking the grub shell</a>). This command can be used only in the grub shell.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="reboot"></a>
+<a name="SEC101"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC100" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC102" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.30 reboot </h3>
+
+<dl>
+<dt><u>Command:</u> <b>reboot</b>
+<a name="IDX53"></a>
+</dt>
+<dd><p>Reboot the computer.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="read"></a>
+<a name="SEC102"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC101" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC103" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.31 read </h3>
+
+<dl>
+<dt><u>Command:</u> <b>read</b><i> addr</i>
+<a name="IDX54"></a>
+</dt>
+<dd><p>Read a 32-bit value from memory at address <var>addr</var> and display it in
+hex format.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="root"></a>
+<a name="SEC103"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC102" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC104" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.32 root </h3>
+
+<dl>
+<dt><u>Command:</u> <b>root</b><i> device [hdbias]</i>
+<a name="IDX55"></a>
+</dt>
+<dd><p>Set the current <em>root device</em> to the device <var>device</var>, then
+attempt to mount it to get the partition size (for passing the partition
+descriptor in <code>ES:ESI</code>, used by some chain-loaded boot loaders), the
+BSD drive-type (for booting BSD kernels using their native boot format),
+and correctly determine the PC partition where a BSD sub-partition is
+located. The optional <var>hdbias</var> parameter is a number to tell a BSD
+kernel how many BIOS drive numbers are on controllers before the current
+one. For example, if there is an IDE disk and a SCSI disk, and your
+FreeBSD root partition is on the SCSI disk, then use a &lsquo;<samp>1</samp>&rsquo; for
+<var>hdbias</var>.
+</p>
+<p>See also <a href="#SEC104">rootnoverify</a>.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="rootnoverify"></a>
+<a name="SEC104"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC103" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC105" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.33 rootnoverify </h3>
+
+<dl>
+<dt><u>Command:</u> <b>rootnoverify</b><i> device [hdbias]</i>
+<a name="IDX56"></a>
+</dt>
+<dd><p>Similar to <code>root</code> (see section <a href="#SEC103">root</a>), but don't attempt to mount the
+partition. This is useful for when an OS is outside of the area of the
+disk that GRUB can read, but setting the correct root device is still
+desired. Note that the items mentioned in <code>root</code> above which
+derived from attempting the mount will <em>not</em> work correctly.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="savedefault"></a>
+<a name="SEC105"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC104" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC106" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.34 savedefault </h3>
+
+<dl>
+<dt><u>Command:</u> <b>savedefault</b><i> num</i>
+<a name="IDX57"></a>
+</dt>
+<dd><p>Save the current menu entry or <var>num</var> if specified as a default
+entry. Here is an example:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">default saved
+timeout 10
+
+title GNU/Linux
+root (hd0,0)
+kernel /boot/vmlinuz root=/dev/sda1 vga=ext
+initrd /boot/initrd
+savedefault
+
+title FreeBSD
+root (hd0,a)
+kernel /boot/loader
+savedefault
+</pre></td></tr></table>
+
+<p>With this configuration, GRUB will choose the entry booted previously as
+the default entry.
+</p>
+<p>You can specify &lsquo;<samp>fallback</samp>&rsquo; instead of a number. Then, next
+fallback entry is saved. Next fallback entry is chosen from fallback
+entries. Normally, this will be the first entry in fallback ones.
+</p>
+<p>See also <a href="#SEC47">default</a> and <a href="grub_19.html#SEC123">Invoking grub-set-default</a>.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="setup"></a>
+<a name="SEC106"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC105" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC107" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.35 setup </h3>
+
+<dl>
+<dt><u>Command:</u> <b>setup</b><i> [&lsquo;<samp>--force-lba</samp>&rsquo;] [&lsquo;<samp>--stage2=os_stage2_file</samp>&rsquo;] [&lsquo;<samp>--prefix=dir</samp>&rsquo;] install_device [image_device]</i>
+<a name="IDX58"></a>
+</dt>
+<dd><p>Set up the installation of GRUB automatically. This command uses the
+more flexible command <code>install</code> (see section <a href="#SEC89">install</a>) in the backend
+and installs GRUB into the device <var>install_device</var>. If
+<var>image_device</var> is specified, then find the GRUB images
+(see section <a href="grub_10.html#SEC35">GRUB image files</a>) in the device <var>image_device</var>, otherwise use the
+current <em>root device</em>, which can be set by the command
+<code>root</code>. If <var>install_device</var> is a hard disk, then embed a
+Stage 1.5 in the disk if possible.
+</p>
+<p>The option &lsquo;<samp>--prefix</samp>&rsquo; specifies the directory under which GRUB
+images are put. If it is not specified, GRUB automatically searches them
+in &lsquo;<tt>/boot/grub</tt>&rsquo; and &lsquo;<tt>/grub</tt>&rsquo;.
+</p>
+<p>The options &lsquo;<samp>--force-lba</samp>&rsquo; and &lsquo;<samp>--stage2</samp>&rsquo; are just passed
+to <code>install</code> if specified. See section <a href="#SEC89">install</a>, for more
+information.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="testload"></a>
+<a name="SEC107"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC106" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC108" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.36 testload </h3>
+
+<dl>
+<dt><u>Command:</u> <b>testload</b><i> file</i>
+<a name="IDX59"></a>
+</dt>
+<dd><p>Read the entire contents of <var>file</var> in several different ways and
+compare them, to test the filesystem code. The output is somewhat
+cryptic, but if no errors are reported and the final &lsquo;<samp>i=<var>X</var>,
+filepos=<var>Y</var></samp>&rsquo; reading has <var>X</var> and <var>Y</var> equal, then it is
+definitely consistent, and very likely works correctly subject to a
+consistent offset error. If this test succeeds, then a good next step is
+to try loading a kernel.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="testvbe"></a>
+<a name="SEC108"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC107" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC109" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.37 testvbe </h3>
+
+<dl>
+<dt><u>Command:</u> <b>testvbe</b><i> mode</i>
+<a name="IDX60"></a>
+</dt>
+<dd><p>Test the VESA BIOS EXTENSION mode <var>mode</var>. This command will switch
+your video card to the graphics mode, and show an endless animation. Hit
+any key to return. See also <a href="#SEC111">vbeprobe</a>.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="uppermem"></a>
+<a name="SEC109"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC108" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC110" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.38 uppermem </h3>
+
+<dl>
+<dt><u>Command:</u> <b>uppermem</b><i> kbytes</i>
+<a name="IDX61"></a>
+</dt>
+<dd><p>Force GRUB to assume that only <var>kbytes</var> kilobytes of upper memory
+are installed. Any system address range maps are discarded.
+</p>
+<p><strong>Caution:</strong> This should be used with great caution, and should
+only be necessary on some old machines. GRUB's BIOS probe can pick up
+all <small>RAM</small> on all new machines the author has ever heard of. It can
+also be used for debugging purposes to lie to an OS.
+</p></dd></dl>
+
+<hr size="6">
+<a name="uuid"></a>
+<a name="SEC110"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC109" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC111" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.39 uuid </h3>
+
+<dl>
+<dt><u>Command:</u> <b>uuid</b><i> [UUID]</i>
+<a name="IDX62"></a>
+</dt>
+<dd><p>Set the current <em>root device</em> to the device with the universally 
+unique identifier <var>UUID</var>, then attempt to mount it.  This is 
+equivalent to the <a href="#SEC103">root</a> command, but allows one to select a 
+filesystem by UUID rather than by device.
+</p>
+<p>The command recognises ext2, ext3, fat, hfs, jfs, ntfs, ocfs, reiserfs 
+and xfs filesystems.
+</p>
+<p><strong>Note:</strong> grub detects and recognises fat UUIDs in lower case 
+whereas examining /dev/disk/by-uuid on Linux will report fat UUIDs 
+in upper case.
+</p>
+<p>By not specifying <var>UUID</var>, the command will scan partitions on 
+attached devices and will display the device, partition type and 
+UUID for each recognised filesystem.
+</p></dd></dl>
+
+
+<hr size="6">
+<a name="vbeprobe"></a>
+<a name="SEC111"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC110" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.3.40 vbeprobe </h3>
+
+<dl>
+<dt><u>Command:</u> <b>vbeprobe</b><i> [mode]</i>
+<a name="IDX63"></a>
+</dt>
+<dd><p>Probe VESA BIOS EXTENSION information. If the mode <var>mode</var> is
+specified, show only the information about <var>mode</var>. Otherwise, this
+command lists up available VBE modes on the screen. See also
+<a href="#SEC108">testvbe</a>.
+</p></dd></dl>
+
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC45" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>root</em> on <em>March, 20 2010</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.78</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

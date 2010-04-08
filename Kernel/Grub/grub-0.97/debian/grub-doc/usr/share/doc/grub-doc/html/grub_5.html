@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on March, 20 2010 by texi2html 1.78 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+
+-->
+<head>
+<title>GRUB Manual: 5. Configuration</title>
+
+<meta name="description" content="GRUB Manual: 5. Configuration">
+<meta name="keywords" content="GRUB Manual: 5. Configuration">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.78">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Configuration"></a>
+<a name="SEC28"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="grub_4.html#SEC27" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_6.html#SEC29" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub_4.html#SEC12" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_6.html#SEC29" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 5. Configuration </h1>
+
+<p>You've probably noticed that you need to type several commands to boot your
+OS. There's a solution to that - GRUB provides a menu interface
+(see section <a href="grub_12.html#SEC42">The simple menu interface</a>) from which you can select an item (using arrow
+keys) that will do everything to boot an OS.
+</p>
+<p>To enable the menu, you need a configuration file,
+&lsquo;<tt>menu.lst</tt>&rsquo; under the boot directory. We'll analyze an example
+file.
+</p>
+<p>The file first contains some general settings, the menu interface
+related options. You can put these commands (see section <a href="grub_13.html#SEC46">The list of commands for the menu only</a>) before any of the items (starting with <code>title</code>
+(see section <a href="grub_13.html#SEC51">title</a>)).
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">#
+# Sample boot menu configuration file
+#
+</pre></td></tr></table>
+
+<p>As you may have guessed, these lines are comments. Lines starting with a
+hash character (&lsquo;<samp>#</samp>&rsquo;), and blank lines, are ignored by GRUB.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"># By default, boot the first entry.
+default 0
+</pre></td></tr></table>
+
+<p>The first entry (here, counting starts with number zero, not one!) will
+be the default choice.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"># Boot automatically after 30 secs.
+timeout 30
+</pre></td></tr></table>
+
+<p>As the comment says, GRUB will boot automatically in 30 seconds, unless
+interrupted with a keypress.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"># Fallback to the second entry.
+fallback 1
+</pre></td></tr></table>
+
+<p>If, for any reason, the default entry doesn't work, fall back to the
+second one (this is rarely used, for obvious reasons).
+</p>
+<p>Note that the complete descriptions of these commands, which are menu
+interface specific, can be found in <a href="grub_13.html#SEC46">The list of commands for the menu only</a>. Other descriptions can be found in <a href="grub_13.html#SEC45">The list of available commands</a>.
+</p>
+<p>Now, on to the actual OS definitions. You will see that each entry
+begins with a special command, <code>title</code> (see section <a href="grub_13.html#SEC51">title</a>), and the
+action is described after it. Note that there is no command
+<code>boot</code> (see section <a href="grub_13.html#SEC73">boot</a>) at the  end of each item. That is because
+GRUB automatically executes <code>boot</code> if it loads other commands
+successfully.
+</p>
+<p>The argument for the command <code>title</code> is used to display a short
+title/description of the entry in the menu. Since <code>title</code>
+displays the argument as is, you can write basically anything there.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"># For booting GNU/Hurd
+title  GNU/Hurd
+root   (hd0,0)
+kernel /boot/gnumach.gz root=hd0s1
+module /boot/serverboot.gz
+</pre></td></tr></table>
+
+<p>This boots GNU/Hurd from the first hard disk.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"># For booting GNU/Linux
+title  GNU/Linux
+kernel (hd1,0)/vmlinuz root=/dev/hdb1
+</pre></td></tr></table>
+
+<p>This boots GNU/Linux, but from the second hard disk.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"># For booting Mach (getting kernel from floppy)
+title  Utah Mach4 multiboot
+root   (hd0,2)
+pause  Insert the diskette now^G!!
+kernel (fd0)/boot/kernel root=hd0s3
+module (fd0)/boot/bootstrap
+</pre></td></tr></table>
+
+<p>This boots Mach with a kernel on a floppy, but the root filesystem at
+hd0s3. It also contains a <code>pause</code> line (see section <a href="grub_13.html#SEC98">pause</a>), which
+will cause GRUB to display a prompt and delay, before actually executing
+the rest of the commands and booting.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"># For booting FreeBSD
+title  FreeBSD
+root   (hd0,2,a)
+kernel /boot/loader
+</pre></td></tr></table>
+
+<p>This item will boot FreeBSD kernel loaded from the &lsquo;<samp>a</samp>&rsquo; partition of
+the third <small>PC</small> slice of the first hard disk.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"># For booting OS/2
+title OS/2
+root  (hd0,1)
+makeactive
+# chainload OS/2 bootloader from the first sector
+chainloader +1
+# This is similar to &quot;chainload&quot;, but loads a specific file
+#chainloader /boot/chain.os2
+</pre></td></tr></table>
+
+<p>This will boot OS/2, using a chain-loader (see section <a href="grub_4.html#SEC15">Load another boot loader to boot unsupported operating systems</a>).
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"># For booting Windows NT or Windows95
+title Windows NT / Windows 95 boot menu
+root        (hd0,0)
+makeactive
+chainloader +1
+# For loading DOS if Windows NT is installed
+# chainload /bootsect.dos
+</pre></td></tr></table>
+
+<p>The same as the above, but for Windows.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"># For installing GRUB into the hard disk
+title Install GRUB into the hard disk
+root    (hd0,0)
+setup   (hd0)
+</pre></td></tr></table>
+
+<p>This will just (re)install GRUB onto the hard disk.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"># Change the colors.
+title Change the colors
+color light-green/brown blink-red/blue
+</pre></td></tr></table>
+
+<p>In the last entry, the command <code>color</code> is used (see section <a href="grub_13.html#SEC54">color</a>),
+to change the menu colors (try it!). This command is somewhat special,
+because it can be used both in the command-line and in the menu. GRUB
+has several such commands, see <a href="grub_13.html#SEC52">The list of general commands</a>.
+</p>
+<p>We hope that you now understand how to use the basic features of
+GRUB. To learn more about GRUB, see the following chapters.
+</p>
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="grub_4.html#SEC12" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_6.html#SEC29" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>root</em> on <em>March, 20 2010</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.78</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

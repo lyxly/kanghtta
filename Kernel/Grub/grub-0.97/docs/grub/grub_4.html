@@ -1,0 +1,853 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on March, 20 2010 by texi2html 1.78 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+
+-->
+<head>
+<title>GRUB Manual: 4. Booting</title>
+
+<meta name="description" content="GRUB Manual: 4. Booting">
+<meta name="keywords" content="GRUB Manual: 4. Booting">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.78">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Booting"></a>
+<a name="SEC12"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="grub_3.html#SEC11" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC13" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub_3.html#SEC7" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_5.html#SEC28" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 4. Booting </h1>
+
+<p>GRUB can load Multiboot-compliant kernels in a consistent way,
+but for some free operating systems you need to use some OS-specific
+magic.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC13">4.1 How to boot operating systems</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">        How to boot OSes with GRUB generally
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC16">4.2 Some caveats on OS-specific issues</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">           Notes on some operating systems
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC25">4.3 How to make your system robust</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+</table>
+
+
+<hr size="6">
+<a name="General-boot-methods"></a>
+<a name="SEC13"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC12" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC14" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC12" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC12" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_5.html#SEC28" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 4.1 How to boot operating systems </h2>
+
+<p>GRUB has two distinct boot methods. One of the two is to load an
+operating system directly, and the other is to chain-load another boot
+loader which then will load an operating system actually. Generally
+speaking, the former is more desirable, because you don't need to
+install or maintain other boot loaders and GRUB is flexible enough to
+load an operating system from an arbitrary disk/partition. However,
+the latter is sometimes required, since GRUB doesn't support all the
+existing operating systems natively.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC14">4.1.1 How to boot an OS directly with GRUB</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC15">4.1.2 Load another boot loader to boot unsupported operating systems</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+</table>
+
+
+<hr size="6">
+<a name="Loading-an-operating-system-directly"></a>
+<a name="SEC14"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC13" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC15" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC12" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC13" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_5.html#SEC28" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 4.1.1 How to boot an OS directly with GRUB </h3>
+
+<p>Multiboot (see <a href="../multiboot/index.html#Top">Multiboot Specification: (multiboot)Top</a> section `Motivation' in <cite>The Multiboot Specification</cite>) is the native format supported by GRUB.
+For the sake of convenience, there is also support for Linux, FreeBSD,
+NetBSD and OpenBSD. If you want to boot other operating systems, you
+will have to chain-load them (see section <a href="#SEC15">Load another boot loader to boot unsupported operating systems</a>).
+</p>
+<p>Generally, GRUB can boot any Multiboot-compliant OS in the following
+steps:
+</p>
+<ol>
+<li>
+Set GRUB's root device to the drive where the OS images are stored with
+the command <code>root</code> (see section <a href="grub_13.html#SEC103">root</a>).
+
+</li><li>
+Load the kernel image with the command <code>kernel</code> (see section <a href="grub_13.html#SEC91">kernel</a>).
+
+</li><li>
+If you need modules, load them with the command <code>module</code>
+(see section <a href="grub_13.html#SEC96">module</a>) or <code>modulenounzip</code> (see section <a href="grub_13.html#SEC97">modulenounzip</a>).
+
+</li><li>
+Run the command <code>boot</code> (see section <a href="grub_13.html#SEC73">boot</a>).
+</li></ol>
+
+<p>Linux, FreeBSD, NetBSD and OpenBSD can be booted in a similar
+manner. You load a kernel image with the command <code>kernel</code> and
+then run the command <code>boot</code>. If the kernel requires some
+parameters, just append the parameters to <code>kernel</code>, after the
+file name of the kernel. Also, please refer to <a href="#SEC16">Some caveats on OS-specific issues</a>,
+for information on your OS-specific issues.
+</p>
+
+<hr size="6">
+<a name="Chain_002dloading"></a>
+<a name="SEC15"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC14" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC12" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC13" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_5.html#SEC28" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 4.1.2 Load another boot loader to boot unsupported operating systems </h3>
+
+<p>If you want to boot an unsupported operating system (e.g. Windows 95),
+chain-load a boot loader for the operating system. Normally, the boot
+loader is embedded in the <em>boot sector</em> of the partition on which
+the operating system is installed.
+</p>
+<ol>
+<li>
+Set GRUB's root device to the partition by the command
+<code>rootnoverify</code> (see section <a href="grub_13.html#SEC104">rootnoverify</a>):
+
+<table><tr><td>&nbsp;</td><td><pre class="example">grub&gt; <kbd>rootnoverify (hd0,0)</kbd>
+</pre></td></tr></table>
+
+</li><li>
+Set the <em>active</em> flag in the partition using the command
+<code>makeactive</code><a name="DOCF6" href="grub_fot.html#FOOT6">(6)</a> (see section <a href="grub_13.html#SEC93">makeactive</a>):
+
+<table><tr><td>&nbsp;</td><td><pre class="example">grub&gt; <kbd>makeactive</kbd>
+</pre></td></tr></table>
+
+</li><li>
+Load the boot loader with the command <code>chainloader</code>
+(see section <a href="grub_13.html#SEC75">chainloader</a>):
+
+<table><tr><td>&nbsp;</td><td><pre class="example">grub&gt; <kbd>chainloader +1</kbd>
+</pre></td></tr></table>
+
+<p>&lsquo;<samp>+1</samp>&rsquo; indicates that GRUB should read one sector from the start of
+the partition. The complete description about this syntax can be found
+in <a href="grub_11.html#SEC39">How to specify block lists</a>.
+</p>
+</li><li>
+Run the command <code>boot</code> (see section <a href="grub_13.html#SEC73">boot</a>).
+</li></ol>
+
+<p>However, DOS and Windows have some deficiencies, so you might have to
+use more complicated instructions. See section <a href="#SEC22">DOS/Windows</a>, for more
+information.
+</p>
+
+<hr size="6">
+<a name="OS_002dspecific-notes"></a>
+<a name="SEC16"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC15" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC17" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC12" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC12" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_5.html#SEC28" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 4.2 Some caveats on OS-specific issues </h2>
+
+<p>Here, we describe some caveats on several operating systems.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC17">4.2.1 GNU/Hurd</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC18">4.2.2 GNU/Linux</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC19">4.2.3 FreeBSD</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC20">4.2.4 NetBSD</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC21">4.2.5 OpenBSD</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC22">4.2.6 DOS/Windows</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC23">4.2.7 SCO UnixWare</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC24">4.2.8 QNX</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+</table>
+
+
+<hr size="6">
+<a name="GNU_002fHurd"></a>
+<a name="SEC17"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC16" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC18" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC12" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_5.html#SEC28" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 4.2.1 GNU/Hurd </h3>
+
+<p>Since GNU/Hurd is Multiboot-compliant, it is easy to boot it; there is
+nothing special about it. But do not forget that you have to specify a
+root partition to the kernel.
+</p>
+<ol>
+<li>
+Set GRUB's root device to the same drive as GNU/Hurd's. Probably the
+command <code>find /boot/gnumach</code> or similar can help you
+(see section <a href="grub_13.html#SEC82">find</a>).
+
+</li><li>
+Load the kernel and the module, like this:
+
+<table><tr><td>&nbsp;</td><td><pre class="example">grub&gt; <kbd>kernel /boot/gnumach root=hd0s1</kbd>
+grub&gt; <kbd>module /boot/serverboot</kbd>
+</pre></td></tr></table>
+
+</li><li>
+Run the command <code>boot</code> (see section <a href="grub_13.html#SEC73">boot</a>).
+</li></ol>
+
+
+<hr size="6">
+<a name="GNU_002fLinux"></a>
+<a name="SEC18"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC17" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC19" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC12" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_5.html#SEC28" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 4.2.2 GNU/Linux </h3>
+
+<p>It is relatively easy to boot GNU/Linux from GRUB, because it somewhat
+resembles to boot a Multiboot-compliant OS.
+</p>
+<ol>
+<li>
+Set GRUB's root device to the same drive as GNU/Linux's. Probably the
+command <code>find /vmlinuz</code> or similar can help you (see section <a href="grub_13.html#SEC82">find</a>).
+
+</li><li>
+Load the kernel:
+
+<table><tr><td>&nbsp;</td><td><pre class="example">grub&gt; <kbd>kernel /vmlinuz root=/dev/hda1</kbd>
+</pre></td></tr></table>
+
+<p>If you need to specify some kernel parameters, just append them to the
+command. For example, to set &lsquo;<samp>vga</samp>&rsquo; to &lsquo;<samp>ext</samp>&rsquo;, do this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">grub&gt; <kbd>kernel /vmlinuz root=/dev/hda1 vga=ext</kbd>
+</pre></td></tr></table>
+
+<p>See the documentation in the Linux source tree for complete
+information on the available options.
+</p>
+</li><li>
+If you use an initrd, execute the command <code>initrd</code>
+(see section <a href="grub_13.html#SEC88">initrd</a>) after <code>kernel</code>:
+
+<table><tr><td>&nbsp;</td><td><pre class="example">grub&gt; <kbd>initrd /initrd</kbd>
+</pre></td></tr></table>
+
+</li><li>
+Finally, run the command <code>boot</code> (see section <a href="grub_13.html#SEC73">boot</a>).
+</li></ol>
+
+<p><strong>Caution:</strong> If you use an initrd and specify the &lsquo;<samp>mem=</samp>&rsquo;
+option to the kernel to let it use less than actual memory size, you
+will also have to specify the same memory size to GRUB. To let GRUB know
+the size, run the command <code>uppermem</code> <em>before</em> loading the
+kernel. See section <a href="grub_13.html#SEC109">uppermem</a>, for more information.
+</p>
+
+<hr size="6">
+<a name="FreeBSD"></a>
+<a name="SEC19"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC18" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC20" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC12" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_5.html#SEC28" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 4.2.3 FreeBSD </h3>
+
+<p>GRUB can load the kernel directly, either in ELF or a.out format. But
+this is not recommended, since FreeBSD's bootstrap interface sometimes
+changes heavily, so GRUB can't guarantee to pass kernel parameters
+correctly.
+</p>
+<p>Thus, we'd recommend loading the very flexible loader
+&lsquo;<tt>/boot/loader</tt>&rsquo; instead. See this example:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">grub&gt; <kbd>root (hd0,a)</kbd>
+grub&gt; <kbd>kernel /boot/loader</kbd>
+grub&gt; <kbd>boot</kbd>
+</pre></td></tr></table>
+
+
+<hr size="6">
+<a name="NetBSD"></a>
+<a name="SEC20"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC19" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC12" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_5.html#SEC28" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 4.2.4 NetBSD </h3>
+
+<p>GRUB can load NetBSD a.out and ELF directly, follow these steps:
+</p>
+<ol>
+<li>
+Set GRUB's root device with <code>root</code> (see section <a href="grub_13.html#SEC103">root</a>).
+
+</li><li>
+Load the kernel with <code>kernel</code> (see section <a href="grub_13.html#SEC91">kernel</a>). You should
+append the ugly option &lsquo;<samp>--type=netbsd</samp>&rsquo;, if you want to load an
+ELF kernel, like this:
+
+<table><tr><td>&nbsp;</td><td><pre class="example">grub&gt; <kbd>kernel --type=netbsd /netbsd-elf</kbd>
+</pre></td></tr></table>
+
+</li><li>
+Run <code>boot</code> (see section <a href="grub_13.html#SEC73">boot</a>).
+</li></ol>
+
+<p>For now, however, GRUB doesn't allow you to pass kernel parameters, so
+it may be better to chain-load it instead. For more information, please
+see <a href="#SEC15">Load another boot loader to boot unsupported operating systems</a>.
+</p>
+
+<hr size="6">
+<a name="OpenBSD"></a>
+<a name="SEC21"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC20" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC22" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC12" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_5.html#SEC28" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 4.2.5 OpenBSD </h3>
+
+<p>The booting instruction is exactly the same as for NetBSD
+(see section <a href="#SEC20">NetBSD</a>).
+</p>
+
+<hr size="6">
+<a name="DOS_002fWindows"></a>
+<a name="SEC22"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC21" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC23" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC12" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_5.html#SEC28" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 4.2.6 DOS/Windows </h3>
+
+<p>GRUB cannot boot DOS or Windows directly, so you must chain-load them
+(see section <a href="#SEC15">Load another boot loader to boot unsupported operating systems</a>). However, their boot loaders have some critical
+deficiencies, so it may not work to just chain-load them. To overcome
+the problems, GRUB provides you with two helper functions.
+</p>
+<p>If you have installed DOS (or Windows) on a non-first hard disk, you
+have to use the disk swapping technique, because that OS cannot boot
+from any disks but the first one. The workaround used in GRUB is the
+command <code>map</code> (see section <a href="grub_13.html#SEC94">map</a>), like this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">grub&gt; <kbd>map (hd0) (hd1)</kbd>
+grub&gt; <kbd>map (hd1) (hd0)</kbd>
+</pre></td></tr></table>
+
+<p>This performs a <em>virtual</em> swap between your first and second hard
+drive.
+</p>
+<p><strong>Caution:</strong> This is effective only if DOS (or Windows) uses BIOS
+to access the swapped disks. If that OS uses a special driver for the
+disks, this probably won't work.
+</p>
+<p>Another problem arises if you installed more than one set of DOS/Windows
+onto one disk, because they could be confused if there are more than one
+primary partitions for DOS/Windows. Certainly you should avoid doing
+this, but there is a solution if you do want to do so. Use the partition
+hiding/unhiding technique.
+</p>
+<p>If GRUB <em>hide</em>s a DOS (or Windows) partition (see section <a href="grub_13.html#SEC57">hide</a>), DOS (or
+Windows) will ignore the partition. If GRUB <em>unhide</em>s a DOS (or
+Windows) partition (see section <a href="grub_13.html#SEC70">unhide</a>), DOS (or Windows) will detect the
+partition. Thus, if you have installed DOS (or Windows) on the first
+and the second partition of the first hard disk, and you want to boot
+the copy on the first partition, do the following:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">grub&gt; <kbd>unhide (hd0,0)</kbd>
+grub&gt; <kbd>hide (hd0,1)</kbd>
+grub&gt; <kbd>rootnoverify (hd0,0)</kbd>
+grub&gt; <kbd>chainloader +1</kbd>
+grub&gt; <kbd>makeactive</kbd>
+grub&gt; <kbd>boot</kbd>
+</pre></td></tr></table>
+
+
+<hr size="6">
+<a name="SCO-UnixWare"></a>
+<a name="SEC23"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC22" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC24" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC12" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_5.html#SEC28" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 4.2.7 SCO UnixWare </h3>
+
+<p>It is known that the signature in the boot loader for SCO UnixWare is
+wrong, so you will have to specify the option &lsquo;<samp>--force</samp>&rsquo; to
+<code>chainloader</code> (see section <a href="grub_13.html#SEC75">chainloader</a>), like this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">grub&gt; <kbd>rootnoverify (hd1,0)</kbd>
+grub&gt; <kbd>chainloader --force +1</kbd>
+grub&gt; <kbd>makeactive</kbd>
+grub&gt; <kbd>boot</kbd>
+</pre></td></tr></table>
+
+
+<hr size="6">
+<a name="QNX"></a>
+<a name="SEC24"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC23" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC25" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC12" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_5.html#SEC28" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 4.2.8 QNX </h3>
+
+<p>QNX seems to use a bigger boot loader, so you need to boot it up, like
+this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">grub&gt; <kbd>rootnoverify (hd1,1)</kbd>
+grub&gt; <kbd>chainloader +4</kbd>
+grub&gt; <kbd>boot</kbd>
+</pre></td></tr></table>
+
+
+<hr size="6">
+<a name="Making-your-system-robust"></a>
+<a name="SEC25"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC24" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC26" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC12" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC12" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_5.html#SEC28" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 4.3 How to make your system robust </h2>
+
+<p>When you test a new kernel or a new OS, it is important to make sure
+that your computer can boot even if the new system is unbootable. This
+is crucial especially if you maintain servers or remote systems. To
+accomplish this goal, you need to set up two things:
+</p>
+<ol>
+<li>
+You must maintain a system which is always bootable. For instance, if
+you test a new kernel, you need to keep a working kernel in a
+different place. And, it would sometimes be very nice to even have a
+complete copy of a working system in a different partition or disk.
+
+</li><li>
+You must direct GRUB to boot a working system when the new system
+fails. This is possible with the <em>fallback</em> system in GRUB.
+</li></ol>
+
+<p>The former requirement is very specific to each OS, so this
+documentation does not cover that topic. It is better to consult some
+backup tools.
+</p>
+<p>So let's see the GRUB part. There are two possibilities: one of them
+is quite simple but not very robust, and the other is a bit complex to
+set up but probably the best solution to make sure that your system
+can start as long as GRUB itself is bootable.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC26">4.3.1 Booting once-only</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC27">4.3.2 Booting fallback systems</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+</table>
+
+
+<hr size="6">
+<a name="Booting-once_002donly"></a>
+<a name="SEC26"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC25" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC27" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC12" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC25" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_5.html#SEC28" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 4.3.1 Booting once-only </h3>
+
+<p>You can teach GRUB to boot an entry only at next boot time. Suppose
+that your have an old kernel &lsquo;<tt>old_kernel</tt>&rsquo; and a new kernel
+&lsquo;<tt>new_kernel</tt>&rsquo;. You know that &lsquo;<tt>old_kernel</tt>&rsquo; can boot
+your system correctly, and you want to test &lsquo;<tt>new_kernel</tt>&rsquo;.
+</p>
+<p>To ensure that your system will go back to the old kernel even if the
+new kernel fails (e.g. it panics), you can specify that GRUB should
+try the new kernel only once and boot the old kernel after that.
+</p>
+<p>First, modify your configuration file. Here is an example:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">default saved        # This is important!!!
+timeout 10
+
+title the old kernel
+root (hd0,0)
+kernel /old_kernel
+savedefault
+
+title the new kernel
+root (hd0,0)
+kernel /new_kernel
+savedefault 0         # This is important!!!
+</pre></td></tr></table>
+
+<p>Note that this configuration file uses &lsquo;<samp>default saved</samp>&rsquo;
+(see section <a href="grub_13.html#SEC47">default</a>) at the head and &lsquo;<samp>savedefault 0</samp>&rsquo;
+(see section <a href="grub_13.html#SEC105">savedefault</a>) in the entry for the new kernel. This means
+that GRUB boots a saved entry by default, and booting the entry for the
+new kernel saves &lsquo;<samp>0</samp>&rsquo; as the saved entry.
+</p>
+<p>With this configuration file, after all, GRUB always tries to boot the
+old kernel after it booted the new one, because &lsquo;<samp>0</samp>&rsquo; is the entry
+of <code>the old kernel</code>.
+</p>
+<p>The next step is to tell GRUB to boot the new kernel at next boot
+time. For this, execute <code>grub-set-default</code> (see section <a href="grub_19.html#SEC123">Invoking grub-set-default</a>):
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"># <kbd>grub-set-default 1</kbd>
+</pre></td></tr></table>
+
+<p>This command sets the saved entry to &lsquo;<samp>1</samp>&rsquo;, that is, to the new
+kernel.
+</p>
+<p>This method is useful, but still not very robust, because GRUB stops
+booting, if there is any error in the boot entry, such that the new
+kernel has an invalid executable format. Thus, it it even better to
+use the <em>fallback</em> mechanism of GRUB. Look at next subsection for
+this feature.
+</p>
+
+<hr size="6">
+<a name="Booting-fallback-systems"></a>
+<a name="SEC27"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC26" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_5.html#SEC28" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC12" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC25" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_5.html#SEC28" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 4.3.2 Booting fallback systems </h3>
+
+<p>GRUB supports a fallback mechanism of booting one or more other
+entries if a default boot entry fails. You can specify multiple
+fallback entries if you wish.
+</p>
+<p>Suppose that you have three systems, &lsquo;<samp>A</samp>&rsquo;, &lsquo;<samp>B</samp>&rsquo; and
+&lsquo;<samp>C</samp>&rsquo;. &lsquo;<samp>A</samp>&rsquo; is a system which you want to boot by
+default. &lsquo;<samp>B</samp>&rsquo; is a backup system which is supposed to boot
+safely. &lsquo;<samp>C</samp>&rsquo; is another backup system which is used in case where
+&lsquo;<samp>B</samp>&rsquo; is broken.
+</p>
+<p>Then you may want GRUB to boot the first system which is bootable
+among &lsquo;<samp>A</samp>&rsquo;, &lsquo;<samp>B</samp>&rsquo; and &lsquo;<samp>C</samp>&rsquo;. A configuration file can be
+written in this way:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">default saved        # This is important!!!
+timeout 10
+fallback 1 2         # This is important!!!
+
+title A
+root (hd0,0)
+kernel /kernel
+savedefault fallback # This is important!!!
+
+title B
+root (hd1,0)
+kernel /kernel
+savedefault fallback # This is important!!!
+
+title C
+root (hd2,0)
+kernel /kernel
+savedefault
+</pre></td></tr></table>
+
+<p>Note that &lsquo;<samp>default saved</samp>&rsquo; (see section <a href="grub_13.html#SEC47">default</a>), &lsquo;<samp>fallback 1 2</samp>&rsquo;
+and &lsquo;<samp>savedefault fallback</samp>&rsquo; are used. GRUB will boot a saved entry
+by default and save a fallback entry as next boot entry with this
+configuration.
+</p>
+<p>When GRUB tries to boot &lsquo;<samp>A</samp>&rsquo;, GRUB saves &lsquo;<samp>1</samp>&rsquo; as next boot
+entry, because the command <code>fallback</code> specifies that &lsquo;<samp>1</samp>&rsquo;
+is the first fallback entry. The entry &lsquo;<samp>1</samp>&rsquo; is &lsquo;<samp>B</samp>&rsquo;, so GRUB
+will try to boot &lsquo;<samp>B</samp>&rsquo; at next boot time.
+</p>
+<p>Likewise, when GRUB tries to boot &lsquo;<samp>B</samp>&rsquo;, GRUB saves &lsquo;<samp>2</samp>&rsquo; as
+next boot entry, because <code>fallback</code> specifies &lsquo;<samp>2</samp>&rsquo; as next
+fallback entry. This makes sure that GRUB will boot &lsquo;<samp>C</samp>&rsquo; after
+booting &lsquo;<samp>B</samp>&rsquo;.
+</p>
+<p>It is noteworthy that GRUB uses fallback entries both when GRUB
+itself fails in booting an entry and when &lsquo;<samp>A</samp>&rsquo; or &lsquo;<samp>B</samp>&rsquo; fails
+in starting up your system. So this solution ensures that your system
+is started even if GRUB cannot find your kernel or if your kernel
+panics.
+</p>
+<p>However, you need to run <code>grub-set-default</code> (see section <a href="grub_19.html#SEC123">Invoking grub-set-default</a>) when &lsquo;<samp>A</samp>&rsquo; starts correctly or you fix &lsquo;<samp>A</samp>&rsquo;
+after it crashes, since GRUB always sets next boot entry to a fallback
+entry. You should run this command in a startup script such as
+&lsquo;<tt>rc.local</tt>&rsquo; to boot &lsquo;<samp>A</samp>&rsquo; by default:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"># <kbd>grub-set-default 0</kbd>
+</pre></td></tr></table>
+
+<p>where &lsquo;<samp>0</samp>&rsquo; is the number of the boot entry for the system
+&lsquo;<samp>A</samp>&rsquo;.
+</p>
+<p>If you want to see what is current default entry, you can look at the
+file &lsquo;<tt>/boot/grub/default</tt>&rsquo; (or &lsquo;<tt>/grub/default</tt>&rsquo; in
+some systems). Because this file is plain-text, you can just
+<code>cat</code> this file. But it is strongly recommended <strong>not to
+modify this file directly</strong>, because GRUB may fail in saving a default
+entry in this file, if you change this file in an unintended
+manner. Therefore, you should use <code>grub-set-default</code> when you
+need to change the default entry.
+</p>
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC12" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_5.html#SEC28" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>root</em> on <em>March, 20 2010</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.78</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

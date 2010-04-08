@@ -1,0 +1,65 @@
+linux_raid.o: linux_raid.c ../config.h volume_id.h /usr/include/stdint.h \
+ /usr/include/features.h /usr/include/bits/predefs.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+ /usr/include/bits/wchar.h \
+ /usr/lib/gcc/i486-linux-gnu/4.4.1/include/stddef.h util.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/byteswap.h \
+ /usr/include/syslog.h /usr/include/sys/syslog.h \
+ /usr/lib/gcc/i486-linux-gnu/4.4.1/include/stdarg.h \
+ /usr/include/bits/syslog-path.h /usr/include/bits/syslog.h util.h \
+ ../stage2/shared.h ../stage1/stage1.h ../stage2/mb_header.h \
+ ../stage2/mb_info.h
+
+../config.h:
+
+volume_id.h:
+
+/usr/include/stdint.h:
+
+/usr/include/features.h:
+
+/usr/include/bits/predefs.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/bits/wordsize.h:
+
+/usr/include/gnu/stubs.h:
+
+/usr/include/gnu/stubs-32.h:
+
+/usr/include/bits/wchar.h:
+
+/usr/lib/gcc/i486-linux-gnu/4.4.1/include/stddef.h:
+
+util.h:
+
+/usr/include/endian.h:
+
+/usr/include/bits/endian.h:
+
+/usr/include/bits/byteswap.h:
+
+/usr/include/byteswap.h:
+
+/usr/include/syslog.h:
+
+/usr/include/sys/syslog.h:
+
+/usr/lib/gcc/i486-linux-gnu/4.4.1/include/stdarg.h:
+
+/usr/include/bits/syslog-path.h:
+
+/usr/include/bits/syslog.h:
+
+util.h:
+
+../stage2/shared.h:
+
+../stage1/stage1.h:
+
+../stage2/mb_header.h:
+
+../stage2/mb_info.h:
