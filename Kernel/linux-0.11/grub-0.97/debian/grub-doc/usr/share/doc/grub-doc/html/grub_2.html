@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on March, 20 2010 by texi2html 1.78 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+
+-->
+<head>
+<title>GRUB Manual: 2. Naming convention</title>
+
+<meta name="description" content="GRUB Manual: 2. Naming convention">
+<meta name="keywords" content="GRUB Manual: 2. Naming convention">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.78">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Naming-convention"></a>
+<a name="SEC6"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="grub_1.html#SEC5" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_3.html#SEC7" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub_1.html#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_3.html#SEC7" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 2. Naming convention </h1>
+
+<p>The device syntax used in GRUB is a wee bit different from what you may
+have seen before in your operating system(s), and you need to know it so
+that you can specify a drive/partition.
+</p>
+<p>Look at the following examples and explanations:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">(fd0)
+</pre></td></tr></table>
+
+<p>First of all, GRUB requires that the device name be enclosed with
+&lsquo;<samp>(</samp>&rsquo; and &lsquo;<samp>)</samp>&rsquo;. The &lsquo;<samp>fd</samp>&rsquo; part means that it is a floppy
+disk. The number &lsquo;<samp>0</samp>&rsquo; is the drive number, which is counted from
+<em>zero</em>. This expression means that GRUB will use the whole floppy
+disk.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">(hd0,1)
+</pre></td></tr></table>
+
+<p>Here, &lsquo;<samp>hd</samp>&rsquo; means it is a hard disk drive. The first integer
+&lsquo;<samp>0</samp>&rsquo; indicates the drive number, that is, the first hard disk, while
+the second integer, &lsquo;<samp>1</samp>&rsquo;, indicates the partition number (or the
+<small>PC</small> slice number in the BSD terminology). Once again, please note
+that the partition numbers are counted from <em>zero</em>, not from
+one. This expression means the second partition of the first hard disk
+drive. In this case, GRUB uses one partition of the disk, instead of the
+whole disk.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">(hd0,4)
+</pre></td></tr></table>
+
+<p>This specifies the first <em>extended partition</em> of the first hard disk
+drive. Note that the partition numbers for extended partitions are
+counted from &lsquo;<samp>4</samp>&rsquo;, regardless of the actual number of primary
+partitions on your hard disk.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">(hd1,a)
+</pre></td></tr></table>
+
+<p>This means the BSD &lsquo;<samp>a</samp>&rsquo; partition of the second hard disk. If you
+need to specify which <small>PC</small> slice number should be used, use something
+like this: &lsquo;<samp>(hd1,0,a)</samp>&rsquo;. If the <small>PC</small> slice number is omitted,
+GRUB searches for the first <small>PC</small> slice which has a BSD &lsquo;<samp>a</samp>&rsquo;
+partition.
+</p>
+<p>Of course, to actually access the disks or partitions with GRUB, you
+need to use the device specification in a command, like &lsquo;<samp>root
+(fd0)</samp>&rsquo; or &lsquo;<samp>unhide (hd0,2)</samp>&rsquo;. To help you find out which number
+specifies a partition you want, the GRUB command-line
+(see section <a href="grub_12.html#SEC41">The flexible command-line interface</a>) options have argument
+completion. This means that, for example, you only need to type
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">root (
+</pre></td></tr></table>
+
+<p>followed by a &lt;TAB&gt;, and GRUB will display the list of drives,
+partitions, or file names. So it should be quite easy to determine the
+name of your target partition, even with minimal knowledge of the
+syntax.
+</p>
+<p>Note that GRUB does <em>not</em> distinguish IDE from SCSI - it simply
+counts the drive numbers from zero, regardless of their type. Normally,
+any IDE drive number is less than any SCSI drive number, although that
+is not true if you change the boot sequence by swapping IDE and SCSI
+drives in your BIOS.
+</p>
+<p>Now the question is, how to specify a file? Again, consider an
+example:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">(hd0,0)/vmlinuz
+</pre></td></tr></table>
+
+<p>This specifies the file named &lsquo;<samp>vmlinuz</samp>&rsquo;, found on the first
+partition of the first hard disk drive. Note that the argument
+completion works with file names, too.
+</p>
+<p>That was easy, admit it. Now read the next chapter, to find out how to
+actually install GRUB on your drive.
+</p>
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="grub_1.html#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_3.html#SEC7" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>root</em> on <em>March, 20 2010</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.78</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on March, 20 2010 by texi2html 1.78 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+
+-->
+<head>
+<title>GRUB Manual: 15. Invoking the grub shell</title>
+
+<meta name="description" content="GRUB Manual: 15. Invoking the grub shell">
+<meta name="keywords" content="GRUB Manual: 15. Invoking the grub shell">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.78">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Invoking-the-grub-shell"></a>
+<a name="SEC116"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="grub_14.html#SEC115" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC117" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub_14.html#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_16.html#SEC120" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 15. Invoking the grub shell </h1>
+
+<p>This chapter documents the grub shell <code>grub</code>. Note that the grub
+shell is an emulator; it doesn't run under the native environment, so it
+sometimes does something wrong. Therefore, you shouldn't trust it too
+much. If there is anything wrong with it, don't hesitate to try the
+native GRUB environment, especially when it guesses a wrong map between
+BIOS drives and OS devices.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC117">15.1 Introduction into the grub shell</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 How to use the grub shell
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC118">15.2 How to install GRUB via <code>grub</code></a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC119">15.3 The map between BIOS drives and OS devices</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+</table>
+
+
+<hr size="6">
+<a name="Basic-usage"></a>
+<a name="SEC117"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC116" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC118" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC116" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC116" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_16.html#SEC120" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 15.1 Introduction into the grub shell </h2>
+
+<p>You can use the command <code>grub</code> for installing GRUB under your
+operating systems and for a testbed when you add a new feature into GRUB
+or when fixing a bug. <code>grub</code> is almost the same as the Stage 2,
+and, in fact, it shares the source code with the Stage 2 and you can use
+the same commands (see section <a href="grub_13.html#SEC45">The list of available commands</a>) in <code>grub</code>. It is emulated by
+replacing BIOS calls with UNIX system calls and libc functions.
+</p>
+<p>The command <code>grub</code> accepts the following options:
+</p>
+<dl compact="compact">
+<dt> &lsquo;<samp>--help</samp>&rsquo;</dt>
+<dd><p>Print a summary of the command-line options and exit.
+</p>
+</dd>
+<dt> &lsquo;<samp>--version</samp>&rsquo;</dt>
+<dd><p>Print the version number of GRUB and exit.
+</p>
+</dd>
+<dt> &lsquo;<samp>--verbose</samp>&rsquo;</dt>
+<dd><p>Print some verbose messages for debugging purpose.
+</p>
+</dd>
+<dt> &lsquo;<samp>--device-map=<var>file</var></samp>&rsquo;</dt>
+<dd><p>Use the device map file <var>file</var>. The format is described in
+<a href="#SEC119">The map between BIOS drives and OS devices</a>.
+</p>
+</dd>
+<dt> &lsquo;<samp>--no-floppy</samp>&rsquo;</dt>
+<dd><p>Do not probe any floppy drive. This option has no effect if the option
+&lsquo;<samp>--device-map</samp>&rsquo; is specified (see section <a href="#SEC119">The map between BIOS drives and OS devices</a>).
+</p>
+</dd>
+<dt> &lsquo;<samp>--probe-second-floppy</samp>&rsquo;</dt>
+<dd><p>Probe the second floppy drive. If this option is not specified, the grub
+shell does not probe it, as that sometimes takes a long time. If you
+specify the device map file (see section <a href="#SEC119">The map between BIOS drives and OS devices</a>), the grub shell just
+ignores this option.
+</p>
+</dd>
+<dt> &lsquo;<samp>--config-file=<var>file</var></samp>&rsquo;</dt>
+<dd><p>Read the configuration file <var>file</var> instead of
+&lsquo;<tt>/boot/grub/menu.lst</tt>&rsquo;. The format is the same as the normal GRUB
+syntax. See <a href="grub_11.html#SEC36">Filesystem syntax and semantics</a>, for more information.
+</p>
+</dd>
+<dt> &lsquo;<samp>--boot-drive=<var>drive</var></samp>&rsquo;</dt>
+<dd><p>Set the stage2 <var>boot_drive</var> to <var>drive</var>. This argument should be
+an integer (decimal, octal or hexadecimal).
+</p>
+</dd>
+<dt> &lsquo;<samp>--install-partition=<var>par</var></samp>&rsquo;</dt>
+<dd><p>Set the stage2 <var>install_partition</var> to <var>par</var>. This argument
+should be an integer (decimal, octal or hexadecimal).
+</p>
+</dd>
+<dt> &lsquo;<samp>--no-config-file</samp>&rsquo;</dt>
+<dd><p>Do not use the configuration file even if it can be read.
+</p>
+</dd>
+<dt> &lsquo;<samp>--no-curses</samp>&rsquo;</dt>
+<dd><p>Do not use the screen handling interface by the curses even if it is
+available.
+</p>
+</dd>
+<dt> &lsquo;<samp>--batch</samp>&rsquo;</dt>
+<dd><p>This option has the same meaning as &lsquo;<samp>--no-config-file --no-curses</samp>&rsquo;.
+</p>
+</dd>
+<dt> &lsquo;<samp>--read-only</samp>&rsquo;</dt>
+<dd><p>Disable writing to any disk.
+</p>
+</dd>
+<dt> &lsquo;<samp>--hold</samp>&rsquo;</dt>
+<dd><p>Wait until a debugger will attach. This option is useful when you want
+to debug the startup code.
+</p></dd>
+</dl>
+
+
+<hr size="6">
+<a name="Installation-under-UNIX"></a>
+<a name="SEC118"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC117" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC119" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC116" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC116" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_16.html#SEC120" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 15.2 How to install GRUB via <code>grub</code> </h2>
+
+<p>The installation procedure is the same as under the <em>native</em> Stage
+2. See section <a href="grub_3.html#SEC7">Installation</a>, for more information. The command
+<code>grub</code>-specific information is described here.
+</p>
+<p>What you should be careful about is <em>buffer cache</em>. <code>grub</code>
+makes use of raw devices instead of filesystems that your operating
+systems serve, so there exists a potential problem that some cache
+inconsistency may corrupt your filesystems. What we recommend is:
+</p>
+<ul>
+<li>
+If you can unmount drives to which GRUB may write any amount of data,
+unmount them before running <code>grub</code>.
+
+</li><li>
+If a drive cannot be unmounted but can be mounted with the read-only
+flag, mount it in read-only mode. That should be secure.
+
+</li><li>
+If a drive must be mounted with the read-write flag, make sure that no
+activity is being done on it while the command <code>grub</code> is
+running.
+
+</li><li>
+Reboot your operating system as soon as possible. This is probably not
+required if you follow the rules above, but reboot is the most secure
+way.
+</li></ul>
+
+<p>In addition, enter the command <code>quit</code> when you finish the
+installation. That is <em>very important</em> because <code>quit</code> makes
+the buffer cache consistent. Do not push &lt;C-c&gt;.
+</p>
+<p>If you want to install GRUB non-interactively, specify &lsquo;<samp>--batch</samp>&rsquo;
+option in the command-line. This is a simple example:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">#!/bin/sh
+
+# Use /usr/sbin/grub if you are on an older system.
+/sbin/grub --batch &lt;&lt;EOT 1&gt;/dev/null 2&gt;/dev/null
+root (hd0,0)
+setup (hd0)
+quit
+EOT
+</pre></td></tr></table>
+
+
+<hr size="6">
+<a name="Device-map"></a>
+<a name="SEC119"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC118" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_16.html#SEC120" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC116" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC116" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_16.html#SEC120" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 15.3 The map between BIOS drives and OS devices </h2>
+
+<p>When you specify the option &lsquo;<samp>--device-map</samp>&rsquo; (see section <a href="#SEC117">Introduction into the grub shell</a>),
+the grub shell creates the <em>device map file</em> automatically unless it
+already exists. The file name &lsquo;<tt>/boot/grub/device.map</tt>&rsquo; is preferred.
+</p>
+<p>If the device map file exists, the grub shell reads it to map BIOS
+drives to OS devices. This file consists of lines like this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"><var>device</var> <var>file</var>
+</pre></td></tr></table>
+
+<p><var>device</var> is a drive specified in the GRUB syntax (see section <a href="grub_11.html#SEC37">How to specify devices</a>), and <var>file</var> is an OS file, which is normally a device
+file.
+</p>
+<p>The reason why the grub shell gives you the device map file is that it
+cannot guess the map between BIOS drives and OS devices correctly in
+some environments. For example, if you exchange the boot sequence
+between IDE and SCSI in your BIOS, it gets the order wrong.
+</p>
+<p>Thus, edit the file if the grub shell makes a mistake. You can put any
+comments in the file if needed, as the grub shell assumes that a line is
+just a comment if the first character is &lsquo;<samp>#</samp>&rsquo;.
+</p>
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC116" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_16.html#SEC120" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>root</em> on <em>March, 20 2010</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.78</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

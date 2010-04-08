@@ -1,0 +1,406 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on March, 20 2010 by texi2html 1.78 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+
+-->
+<head>
+<title>GRUB Manual: 3. Installation</title>
+
+<meta name="description" content="GRUB Manual: 3. Installation">
+<meta name="keywords" content="GRUB Manual: 3. Installation">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.78">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Installation"></a>
+<a name="SEC7"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="grub_2.html#SEC6" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub_2.html#SEC6" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_4.html#SEC12" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 3. Installation </h1>
+
+<p>In order to install GRUB as your boot loader, you need to first
+install the GRUB system and utilities under your UNIX-like operating
+system (see section <a href="grub_21.html#SEC125">How to obtain and build GRUB</a>). You can do this either
+from the source tarball, or as a package for your OS.
+</p>
+<p>After you have done that, you need to install the boot loader on a
+drive (floppy or hard disk). There are two ways of doing that - either
+using the utility <code>grub-install</code> (see section <a href="grub_16.html#SEC120">Invoking grub-install</a>) on a UNIX-like OS, or by running GRUB itself from a
+floppy. These are quite similar, however the utility might probe a
+wrong BIOS drive, so you should be careful.
+</p>
+<p>Also, if you install GRUB on a UNIX-like OS, please make sure that you
+have an emergency boot disk ready, so that you can rescue your computer
+if, by any chance, your hard drive becomes unusable (unbootable).
+</p>
+<p>GRUB comes with boot images, which are normally put in the directory
+&lsquo;<tt>/usr/lib/grub/i386-pc</tt>&rsquo;. If you do not use grub-install, then
+you need to copy the files &lsquo;<tt>stage1</tt>&rsquo;, &lsquo;<tt>stage2</tt>&rsquo;, and
+&lsquo;<tt>*stage1_5</tt>&rsquo; to the directory &lsquo;<tt>/boot/grub</tt>&rsquo;, and run the
+<code>grub-set-default</code> (see section <a href="grub_19.html#SEC123">Invoking grub-set-default</a>) if you
+intend to use &lsquo;<samp>default saved</samp>&rsquo; (see section <a href="grub_13.html#SEC47">default</a>) in your
+configuration file. Hereafter, the directory where GRUB images are
+initially placed (normally &lsquo;<tt>/usr/lib/grub/i386-pc</tt>&rsquo;) will be
+called the <em>image directory</em>, and the directory where the boot
+loader needs to find them (usually &lsquo;<tt>/boot/grub</tt>&rsquo;) will be called
+the <em>boot directory</em>.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC8">3.1 Creating a GRUB boot floppy</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC9">3.2 Installing GRUB natively</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC10">3.3 Installing GRUB using grub-install</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC11">3.4 Making a GRUB bootable CD-ROM</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+</table>
+
+
+<hr size="6">
+<a name="Creating-a-GRUB-boot-floppy"></a>
+<a name="SEC8"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC7" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC9" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC7" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC7" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_4.html#SEC12" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 3.1 Creating a GRUB boot floppy </h2>
+
+<p>To create a GRUB boot floppy, you need to take the files &lsquo;<tt>stage1</tt>&rsquo;
+and &lsquo;<tt>stage2</tt>&rsquo; from the image directory, and write them to the first
+and the second block of the floppy disk, respectively.
+</p>
+<p><strong>Caution:</strong> This procedure will destroy any data currently stored
+on the floppy.
+</p>
+<p>On a UNIX-like operating system, that is done with the following
+commands:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"># <kbd>cd /usr/lib/grub/i386-pc</kbd>
+# <kbd>dd if=stage1 of=/dev/fd0 bs=512 count=1</kbd>
+1+0 records in
+1+0 records out
+# <kbd>dd if=stage2 of=/dev/fd0 bs=512 seek=1</kbd>
+153+1 records in
+153+1 records out
+#
+</pre></td></tr></table>
+
+<p>The device file name may be different. Consult the manual for your OS.
+</p>
+
+<hr size="6">
+<a name="Installing-GRUB-natively"></a>
+<a name="SEC9"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC8" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC10" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC7" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC7" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_4.html#SEC12" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 3.2 Installing GRUB natively </h2>
+
+<p><strong>Caution:</strong> Installing GRUB's stage1 in this manner will erase the
+normal boot-sector used by an OS.
+</p>
+<p>GRUB can currently boot GNU Mach, Linux, FreeBSD, NetBSD, and OpenBSD
+directly, so using it on a boot sector (the first sector of a
+partition) should be okay. But generally, it would be a good idea to
+back up the first sector of the partition on which you are installing
+GRUB's stage1. This isn't as important if you are installing GRUB on
+the first sector of a hard disk, since it's easy to reinitialize it
+(e.g. by running &lsquo;<samp>FDISK /MBR</samp>&rsquo; from DOS).
+</p>
+<p>If you decide to install GRUB in the native environment, which is
+definitely desirable, you'll need to create a GRUB boot disk, and
+reboot your computer with it. Otherwise, see <a href="#SEC10">Installing GRUB using grub-install</a>.
+</p>
+<p>Once started, GRUB will show the command-line interface
+(see section <a href="grub_12.html#SEC41">The flexible command-line interface</a>). First, set the GRUB's <em>root
+device</em><a name="DOCF4" href="grub_fot.html#FOOT4">(4)</a> to the
+partition containing the boot directory, like this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">grub&gt; <kbd>root (hd0,0)</kbd>
+</pre></td></tr></table>
+
+<p>If you are not sure which partition actually holds this directory, use the
+command <code>find</code> (see section <a href="grub_13.html#SEC82">find</a>), like this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">grub&gt; <kbd>find /boot/grub/stage1</kbd>
+</pre></td></tr></table>
+
+<p>This will search for the file name &lsquo;<tt>/boot/grub/stage1</tt>&rsquo; and show the
+devices which contain the file.
+</p>
+<p>Once you've set the root device correctly, run the command
+<code>setup</code> (see section <a href="grub_13.html#SEC106">setup</a>):
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">grub&gt; <kbd>setup (hd0)</kbd>
+</pre></td></tr></table>
+
+<p>This command will install the GRUB boot loader on the Master Boot
+Record (MBR) of the first drive. If you want to put GRUB into the boot
+sector of a partition instead of putting it in the MBR, specify the
+partition into which you want to install GRUB:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">grub&gt; <kbd>setup (hd0,0)</kbd>
+</pre></td></tr></table>
+
+<p>If you install GRUB into a partition or a drive other than the first
+one, you must chain-load GRUB from another boot loader. Refer to the
+manual for the boot loader to know how to chain-load GRUB.
+</p>
+<p>After using the setup command, you will boot into GRUB without the
+GRUB floppy. See the chapter <a href="grub_4.html#SEC12">Booting</a> to find out how to boot
+your operating systems from GRUB.
+</p>
+
+<hr size="6">
+<a name="Installing-GRUB-using-grub_002dinstall"></a>
+<a name="SEC10"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC9" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC11" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC7" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC7" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_4.html#SEC12" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 3.3 Installing GRUB using grub-install </h2>
+
+<p><strong>Caution:</strong> This procedure is definitely less safe, because
+there are several ways in which your computer can become
+unbootable. For example, most operating systems don't tell GRUB how to
+map BIOS drives to OS devices correctly&mdash;GRUB merely <em>guesses</em>
+the mapping. This will succeed in most cases, but not
+always. Therefore, GRUB provides you with a map file called the
+<em>device map</em>, which you must fix if it is wrong. See section <a href="grub_15.html#SEC119">The map between BIOS drives and OS devices</a>, for more details.
+</p>
+<p>If you still do want to install GRUB under a UNIX-like OS (such
+as <small>GNU</small>), invoke the program <code>grub-install</code> (see section <a href="grub_16.html#SEC120">Invoking grub-install</a>) as the superuser (<em>root</em>).
+</p>
+<p>The usage is basically very simple. You only need to specify one
+argument to the program, namely, where to install the boot loader. The
+argument can be either a device file (like &lsquo;<samp>/dev/hda</samp>&rsquo;) or a
+partition specified in GRUB's notation. For example, under Linux the
+following will install GRUB into the MBR of the first IDE disk:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"># <kbd>grub-install /dev/hda</kbd>
+</pre></td></tr></table>
+
+<p>Likewise, under GNU/Hurd, this has the same effect:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"># <kbd>grub-install /dev/hd0</kbd>
+</pre></td></tr></table>
+
+<p>If it is the first BIOS drive, this is the same as well:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"># <kbd>grub-install '(hd0)'</kbd>
+</pre></td></tr></table>
+
+<p>Or you can omit the parentheses:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"># <kbd>grub-install hd0</kbd>
+</pre></td></tr></table>
+
+<p>But all the above examples assume that GRUB should use images under
+the root directory. If you want GRUB to use images under a directory
+other than the root directory, you need to specify the option
+&lsquo;<samp>--root-directory</samp>&rsquo;. The typical usage is that you create a GRUB
+boot floppy with a filesystem. Here is an example:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"># <kbd>mke2fs /dev/fd0</kbd>
+# <kbd>mount -t ext2 /dev/fd0 /mnt</kbd>
+# <kbd>grub-install --root-directory=/mnt fd0</kbd>
+# <kbd>umount /mnt</kbd>
+</pre></td></tr></table>
+
+<p>Another example is when you have a separate boot partition
+which is mounted at &lsquo;<tt>/boot</tt>&rsquo;. Since GRUB is a boot loader, it
+doesn't know anything about mountpoints at all. Thus, you need to run
+<code>grub-install</code> like this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"># <kbd>grub-install --root-directory=/boot /dev/hda</kbd>
+</pre></td></tr></table>
+
+<p>By the way, as noted above, it is quite difficult to guess BIOS drives
+correctly under a UNIX-like OS. Thus, <code>grub-install</code> will prompt
+you to check if it could really guess the correct mappings, after the
+installation. The format is defined in <a href="grub_15.html#SEC119">The map between BIOS drives and OS devices</a>. Please be
+quite careful. If the output is wrong, it is unlikely that your
+computer will be able to boot with no problem.
+</p>
+<p>Note that <code>grub-install</code> is actually just a shell script and the
+real task is done by the grub shell <code>grub</code> (see section <a href="grub_15.html#SEC116">Invoking the grub shell</a>). Therefore, you may run <code>grub</code> directly to install
+GRUB, without using <code>grub-install</code>. Don't do that, however,
+unless you are very familiar with the internals of GRUB. Installing a
+boot loader on a running OS may be extremely dangerous.
+</p>
+
+<hr size="6">
+<a name="Making-a-GRUB-bootable-CD_002dROM"></a>
+<a name="SEC11"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC10" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_4.html#SEC12" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC7" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC7" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_4.html#SEC12" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 3.4 Making a GRUB bootable CD-ROM </h2>
+
+<p>GRUB supports the <em>no emulation mode</em> in the El Torito
+specification<a name="DOCF5" href="grub_fot.html#FOOT5">(5)</a>. This means that you can use the whole CD-ROM
+from GRUB and you don't have to make a floppy or hard disk image file,
+which can cause compatibility problems.
+</p>
+<p>For booting from a CD-ROM, GRUB uses a special Stage 2 called
+&lsquo;<tt>stage2_eltorito</tt>&rsquo;. The only GRUB files you need to have in your 
+bootable CD-ROM are this &lsquo;<tt>stage2_eltorito</tt>&rsquo; and optionally a config file
+&lsquo;<tt>menu.lst</tt>&rsquo;. You don't need to use &lsquo;<tt>stage1</tt>&rsquo; or &lsquo;<tt>stage2</tt>&rsquo;,
+because El Torito is quite different from the standard boot process.
+</p>
+<p>Here is an example of procedures to make a bootable CD-ROM
+image. First, make a top directory for the bootable image, say,
+&lsquo;<samp>iso</samp>&rsquo;:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">$ <kbd>mkdir iso</kbd>
+</pre></td></tr></table>
+
+<p>Make a directory for GRUB:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">$ <kbd>mkdir -p iso/boot/grub</kbd>
+</pre></td></tr></table>
+
+<p>Copy the file &lsquo;<tt>stage2_eltorito</tt>&rsquo;:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">$ <kbd>cp /usr/lib/grub/i386-pc/stage2_eltorito iso/boot/grub</kbd>
+</pre></td></tr></table>
+
+<p>If desired, make the config file &lsquo;<tt>menu.lst</tt>&rsquo; under &lsquo;<tt>iso/boot/grub</tt>&rsquo;
+(see section <a href="grub_5.html#SEC28">Configuration</a>), and copy any files and directories for the disc to the
+directory &lsquo;<tt>iso/</tt>&rsquo;.
+</p>
+<p>Finally, make a ISO9660 image file like this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">$ <kbd>genisoimage -R -b boot/grub/stage2_eltorito -no-emul-boot \
+    -boot-load-size 4 -boot-info-table -o grub.iso iso</kbd>
+</pre></td></tr></table>
+
+<p>This produces a file named &lsquo;<tt>grub.iso</tt>&rsquo;, which then can be burned
+into a CD (or a DVD).  <kbd>genisoimage</kbd> has already set up the disc to boot
+from the <kbd>boot/grub/stage2_eltorito</kbd> file, so there is no need to 
+setup GRUB on the disc.  (Note that the <kbd>-boot-load-size 4</kbd> bit is
+required for compatibility with the BIOS on many older machines.)
+</p>
+<p>You can use the device &lsquo;<samp>(cd)</samp>&rsquo; to access a CD-ROM in your
+config file. This is not required; GRUB automatically sets the root device 
+to &lsquo;<samp>(cd)</samp>&rsquo; when booted from a CD-ROM. It is only necessary to refer to 
+&lsquo;<samp>(cd)</samp>&rsquo; if you want to access other drives as well.
+</p>
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC7" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_4.html#SEC12" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>root</em> on <em>March, 20 2010</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.78</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

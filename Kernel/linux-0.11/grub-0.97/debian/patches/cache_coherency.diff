@@ -1,0 +1,44 @@
+Description: Flush buffer cache on disk devices after writing to any
+ partition devices they contain, otherwise we may read old data back.
+Ubuntu: https://bugs.launchpad.net/bugs/185878
+Debian: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=362028
+
+Index: b/stage2/disk_io.c
+===================================================================
+--- a/stage2/disk_io.c
++++ b/stage2/disk_io.c
+@@ -32,6 +32,11 @@
+ # include <device.h>
+ #endif
+ 
++#if defined(GRUB_UTIL) && defined(__linux__)
++# include <sys/ioctl.h>		/* ioctl */
++# include <linux/fs.h>		/* BLKFLSBUF */
++#endif
++
+ /* instrumentation variables */
+ void (*disk_read_hook) (int, int, int) = NULL;
+ void (*disk_read_func) (int, int, int) = NULL;
+@@ -367,6 +372,8 @@
+ devwrite (int sector, int sector_count, char *buf)
+ {
+ #if defined(GRUB_UTIL) && defined(__linux__)
++  int ret;
++
+   if (current_partition != 0xFFFFFF
+       && is_disk_device (device_map, current_drive))
+     {
+@@ -374,8 +381,11 @@
+ 	 embed a Stage 1.5 into a partition instead of a MBR, use system
+ 	 calls directly instead of biosdisk, because of the bug in
+ 	 Linux. *sigh*  */
+-      return write_to_partition (device_map, current_drive, current_partition,
+-				 sector, sector_count, buf);
++      ret = write_to_partition (device_map, current_drive, current_partition,
++				sector, sector_count, buf);
++      if (ret && disks[current_drive].flags != -1)
++	ioctl (disks[current_drive].flags, BLKFLSBUF, 0);
++      return ret;
+     }
+   else
+ #endif /* GRUB_UTIL && __linux__ */

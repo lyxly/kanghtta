@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on March, 20 2010 by texi2html 1.78 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+
+-->
+<head>
+<title>GRUB Manual: 6. Downloading OS images from a network</title>
+
+<meta name="description" content="GRUB Manual: 6. Downloading OS images from a network">
+<meta name="keywords" content="GRUB Manual: 6. Downloading OS images from a network">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.78">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Network"></a>
+<a name="SEC29"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="grub_5.html#SEC28" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub_5.html#SEC28" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_7.html#SEC32" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 6. Downloading OS images from a network </h1>
+
+<p>Although GRUB is a disk-based boot loader, it does provide network
+support. To use the network support, you need to enable at least one
+network driver in the GRUB build process. For more information please
+see &lsquo;<tt>netboot/README.netboot</tt>&rsquo; in the source distribution.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC30">6.1 How to set up your network</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC31">6.2 Booting from a network</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+</table>
+
+
+<hr size="6">
+<a name="General-usage-of-network-support"></a>
+<a name="SEC30"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC29" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC31" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC29" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC29" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_7.html#SEC32" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 6.1 How to set up your network </h2>
+
+<p>GRUB requires a file server and optionally a server that will assign an
+IP address to the machine on which GRUB is running. For the former, only
+TFTP is supported at the moment. The latter is either BOOTP, DHCP or a
+RARP server<a name="DOCF7" href="grub_fot.html#FOOT7">(7)</a>. It is not necessary to run both the servers on one
+computer. How to configure these servers is beyond the scope of this
+document, so please refer to the manuals specific to those
+protocols/servers.
+</p>
+<p>If you decided to use a server to assign an IP address, set up the
+server and run <code>bootp</code> (see section <a href="grub_13.html#SEC53">bootp</a>), <code>dhcp</code>
+(see section <a href="grub_13.html#SEC56">dhcp</a>) or <code>rarp</code> (see section <a href="grub_13.html#SEC63">rarp</a>) for BOOTP, DHCP or RARP,
+respectively. Each command will show an assigned IP address, a netmask,
+an IP address for your TFTP server and a gateway. If any of the
+addresses is wrong or it causes an error, probably the configuration of
+your servers isn't set up properly.
+</p>
+<p>Otherwise, run <code>ifconfig</code>, like this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">grub&gt; <kbd>ifconfig --address=192.168.110.23 --server=192.168.110.14</kbd>
+</pre></td></tr></table>
+
+<p>You can also use <code>ifconfig</code> in conjuction with <code>bootp</code>,
+<code>dhcp</code> or <code>rarp</code> (e.g. to reassign the server address
+manually). See section <a href="grub_13.html#SEC58">ifconfig</a>, for more details.
+</p>
+<p>Finally, download your OS images from your network. The network can be
+accessed using the network drive &lsquo;<samp>(nd)</samp>&rsquo;. Everything else is very
+similar to the normal instructions (see section <a href="grub_4.html#SEC12">Booting</a>).
+</p>
+<p>Here is an example:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">grub&gt; <kbd>bootp</kbd>
+Probing... [NE*000]
+NE2000 base ...
+Address: 192.168.110.23    Netmask: 255.255.255.0
+Server: 192.168.110.14     Gateway: 192.168.110.1
+
+grub&gt; <kbd>root (nd)</kbd>
+grub&gt; <kbd>kernel /tftproot/gnumach.gz root=sd0s1</kbd>
+grub&gt; <kbd>module /tftproot/serverboot.gz</kbd>
+grub&gt; <kbd>boot</kbd>
+</pre></td></tr></table>
+
+
+<hr size="6">
+<a name="Diskless"></a>
+<a name="SEC31"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC30" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_7.html#SEC32" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC29" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC29" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_7.html#SEC32" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 6.2 Booting from a network </h2>
+
+<p>It is sometimes very useful to boot from a network, especially when you
+use a machine which has no local disk. In this case, you need to obtain
+a kind of Net Boot <small>ROM</small>, such as a PXE <small>ROM</small> or a free software
+package like Etherboot. Such a Boot <small>ROM</small> first boots the machine,
+sets up the network card installed into the machine, and downloads a
+second stage boot image from the network. Then, the second image will
+try to boot an operating system actually from the network.
+</p>
+<p>GRUB provides two second stage images, &lsquo;<tt>nbgrub</tt>&rsquo; and
+&lsquo;<tt>pxegrub</tt>&rsquo; (see section <a href="grub_10.html#SEC35">GRUB image files</a>). These images are the same as the
+normal Stage 2, except that they set up a network automatically, and try
+to load a configuration file from the network, if specified. The usage
+is very simple: If the machine has a PXE <small>ROM</small>, use
+&lsquo;<tt>pxegrub</tt>&rsquo;. If the machine has an NBI loader such as Etherboot, use
+&lsquo;<tt>nbgrub</tt>&rsquo;. There is no difference between them except their
+formats. Since the way to load a second stage image you want to use
+should be described in the manual on your Net Boot <small>ROM</small>, please
+refer to the manual, for more information.
+</p>
+<p>However, there is one thing specific to GRUB. Namely, how to specify a
+configuration file in a BOOTP/DHCP server. For now, GRUB uses the tag
+&lsquo;<samp>150</samp>&rsquo;, to get the name of a configuration file. The following is an
+example with a BOOTP configuration:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">.allhost:hd=/tmp:bf=null:\
+        :ds=145.71.35.1 145.71.32.1:\
+        :sm=255.255.254.0:\
+        :gw=145.71.35.1:\
+        :sa=145.71.35.5:
+
+foo:ht=1:ha=63655d0334a7:ip=145.71.35.127:\
+        :bf=/nbgrub:\
+        :tc=.allhost:\
+        :T150=&quot;(nd)/tftpboot/menu.lst.foo&quot;:
+</pre></td></tr></table>
+
+<p>Note that you should specify the drive name <code>(nd)</code> in the name of
+the configuration file. This is because you might change the root drive
+before downloading the configuration from the TFTP server when the
+preset menu feature is used (see section <a href="grub_8.html#SEC33">Embedding a configuration file into GRUB</a>).
+</p>
+<p>See the manual of your BOOTP/DHCP server for more information. The
+exact syntax should differ a little from the example.
+</p>
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC29" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_7.html#SEC32" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>root</em> on <em>March, 20 2010</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.78</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

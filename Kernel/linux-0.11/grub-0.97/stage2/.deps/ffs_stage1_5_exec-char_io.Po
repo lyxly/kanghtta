@@ -1,0 +1,24 @@
+ffs_stage1_5_exec-char_io.o: char_io.c shared.h ../config.h \
+ ../stage1/stage1.h mb_header.h mb_info.h term.h \
+ /usr/lib/gcc/i486-linux-gnu/4.4.1/include/stdarg.h hercules.h serial.h \
+ graphics.h
+
+shared.h:
+
+../config.h:
+
+../stage1/stage1.h:
+
+mb_header.h:
+
+mb_info.h:
+
+term.h:
+
+/usr/lib/gcc/i486-linux-gnu/4.4.1/include/stdarg.h:
+
+hercules.h:
+
+serial.h:
+
+graphics.h:

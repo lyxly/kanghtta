@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on March, 20 2010 by texi2html 1.78 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+
+-->
+<head>
+<title>GRUB Manual: 10. GRUB image files</title>
+
+<meta name="description" content="GRUB Manual: 10. GRUB image files">
+<meta name="keywords" content="GRUB Manual: 10. GRUB image files">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.78">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Images"></a>
+<a name="SEC35"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="grub_9.html#SEC34" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_11.html#SEC36" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub_9.html#SEC34" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_11.html#SEC36" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 10. GRUB image files </h1>
+
+<p>GRUB consists of several images: two essential stages, optional stages
+called <em>Stage 1.5</em>, one image for bootable CD-ROM, and two network
+boot images. Here is a short overview of them. See section <a href="grub_24.html#SEC128">Hacking GRUB</a>, for
+more details.
+</p>
+<dl compact="compact">
+<dt> &lsquo;<tt>stage1</tt>&rsquo;</dt>
+<dd><p>This is an essential image used for booting up GRUB. Usually, this is
+embedded in an MBR or the boot sector of a partition. Because a PC boot
+sector is 512 bytes, the size of this image is exactly 512 bytes.
+</p>
+<p>All &lsquo;<tt>stage1</tt>&rsquo; must do is to load Stage 2 or Stage 1.5 from a local
+disk. Because of the size restriction, &lsquo;<tt>stage1</tt>&rsquo; encodes the
+location of Stage 2 (or Stage 1.5) in a block list format, so it never
+understand any filesystem structure.
+</p>
+</dd>
+<dt> &lsquo;<tt>stage2</tt>&rsquo;</dt>
+<dd><p>This is the core image of GRUB. It does everything but booting up
+itself. Usually, this is put in a filesystem, but that is not required.
+</p>
+</dd>
+<dt> &lsquo;<tt>e2fs_stage1_5</tt>&rsquo;</dt>
+<dt> &lsquo;<tt>fat_stage1_5</tt>&rsquo;</dt>
+<dt> &lsquo;<tt>ffs_stage1_5</tt>&rsquo;</dt>
+<dt> &lsquo;<tt>jfs_stage1_5</tt>&rsquo;</dt>
+<dt> &lsquo;<tt>minix_stage1_5</tt>&rsquo;</dt>
+<dt> &lsquo;<tt>reiserfs_stage1_5</tt>&rsquo;</dt>
+<dt> &lsquo;<tt>vstafs_stage1_5</tt>&rsquo;</dt>
+<dt> &lsquo;<tt>xfs_stage1_5</tt>&rsquo;</dt>
+<dd>
+<p>These are called <em>Stage 1.5</em>, because they serve as a bridge
+between &lsquo;<tt>stage1</tt>&rsquo; and &lsquo;<tt>stage2</tt>&rsquo;, that is to say, Stage 1.5 is
+loaded by Stage 1 and Stage 1.5 loads Stage 2. The difference between
+&lsquo;<tt>stage1</tt>&rsquo; and &lsquo;<tt>*_stage1_5</tt>&rsquo; is that the former doesn't
+understand any filesystem while the latter understands one filesystem
+(e.g. &lsquo;<tt>e2fs_stage1_5</tt>&rsquo; understands ext2fs). So you can move the
+Stage 2 image to another location safely, even after GRUB has been
+installed.
+</p>
+<p>While Stage 2 cannot generally be embedded in a fixed area as the size
+is so large, Stage 1.5 can be installed into the area right after an MBR,
+or the boot loader area of a ReiserFS or a FFS.
+</p>
+</dd>
+<dt> &lsquo;<tt>stage2_eltorito</tt>&rsquo;</dt>
+<dd><p>This is a boot image for CD-ROMs using the <em>no emulation mode</em> in
+El Torito specification. This is identical to Stage 2, except that
+this boots up without Stage 1 and sets up a special drive &lsquo;<samp>(cd)</samp>&rsquo;.
+</p>
+</dd>
+<dt> &lsquo;<tt>nbgrub</tt>&rsquo;</dt>
+<dd><p>This is a network boot image for the Network Image Proposal used by some
+network boot loaders, such as Etherboot. This is mostly the same as
+Stage 2, but it also sets up a network and loads a configuration file
+from the network.
+</p>
+</dd>
+<dt> &lsquo;<tt>pxegrub</tt>&rsquo;</dt>
+<dd><p>This is another network boot image for the Preboot Execution Environment
+used by several Netboot ROMs. This is identical to &lsquo;<tt>nbgrub</tt>&rsquo;, except
+for the format.
+</p></dd>
+</dl>
+
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="grub_9.html#SEC34" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_11.html#SEC36" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>root</em> on <em>March, 20 2010</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.78</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

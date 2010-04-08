@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on March, 20 2010 by texi2html 1.78 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+
+-->
+<head>
+<title>GRUB Manual: 16. Invoking grub-install</title>
+
+<meta name="description" content="GRUB Manual: 16. Invoking grub-install">
+<meta name="keywords" content="GRUB Manual: 16. Invoking grub-install">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.78">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Invoking-grub_002dinstall"></a>
+<a name="SEC120"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="grub_15.html#SEC119" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_17.html#SEC121" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub_15.html#SEC116" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_17.html#SEC121" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 16. Invoking grub-install </h1>
+
+<p>The program <code>grub-install</code> installs GRUB on your drive using the
+grub shell (see section <a href="grub_15.html#SEC116">Invoking the grub shell</a>). You must specify the
+device name on which you want to install GRUB, like this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">grub-install <var>install_device</var>
+</pre></td></tr></table>
+
+<p>The device name <var>install_device</var> is an OS device name or a GRUB
+device name.
+</p>
+<p><code>grub-install</code> accepts the following options:
+</p>
+<dl compact="compact">
+<dt> &lsquo;<samp>--help</samp>&rsquo;</dt>
+<dd><p>Print a summary of the command-line options and exit.
+</p>
+</dd>
+<dt> &lsquo;<samp>--version</samp>&rsquo;</dt>
+<dd><p>Print the version number of GRUB and exit.
+</p>
+</dd>
+<dt> &lsquo;<samp>--force-lba</samp>&rsquo;</dt>
+<dd><p>Force GRUB to use LBA mode even for a buggy BIOS. Use this option only
+if your BIOS doesn't work properly in LBA mode even though it supports
+LBA mode.
+</p>
+</dd>
+<dt> &lsquo;<samp>--root-directory=<var>dir</var></samp>&rsquo;</dt>
+<dd><p>Install GRUB images under the directory <var>dir</var> instead of the root
+directory. This option is useful when you want to install GRUB into a
+separate partition or a removable disk. Here is an example in which
+you have a separate <em>boot</em> partition which is mounted on
+&lsquo;<tt>/boot</tt>&rsquo;:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"><kbd>grub-install --root-directory=/boot hd0</kbd>
+</pre></td></tr></table>
+
+</dd>
+<dt> &lsquo;<samp>--grub-shell=<var>file</var></samp>&rsquo;</dt>
+<dd><p>Use <var>file</var> as the grub shell. You can append arbitrary options to
+<var>file</var> after the file name, like this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"><kbd>grub-install --grub-shell=&quot;grub --read-only&quot; /dev/fd0</kbd>
+</pre></td></tr></table>
+
+</dd>
+<dt> &lsquo;<samp>--recheck</samp>&rsquo;</dt>
+<dd><p>Recheck the device map, even if &lsquo;<tt>/boot/grub/device.map</tt>&rsquo; already
+exists. You should use this option whenever you add/remove a disk
+into/from your computer.
+</p></dd>
+</dl>
+
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="grub_15.html#SEC116" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_17.html#SEC121" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>root</em> on <em>March, 20 2010</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.78</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

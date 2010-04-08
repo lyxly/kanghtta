@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on March, 20 2010 by texi2html 1.78 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+
+-->
+<head>
+<title>GRUB Manual: 7. Using GRUB via a serial line</title>
+
+<meta name="description" content="GRUB Manual: 7. Using GRUB via a serial line">
+<meta name="keywords" content="GRUB Manual: 7. Using GRUB via a serial line">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.78">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Serial-terminal"></a>
+<a name="SEC32"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="grub_6.html#SEC31" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_8.html#SEC33" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub_6.html#SEC29" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_8.html#SEC33" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 7. Using GRUB via a serial line </h1>
+
+<p>This chapter describes how to use the serial terminal support in GRUB.
+</p>
+<p>If you have many computers or computers with no display/keyboard, it
+could be very useful to control the computers through serial
+communications. To connect one computer with another via a serial line,
+you need to prepare a null-modem (cross) serial cable, and you may need
+to have multiport serial boards, if your computer doesn't have extra
+serial ports. In addition, a terminal emulator is also required, such as
+minicom. Refer to a manual of your operating system, for more
+information.
+</p>
+<p>As for GRUB, the instruction to set up a serial terminal is quite
+simple. First of all, make sure that you haven't specified the option
+&lsquo;<samp>--disable-serial</samp>&rsquo; to the configure script when you built your
+GRUB images. If you get them in binary form, probably they have serial
+terminal support already.
+</p>
+<p>Then, initialize your serial terminal after GRUB starts up. Here is an
+example:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">grub&gt; <kbd>serial --unit=0 --speed=9600</kbd>
+grub&gt; <kbd>terminal serial</kbd>
+</pre></td></tr></table>
+
+<p>The command <code>serial</code> initializes the serial unit 0 with the
+speed 9600bps. The serial unit 0 is usually called &lsquo;<samp>COM1</samp>&rsquo;, so, if
+you want to use COM2, you must specify &lsquo;<samp>--unit=1</samp>&rsquo; instead. This
+command accepts many other options, so please refer to <a href="grub_13.html#SEC64">serial</a>,
+for more details.
+</p>
+<p>The command <code>terminal</code> (see section <a href="grub_13.html#SEC67">terminal</a>) chooses which type of
+terminal you want to use. In the case above, the terminal will be a
+serial terminal, but you can also pass <code>console</code> to the command,
+as &lsquo;<samp>terminal serial console</samp>&rsquo;. In this case, a terminal in which
+you press any key will be selected as a GRUB terminal.
+</p>
+<p>However, note that GRUB assumes that your terminal emulator is
+compatible with VT100 by default. This is true for most terminal
+emulators nowadays, but you should pass the option &lsquo;<samp>--dumb</samp>&rsquo; to
+the command if your terminal emulator is not VT100-compatible or
+implements few VT100 escape sequences. If you specify this option then
+GRUB provides you with an alternative menu interface, because the normal
+menu requires several fancy features of your terminal.
+</p>
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="grub_6.html#SEC29" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_8.html#SEC33" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>root</em> on <em>March, 20 2010</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.78</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>
