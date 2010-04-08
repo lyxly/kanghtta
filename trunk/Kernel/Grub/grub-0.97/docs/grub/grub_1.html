@@ -1,0 +1,401 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on March, 20 2010 by texi2html 1.78 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+
+-->
+<head>
+<title>GRUB Manual: 1. Introduction to GRUB</title>
+
+<meta name="description" content="GRUB Manual: 1. Introduction to GRUB">
+<meta name="keywords" content="GRUB Manual: 1. Introduction to GRUB">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.78">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Introduction"></a>
+<a name="SEC1"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC2" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[ &lt;&lt; ]</td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_2.html#SEC6" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 1. Introduction to GRUB </h1>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC2">1.1 Overview</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                    What exactly GRUB is and how to use it
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC3">1.2 History of GRUB</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                     From maggot to house fly
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC4">1.3 GRUB features</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC5">1.4 The role of a boot loader</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+</table>
+
+
+<hr size="6">
+<a name="Overview"></a>
+<a name="SEC2"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC1" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC3" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_2.html#SEC6" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 1.1 Overview </h2>
+
+<p>Briefly, a <em>boot loader</em> is the first software program that runs when
+a computer starts.  It is responsible for loading and transferring
+control to an operating system <em>kernel</em> software (such as Linux or
+GNU Mach).  The kernel, in turn, initializes the rest of the operating
+system (e.g. a GNU system).
+</p>
+<p>GNU GRUB is a very powerful boot loader, which can load a wide variety
+of free operating systems, as well as proprietary operating systems with
+chain-loading<a name="DOCF1" href="grub_fot.html#FOOT1">(1)</a>. GRUB is designed to
+address the complexity of booting a personal computer; both the
+program and this manual are tightly bound to that computer platform,
+although porting to other platforms may be addressed in the future.
+</p>
+<p>One of the important features in GRUB is flexibility; GRUB understands
+filesystems and kernel executable formats, so you can load an arbitrary
+operating system the way you like, without recording the physical
+position of your kernel on the disk. Thus you can load the kernel
+just by specifying its file name and the drive and partition where the
+kernel resides.
+</p>
+<p>When booting with GRUB, you can use either a command-line interface
+(see section <a href="grub_12.html#SEC41">The flexible command-line interface</a>), or a menu interface (see section <a href="grub_12.html#SEC42">The simple menu interface</a>). Using the command-line interface, you type the drive
+specification and file name of the kernel manually. In the menu
+interface, you just select an OS using the arrow keys. The menu is
+based on a configuration file which you prepare beforehand
+(see section <a href="grub_5.html#SEC28">Configuration</a>). While in the menu, you can switch to the
+command-line mode, and vice-versa. You can even edit menu entries
+before using them.
+</p>
+<p>In the following chapters, you will learn how to specify a drive, a
+partition, and a file name (see section <a href="grub_2.html#SEC6">Naming convention</a>) to GRUB, how to
+install GRUB on your drive (see section <a href="grub_3.html#SEC7">Installation</a>), and how to boot your
+OSes (see section <a href="grub_4.html#SEC12">Booting</a>), step by step.
+</p>
+<p>Besides the GRUB boot loader itself, there is a <em>grub shell</em>
+<code>grub</code> (see section <a href="grub_15.html#SEC116">Invoking the grub shell</a>) which can be run when
+you are in your operating system. It emulates the boot loader and can
+be used for installing the boot loader.
+</p>
+
+<hr size="6">
+<a name="History"></a>
+<a name="SEC3"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC2" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC4" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_2.html#SEC6" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 1.2 History of GRUB </h2>
+
+<p>GRUB originated in 1995 when Erich Boleyn was trying to boot the GNU
+Hurd with the University of Utah's Mach 4 microkernel (now known as GNU
+Mach).  Erich and Brian Ford designed the Multiboot Specification
+(see <a href="../multiboot/index.html#Top">Multiboot Specification: (multiboot)Top</a> section `Motivation' in <cite>The Multiboot Specification</cite>), because they were determined not to add to the large
+number of mutually-incompatible PC boot methods.
+</p>
+<p>Erich then began modifying the FreeBSD boot loader so that it would
+understand Multiboot. He soon realized that it would be a lot easier
+to write his own boot loader from scratch than to keep working on the
+FreeBSD boot loader, and so GRUB was born.
+</p>
+<p>Erich added many features to GRUB, but other priorities prevented him
+from keeping up with the demands of its quickly-expanding user base. In
+1999, Gordon Matzigkeit and Yoshinori K. Okuji adopted GRUB as an
+official GNU package, and opened its development by making the latest
+sources available via anonymous CVS. See section <a href="grub_21.html#SEC125">How to obtain and build GRUB</a>, for more information.
+</p>
+
+<hr size="6">
+<a name="Features"></a>
+<a name="SEC4"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC3" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC5" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_2.html#SEC6" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 1.3 GRUB features </h2>
+
+<p>The primary requirement for GRUB is that it be compliant with the
+<em>Multiboot Specification</em>, which is described in <a href="../multiboot/index.html#Top">Multiboot Specification: (multiboot)Top</a> section `Motivation' in <cite>The Multiboot Specification</cite>.
+</p>
+<p>The other goals, listed in approximate order of importance, are:
+</p>
+<ul>
+<li>
+Basic functions must be straightforward for end-users.
+
+</li><li>
+Rich functionality to support kernel experts and designers.
+
+</li><li>
+Backward compatibility for booting FreeBSD, NetBSD, OpenBSD, and
+Linux. Proprietary kernels (such as DOS, Windows NT, and OS/2) are
+supported via a chain-loading function.
+</li></ul>
+
+<p>Except for specific compatibility modes (chain-loading and the Linux
+<em>piggyback</em> format), all kernels will be started in much the same
+state as in the Multiboot Specification. Only kernels loaded at 1 megabyte
+or above are presently supported. Any attempt to load below that
+boundary will simply result in immediate failure and an error message
+reporting the problem.
+</p>
+<p>In addition to the requirements above, GRUB has the following features
+(note that the Multiboot Specification doesn't require all the features
+that GRUB supports):
+</p>
+<dl compact="compact">
+<dt> Recognize multiple executable formats</dt>
+<dd><p>Support many of the <em>a.out</em> variants plus <em>ELF</em>. Symbol
+tables are also loaded.
+</p>
+</dd>
+<dt> Support non-Multiboot kernels</dt>
+<dd><p>Support many of the various free 32-bit kernels that lack Multiboot
+compliance (primarily FreeBSD, NetBSD, OpenBSD, and
+Linux). Chain-loading of other boot loaders is also supported.
+</p>
+</dd>
+<dt> Load multiples modules</dt>
+<dd><p>Fully support the Multiboot feature of loading multiple modules.
+</p>
+</dd>
+<dt> Load a configuration file</dt>
+<dd><p>Support a human-readable text configuration file with preset boot
+commands. You can also load another configuration file dynamically and
+embed a preset configuration file in a GRUB image file. The list of
+commands (see section <a href="grub_13.html#SEC45">The list of available commands</a>) are a superset of those supported on the
+command-line. An example configuration file is provided in
+<a href="grub_5.html#SEC28">Configuration</a>.
+</p>
+</dd>
+<dt> Provide a menu interface</dt>
+<dd><p>A menu interface listing preset boot commands, with a programmable
+timeout, is available. There is no fixed limit on the number of boot
+entries, and the current implementation has space for several hundred.
+</p>
+</dd>
+<dt> Have a flexible command-line interface</dt>
+<dd><p>A fairly flexible command-line interface, accessible from the menu,
+is available to edit any preset commands, or write a new boot command
+set from scratch. If no configuration file is present, GRUB drops to
+the command-line.
+</p>
+<p>The list of commands (see section <a href="grub_13.html#SEC45">The list of available commands</a>) are a subset of those supported
+for configuration files. Editing commands closely resembles the Bash
+command-line (see <a href="../features/Command-Line-Editing.html#Command-Line-Editing">Bash: (features)Command Line Editing</a> section `Command Line Editing' in <cite>Bash Features</cite>), with &lt;TAB&gt;-completion of commands,
+devices, partitions, and files in a directory depending on context.
+</p>
+</dd>
+<dt> Support multiple filesystem types</dt>
+<dd><p>Support multiple filesystem types transparently, plus a useful explicit
+blocklist notation. The currently supported filesystem types are
+<em>BSD FFS</em>, <em>DOS FAT16 and FAT32</em>, <em>Minix fs</em>, <em>Linux
+ext2fs</em>, <em>ReiserFS</em>, <em>JFS</em>, <em>XFS</em>, and <em>VSTa
+fs</em>. See section <a href="grub_11.html#SEC36">Filesystem syntax and semantics</a>, for more information.
+</p>
+</dd>
+<dt> Support automatic decompression</dt>
+<dd><p>Can decompress files which were compressed by <code>gzip</code>. This
+function is both automatic and transparent to the user (i.e. all
+functions operate upon the uncompressed contents of the specified
+files). This greatly reduces a file size and loading time, a
+particularly great benefit for floppies.<a name="DOCF2" href="grub_fot.html#FOOT2">(2)</a>
+</p>
+<p>It is conceivable that some kernel modules should be loaded in a
+compressed state, so a different module-loading command can be specified
+to avoid uncompressing the modules.
+</p>
+</dd>
+<dt> Access data on any installed device</dt>
+<dd><p>Support reading data from any or all floppies or hard disk(s) recognized
+by the BIOS, independent of the setting of the root device.
+</p>
+</dd>
+<dt> Be independent of drive geometry translations</dt>
+<dd><p>Unlike many other boot loaders, GRUB makes the particular drive
+translation irrelevant. A drive installed and running with one
+translation may be converted to another translation without any adverse
+effects or changes in GRUB's configuration.
+</p>
+</dd>
+<dt> Detect all installed <small>RAM</small></dt>
+<dd><p>GRUB can generally find all the installed <small>RAM</small> on a PC-compatible
+machine. It uses an advanced BIOS query technique for finding all
+memory regions. As described on the Multiboot Specification (see <a href="../multiboot/index.html#Top">Multiboot Specification: (multiboot)Top</a> section `Motivation' in <cite>The Multiboot Specification</cite>), not all kernels make use of this information, but GRUB
+provides it for those who do.
+</p>
+</dd>
+<dt> Support Logical Block Address mode</dt>
+<dd><p>In traditional disk calls (called <em>CHS mode</em>), there is a geometry
+translation problem, that is, the BIOS cannot access over 1024
+cylinders, so the accessible space is limited to at least 508 MB and to
+at most 8GB. GRUB can't universally solve this problem, as there is no
+standard interface used in all machines. However, several newer machines
+have the new interface, Logical Block Address (<em>LBA</em>) mode. GRUB
+automatically detects if LBA mode is available and uses it if
+available. In LBA mode, GRUB can access the entire disk.
+</p>
+</dd>
+<dt> Support network booting</dt>
+<dd><p>GRUB is basically a disk-based boot loader but also has network
+support. You can load OS images from a network by using the <em>TFTP</em>
+protocol.
+</p>
+</dd>
+<dt> Support remote terminals</dt>
+<dd><p>To support computers with no console, GRUB provides remote terminal
+support, so that you can control GRUB from a remote host. Only serial
+terminal support is implemented at the moment.
+</p></dd>
+</dl>
+
+
+<hr size="6">
+<a name="Role-of-a-boot-loader"></a>
+<a name="SEC5"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC4" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_2.html#SEC6" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_2.html#SEC6" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 1.4 The role of a boot loader </h2>
+
+<p>The following is a quotation from Gordon Matzigkeit, a GRUB fanatic:
+</p>
+<blockquote><p>Some people like to acknowledge both the operating system and kernel when
+they talk about their computers, so they might say they use
+&ldquo;GNU/Linux&rdquo; or &ldquo;GNU/Hurd&rdquo;.  Other people seem to think that the
+kernel is the most important part of the system, so they like to call
+their GNU operating systems &ldquo;Linux systems.&rdquo;
+</p>
+<p>I, personally, believe that this is a grave injustice, because the
+<em>boot loader</em> is the most important software of all. I used to
+refer to the above systems as either &ldquo;LILO&rdquo;<a name="DOCF3" href="grub_fot.html#FOOT3">(3)</a> or &ldquo;GRUB&rdquo;
+systems.
+</p>
+<p>Unfortunately, nobody ever understood what I was talking about; now I
+just use the word &ldquo;GNU&rdquo; as a pseudonym for GRUB.
+</p>
+<p>So, if you ever hear people talking about their alleged &ldquo;GNU&rdquo; systems,
+remember that they are actually paying homage to the best boot loader
+around&hellip; GRUB!
+</p></blockquote>
+
+<p>We, the GRUB maintainers, do not (usually) encourage Gordon's level of
+fanaticism, but it helps to remember that boot loaders deserve
+recognition.  We hope that you enjoy using GNU GRUB as much as we did
+writing it.
+</p>
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_2.html#SEC6" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>root</em> on <em>March, 20 2010</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.78</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

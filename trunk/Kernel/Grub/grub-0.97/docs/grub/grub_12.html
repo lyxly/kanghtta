@@ -1,0 +1,314 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on March, 20 2010 by texi2html 1.78 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+
+-->
+<head>
+<title>GRUB Manual: 12. GRUB's user interface</title>
+
+<meta name="description" content="GRUB Manual: 12. GRUB's user interface">
+<meta name="keywords" content="GRUB Manual: 12. GRUB's user interface">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.78">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Interface"></a>
+<a name="SEC40"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="grub_11.html#SEC39" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC41" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub_11.html#SEC36" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_13.html#SEC45" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 12. GRUB's user interface </h1>
+
+<p>GRUB has both a simple menu interface for choosing preset entries from a
+configuration file, and a highly flexible command-line for performing
+any desired combination of boot commands.
+</p>
+<p>GRUB looks for its configuration file as soon as it is loaded. If one
+is found, then the full menu interface is activated using whatever
+entries were found in the file. If you choose the <em>command-line</em> menu
+option, or if the configuration file was not found, then GRUB drops to
+the command-line interface.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC41">12.1 The flexible command-line interface</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC42">12.2 The simple menu interface</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC43">12.3 Editing a menu entry</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC44">12.4 The hidden menu interface</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+</table>
+
+
+<hr size="6">
+<a name="Command_002dline-interface"></a>
+<a name="SEC41"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC40" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC42" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC40" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC40" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_13.html#SEC45" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 12.1 The flexible command-line interface </h2>
+
+<p>The command-line interface provides a prompt and after it an editable
+text area much like a command-line in Unix or DOS. Each command is
+immediately executed after it is entered<a name="DOCF8" href="grub_fot.html#FOOT8">(8)</a>. The commands (see section <a href="grub_13.html#SEC71">The list of command-line and menu entry commands</a>) are a
+subset of those available in the configuration file, used with exactly
+the same syntax.
+</p>
+<p>Cursor movement and editing of the text on the line can be done via a
+subset of the functions available in the Bash shell:
+</p>
+<dl compact="compact">
+<dt> &lt;C-f&gt;</dt>
+<dt> &lt;PC right key&gt;</dt>
+<dd><p>Move forward one character.
+</p>
+</dd>
+<dt> &lt;C-b&gt;</dt>
+<dt> &lt;PC left key&gt;</dt>
+<dd><p>Move back one character.
+</p>
+</dd>
+<dt> &lt;C-a&gt;</dt>
+<dt> &lt;HOME&gt;</dt>
+<dd><p>Move to the start of the line.
+</p>
+</dd>
+<dt> &lt;C-e&gt;</dt>
+<dt> &lt;END&gt;</dt>
+<dd><p>Move the the end of the line.
+</p>
+</dd>
+<dt> &lt;C-d&gt;</dt>
+<dt> &lt;DEL&gt;</dt>
+<dd><p>Delete the character underneath the cursor.
+</p>
+</dd>
+<dt> &lt;C-h&gt;</dt>
+<dt> &lt;BS&gt;</dt>
+<dd><p>Delete the character to the left of the cursor.
+</p>
+</dd>
+<dt> &lt;C-k&gt;</dt>
+<dd><p>Kill the text from the current cursor position to the end of the line.
+</p>
+</dd>
+<dt> &lt;C-u&gt;</dt>
+<dd><p>Kill backward from the cursor to the beginning of the line.
+</p>
+</dd>
+<dt> &lt;C-y&gt;</dt>
+<dd><p>Yank the killed text back into the buffer at the cursor.
+</p>
+</dd>
+<dt> &lt;C-p&gt;</dt>
+<dt> &lt;PC up key&gt;</dt>
+<dd><p>Move up through the history list.
+</p>
+</dd>
+<dt> &lt;C-n&gt;</dt>
+<dt> &lt;PC down key&gt;</dt>
+<dd><p>Move down through the history list.
+</p></dd>
+</dl>
+
+<p>When typing commands interactively, if the cursor is within or before
+the first word in the command-line, pressing the &lt;TAB&gt; key (or
+&lt;C-i&gt;) will display a listing of the available commands, and if the
+cursor is after the first word, the <kbd>&lt;TAB&gt;</kbd> will provide a
+completion listing of disks, partitions, and file names depending on the
+context. Note that to obtain a list of drives, one must open a
+parenthesis, as <code>root (</code>.
+</p>
+<p>Note that you cannot use the completion functionality in the TFTP
+filesystem. This is because TFTP doesn't support file name listing for
+the security.
+</p>
+
+<hr size="6">
+<a name="Menu-interface"></a>
+<a name="SEC42"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC41" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC43" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC40" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC40" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_13.html#SEC45" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 12.2 The simple menu interface </h2>
+
+<p>The menu interface is quite easy to use. Its commands are both
+reasonably intuitive and described on screen.
+</p>
+<p>Basically, the menu interface provides a list of <em>boot entries</em> to
+the user to choose from. Use the arrow keys to select the entry of
+choice, then press &lt;RET&gt; to run it.  An optional timeout is
+available to boot the default entry (the first one if not set), which is
+aborted by pressing any key.
+</p>
+<p>Commands are available to enter a bare command-line by pressing &lt;c&gt;
+(which operates exactly like the non-config-file version of GRUB, but
+allows one to return to the menu if desired by pressing &lt;ESC&gt;) or to
+edit any of the <em>boot entries</em> by pressing &lt;e&gt;.
+</p>
+<p>If you protect the menu interface with a password (see section <a href="grub_9.html#SEC34">Protecting your computer from cracking</a>),
+all you can do is choose an entry by pressing &lt;RET&gt;, or press
+&lt;p&gt; to enter the password.
+</p>
+
+<hr size="6">
+<a name="Menu-entry-editor"></a>
+<a name="SEC43"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC42" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC44" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC40" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC40" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_13.html#SEC45" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 12.3 Editing a menu entry </h2>
+
+<p>The menu entry editor looks much like the main menu interface, but the
+lines in the menu are individual commands in the selected entry instead
+of entry names.
+</p>
+<p>If an &lt;ESC&gt; is pressed in the editor, it aborts all the changes made
+to the configuration entry and returns to the main menu interface.
+</p>
+<p>When a particular line is selected, the editor places the user in a
+special version of the GRUB command-line to edit that line.  When the
+user hits &lt;RET&gt;, GRUB replaces the line in question in the boot
+entry with the changes (unless it was aborted via &lt;ESC&gt;,
+in which case the changes are thrown away).
+</p>
+<p>If you want to add a new line to the menu entry, press &lt;o&gt; if adding
+a line after the current line or press &lt;O&gt; if before the current
+line.
+</p>
+<p>To delete a line, hit the key &lt;d&gt;. Although GRUB unfortunately
+does not support <em>undo</em>, you can do almost the same thing by just
+returning to the main menu.
+</p>
+
+<hr size="6">
+<a name="Hidden-menu-interface"></a>
+<a name="SEC44"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC43" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_13.html#SEC45" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC40" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC40" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="grub_13.html#SEC45" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 12.4 The hidden menu interface </h2>
+
+<p>When your terminal is dumb or you request GRUB to hide the menu
+interface explicitly with the command <code>hiddenmenu</code>
+(see section <a href="grub_13.html#SEC49">hiddenmenu</a>), GRUB doesn't show the menu interface (see section <a href="#SEC42">The simple menu interface</a>) and automatically boots the default entry, unless
+interrupted by pressing &lt;ESC&gt;.
+</p>
+<p>When you interrupt the timeout and your terminal is dumb, GRUB falls
+back to the command-line interface (see section <a href="#SEC41">The flexible command-line interface</a>).
+</p>
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC40" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="grub_13.html#SEC45" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="grub.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="grub_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="grub_25.html#SEC140" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="grub_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>root</em> on <em>March, 20 2010</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.78</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

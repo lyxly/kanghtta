@@ -1,0 +1,17 @@
+Package: grub
+Version: 0.97-29ubuntu59
+Architecture: i386
+Maintainer: Ubuntu Kernel Team <kernel-team@lists.ubuntu.com>
+Installed-Size: 920
+Depends: libc6 (>= 2.7), grub-common, udev (>= 117-5), ucf (>= 3.004-0ubuntu2), debconf (>= 1.5.19) | cdebconf, util-linux (>= 2.15-1)
+Suggests: grub-doc, mdadm
+Conflicts: grub-coreboot, grub-efi-amd64, grub-efi-ia32, grub-ieee1275, grub-pc
+Provides: linux-boot-loader
+Section: admin
+Priority: optional
+Description: GRand Unified Bootloader
+ GRUB is a GPLed bootloader intended to unify bootloading across x86
+ operating systems.  In addition to loading the Linux kernel,
+ it implements the Multiboot standard, which allows for flexible loading
+ of multiple boot images (needed for modular kernels such as the GNU Hurd).
+Original-Maintainer: Grub Maintainers <pkg-grub-devel@lists.alioth.debian.org>
